@@ -1,0 +1,402 @@
+/**
+ * @author Fedor Pudeyan
+ */
+
+/* CUSTOM MIXINS */
+.pie {
+    behavior:url(./../js/PIE.htc);
+}
+.fontMetrics(@fontSize: 12px, @lineHeight: 14px) {
+    font-size: @fontSize;
+    line-height: @lineHeight;
+}
+.relative(@top: auto, @right: auto, @bottom: auto, @left: auto) {
+    position: relative;
+    top: @top;
+    right: @right;
+    bottom: @bottom;
+    left: @left;
+}
+.absolute(@top: auto, @right: auto, @bottom: auto, @left: auto) {
+    position: absolute;
+    top: @top;
+    right: @right;
+    bottom: @bottom;
+    left: @left;
+}
+.absoluteStretch(@amount: 0) {
+    .absolute(@amount, @amount, @amount, @amount);
+}
+.fixed(@top: auto, @right: auto, @bottom: auto, @left: auto) {
+    position: fixed;
+    top: @top;
+    right: @right;
+    bottom: @bottom;
+    left: @left;
+}
+.fixedStretch(@amount: 0) {
+    .fixed(@amount, @amount, @amount, @amount);
+}
+.adaptiveImage(@height) {
+    position: relative;
+    overflow: hidden;
+    height: @height;
+
+    span {
+        .absolute;
+        left: 50%;
+
+        img {
+            position: relative;
+            left: -50%;
+        }
+    }
+}
+.pseudo(@content: '', @display: inline) {
+    content: @content;
+    display: @display;
+}
+.pseudoBlock(@content: '') {.pseudo(@content, block)}
+
+.aspectRatio(@widthAspect: 1, @heightAspect: 1) {
+    content: '';
+    padding-top: @heightAspect / @widthAspect * 100%;
+}
+/* usage for aspect ratio 3:2
+    .aspect-box {
+        .relative;
+
+        &:before {
+            .pseudoBlock;
+            .aspectRatio(3, 2);
+        }
+    }
+*/
+
+.verticalCenterContainer {
+        &:after {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        height:100%;
+    }
+}
+
+// Arrows © Fedor Pudeyan
+#arrow {
+    .up(@width, @height, @color: black) {
+        #reset > .reset-box-model;
+        width: ~`parseInt("@{width}") % 2 + 'px'`;
+        height: 0;
+        border: 0 solid transparent;
+        border-bottom: @height solid @color;
+        border-left-width: ~`Math.floor(parseInt("@{width}") / 2) + 'px'`;
+        border-right-width: ~`Math.floor(parseInt("@{width}") / 2) + 'px'`;
+    }
+    .down(@width, @height, @color: black) {
+        #reset > .reset-box-model;
+        width: ~`parseInt("@{width}") % 2 + 'px'`;
+        height: 0;
+        border: 0 solid transparent;
+        border-top: @height solid @color;
+        border-left-width: ~`Math.floor(parseInt("@{width}") / 2) + 'px'`;
+        border-right-width: ~`Math.floor(parseInt("@{width}") / 2) + 'px'`;
+    }
+    .left(@width, @height, @color: black) {
+        #reset > .reset-box-model;
+        width: 0;
+        height: ~`parseInt("@{height}") % 2 + 'px'`;
+        border: 0 solid transparent;
+        border-right: @width solid @color;
+        border-top-width: ~`Math.floor(parseInt("@{height}") / 2) + 'px'`;
+        border-bottom-width: ~`Math.floor(parseInt("@{height}") / 2) + 'px'`;
+    }
+    .right(@width, @height, @color: black) {
+        #reset > .reset-box-model;
+        width: 0;
+        height: ~`parseInt("@{height}") % 2 + 'px'`;
+        border: 0 solid transparent;
+        border-left: @width solid @color;
+        border-top-width: ~`Math.floor(parseInt("@{height}") / 2) + 'px'`;
+        border-bottom-width: ~`Math.floor(parseInt("@{height}") / 2) + 'px'`;
+    }
+}
+
+// Image with Retina Display Support © Fedor Pudeyan
+.retinaBackgroundImage(@path) {
+    @retina_path: ~`@{path}.replace(/(.*[^\/]+)\.(png|jpg|jpeg|gif)/g, "$1@2x.$2")`;
+
+    @media
+    (-webkit-min-device-pixel-ratio: 2),
+    (   min--moz-device-pixel-ratio: 2),
+    (     -o-min-device-pixel-ratio: 2/1),
+    (        min-device-pixel-ratio: 2),
+    (                min-resolution: 192dpi),
+    (                min-resolution: 2dppx) {
+        background-image: url(@retina_path);
+    }
+}
+
+.persp(@arguments:none) {
+    -webkit-perspective: @arguments;
+    -moz-perspective: @arguments;
+    perspective: @arguments;
+}
+
+
+.sprite(@path, @width: auto, @height: auto) {
+    content: '';
+    .hideText;
+    .size(@width, @height);
+    background-repeat: no-repeat;
+    -webkit-background-size: auto 100%;
+    background-size: auto 100%;
+    background-image: url(@path);
+/*     .retinaBackgroundImage(@path); */
+}
+
+.spriteXY(@targetColumn: 2, @targetRow: 2, @columnsCount: 2, @rowsCount: 2) {
+  background-position: ~`@{targetColumn} > 1 ? 100 / (@{columnsCount} - 1) * (@{targetColumn} - 1) + '%' : 0` ~`@{targetRow} > 1 ? 100 / (@{rowsCount} - 1) * (@{targetRow} - 1) + '%' : 0`;
+}
+.spriteX(@targetColumn: 2, @columnsCount: 2) {
+  .spriteXY(@targetColumn, 1, @columnsCount, 1);
+}
+/* .spriteX(2, 6); => background-position: 20% 0;*/
+
+.spriteY(@targetRow: 2, @rowsCount: 2) {
+  .spriteXY(1, @targetRow, 1, @rowsCount);
+}
+/* .spriteY(3, 5); => background-position: 0 50%;*/
+
+.clearFix(@side: both) {
+    &:after {
+        content: '';
+        display: block;
+        clear: @side;
+    }
+}
+.hideText {
+    display: block;
+    overflow: hidden;
+    text-indent: -10000px;
+    white-space: nowrap;
+}
+.backgroundColor(@color: black, @opacity: 0.5) {
+    @transientColor: fade(@color, percentage(@opacity));
+     background-color: @transientColor;
+
+    :root & {filter: none !important} /* turn off filters in IE9+ */
+
+    /* using filter for IE5.5-8 */
+      @alpha: round(alpha(@transientColor)*255);
+    @transientColorARGBHex: ~`"#" + (@{alpha}).toString(16) + "@{color}".slice(1)`;
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@transientColorARGBHex, @transientColorARGBHex));
+
+    /* For example:    .backgroundColor(white, 0.85);   */
+}
+.backgroundCover(@url) {
+    background-image: url(@url);
+    background-size: cover;
+    background-repeat: no-repeat;
+/*     -ms-behavior: url(./../js/backgroundsize.min.htc); */
+/*     -pie-background: url(@url) no-repeat 50% 0 / cover; */
+/*     filter: e(%("progid:DXImageTransform.Microsoft.AlphaImageLoader(src='%s', sizingMethod='scale')",@url)); */
+}
+.backgroundContain(@url) {
+    background-image: url(@url);
+    background-size: contain;
+    background-repeat: no-repeat;
+/*     -ms-behavior: url(./../js/backgroundsize.min.htc); */
+/*     -pie-background: red url(@url) no-repeat 50% 50% / contain; */
+/*     filter: e(%("progid:DXImageTransform.Microsoft.AlphaImageLoader(src='%s', sizingMethod='scale')",@url)); */
+}
+.gradientVertical(@color1: white, @color2: black) {
+
+    .background-image(linear-gradient(top, @color1 0%, @color2 100%));
+
+    :root & {filter: none !important} /* turn off filters in IE9+ */
+    /* using filter for IE5.5-8 */
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)", argb(@color1), argb(@color2)));
+}
+
+/* Sizing */
+.maxSize(@square){
+    max-width: @square;
+    max-height: @square;
+}
+.maxSize(@width, @height){
+    max-width: @width;
+    max-height: @height;
+}
+.minSize(@square){
+    min-width: @square;
+    min-height: @square;
+}
+.minSize(@width, @height){
+    min-width: @width;
+    min-height: @height;
+}
+.widthRange(@min, @max) {
+    min-width: @min;
+    max-width: @max;
+}
+.heightRange(@min, @max) {
+    min-height: @min;
+    max-height: @max;
+}
+/* LESS Hat Addons*/
+
+//  .transition
+
+  .transitionQ(...){
+
+      //  Local config for disabling properties
+
+      @w3cLocal: true; // Unprefixed W3C syntax
+      @webkitLocal: true; // Chrome 7+, Safari 5+, iOS5, Android
+      @mozLocal: true; //  Firefox 4+
+      @operaLocal: true; // Opera 10.5+
+      @msLocal: true;  // IE 10+
+
+      @transitionWebkit: ~`(function(){var a,b,c,d,e,f,g;a=@{arguments},c=["background-size","box-shadow","column","transform"],d=c.length,e=a,f=!1,b=a.length;for(var h=0;h<d;h++)for(var i=0;i<b;i++){g=new RegExp(c[h],"g");try{"".trim(),f=!0}catch(j){f=!1}a[i]=f?a[i].trim():a[i],g.test(a[i])&&(e[i]=a[i].replace(g,"-webkit-"+c[h]))}return ((typeof(e) == 'string') ? e : e.join(", ")).replace("[","").replace("]","");}())`;
+      @transitionMoz: ~`(function(){var a,b,c,d,e,f,g;a=@{arguments},c=["background-size","border-","box-shadow","column","transform"],d=c.length,e=a,f=!1,b=a.length;for(var h=0;h<d;h++)for(var i=0;i<b;i++){g=new RegExp(c[h],"g");try{"".trim(),f=!0}catch(j){f=!1}a[i]=f?a[i].trim():a[i],g.test(a[i])&&(e[i]=a[i].replace(g,"-moz-"+c[h]))}return ((typeof(e) == 'string') ? e : e.join(", ")).replace("[","").replace("]","");}())`;
+      @transitionOpera: ~`(function(){var a,b,c,d,e,f,g;a=@{arguments},c=["background-size","border-","box-shadow","column","transform"],d=c.length,e=a,f=!1,b=a.length;for(var h=0;h<d;h++)for(var i=0;i<b;i++){g=new RegExp(c[h],"g");try{"".trim(),f=!0}catch(j){f=!1}a[i]=f?a[i].trim():a[i],g.test(a[i])&&(e[i]=a[i].replace(g,"-o-"+c[h]))}return ((typeof(e) == 'string') ? e : e.join(", ")).replace("[","").replace("]","");}())`;
+      @transitionMs: ~`(function(){var a,b,c,d,e,f,g;a=@{arguments},c=["background-size","border-","box-shadow","column","transform"],d=c.length,e=a,f=!1,b=a.length;for(var h=0;h<d;h++)for(var i=0;i<b;i++){g=new RegExp(c[h],"g");try{"".trim(),f=!0}catch(j){f=!1}a[i]=f?a[i].trim():a[i],g.test(a[i])&&(e[i]=a[i].replace(g,"-ms-"+c[h]))}return ((typeof(e) == 'string') ? e : e.join(", ")).replace("[","").replace("]","");}())`;
+      @transitionW3C: ~`(function(){var a,b,c;a=@{arguments},c=!1,b=a.length;for(var d=0;d<b;d++){try{"".trim(),c=!0}catch(e){c=!1}a[d]=c?a[d].trim():a[d]}return ((typeof(a) == 'string') ? a : a.join(", ").replace("[","").replace("]",""));}())`;
+
+      .result (@arguments, @signal, @boolean, @localBoolean) when (@boolean = true) and (@localBoolean = true) {
+        .inception (@signal, @arguments) when (@signal = 1) { -webkit-transition: ~`(function(){ var arg = "@{transitionWebkit}" || "all 0 ease 0"; return arg; })()`; }
+        .inception (@signal, @arguments) when (@signal = 2) { -moz-transition: ~`(function(){ var arg = "@{transitionMoz}" || "all 0 ease 0"; return arg; })()`; }
+        .inception (@signal, @arguments) when (@signal = 3) { -o-transition:~`(function(){ var arg = "@{transitionOpera}" || "all 0 ease 0"; return arg; })()`; }
+        .inception (@signal, @arguments) when (@signal = 4) { -ms-transition: ~`(function(){ var arg = "@{transitionMs}" || "all 0 ease 0"; return arg; })()`; }
+        .inception (@signal, @arguments) when (@signal = 5) { transition: ~`(function(){ var arg = "@{transitionW3C}" || "all 0 ease 0"; return arg; })()`; }
+        .inception (@signal, @arguments) when (@signal > 5),(@signal < 1) { error: "Signal is out of range"; }
+        .inception(@signal, @arguments);
+      }
+      .result (@arguments, @signal, @boolean, @localBoolean) when not (@boolean = true), not (@localBoolean = true) { }
+
+      .result(@arguments, @webkitSignal, @webkit, @webkitLocal);
+      // --  this comment must be here because of LESS bug
+      .result(@arguments, @mozSignal, @moz, @mozLocal);
+      // --
+      .result(@arguments, @operaSignal, @opera, @operaLocal);
+      // --
+      .result(@arguments, @msSignal, @ms, @msLocal);
+      // --
+      .result(@arguments, @w3cSignal, @w3c, @w3cLocal);
+  }
+
+  //   element{ .transitionQ('transform 3s linear', 'color 800ms'); }
+
+//  .transition
+
+
+/*
+@-webkit-keyframes wobble {
+  0% { -webkit-transform: translateX(0%); }
+  15% { -webkit-transform: translateX(-25%) rotate(-5deg); }
+  30% { -webkit-transform: translateX(20%) rotate(3deg); }
+  45% { -webkit-transform: translateX(-15%) rotate(-3deg); }
+  60% { -webkit-transform: translateX(10%) rotate(2deg); }
+  75% { -webkit-transform: translateX(-5%) rotate(-1deg); }
+  100% { -webkit-transform: translateX(0%); }
+}
+*/
+
+
+.keyframes(@name: flash, @frames: ~"{0%, 100% { opacity: 1; } 50% {opacity: 0 }}") {
+  .webkit { content: ~"''; } @-webkit-keyframes @{name} @{frames}"}
+     .moz { content: ~"''; }    @-moz-keyframes @{name} @{frames}"}
+      .ms { content: ~"''; }     @-ms-keyframes @{name} @{frames}"}
+       .o { content: ~"''; }      @-o-keyframes @{name} @{frames}"}
+     .w3c { content: ~"''; }         @keyframes @{name} @{frames}"}
+}
+
+/* COMMON MIXINS */
+// Based on Eric Meyers' reset 2.0 - http://meyerweb.com/eric/tools/css/reset/index.html
+// & the Compass Reset utility - http://compass-style.org/reference/compass/reset/utilities/
+#reset {
+  .global-reset {
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, img, ins, kbd, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    b, u, i, center,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    article, aside, canvas, details, embed,
+    figure, figcaption, footer, header, hgroup,
+    menu, nav, output, ruby, section, summary,
+    time, mark, audio, video {
+      #reset > .reset-box-model;
+      #reset > .reset-font;
+    }
+    body {
+      #reset > .reset-body;
+    }
+    ol, ul {
+      #reset > .reset-list-style;
+    }
+    table {
+      #reset > .reset-table;
+    }
+    caption, th, td {
+      #reset > .reset-table-cell;
+    }
+    q, blockquote {
+      #reset > .reset-quotation;
+    }
+    a img {
+      #reset > .reset-image-anchor-border;
+    }
+    #reset > .reset-html5;
+  }
+  .reset-box-model {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .reset-font {
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+  .reset-focus {
+    outline: 0;
+  }
+  .reset-body {
+    line-height: 1;
+  }
+  .reset-list-style {
+    list-style: none;
+  }
+  .reset-table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  .reset-table-cell {
+    text-align: left;
+    font-weight: normal;
+    vertical-align: middle;
+  }
+  .reset-quotation {
+    quotes: none;
+    &:before, &:after {
+      content: "";
+      content: none;
+    }
+  }
+  .reset-image-anchor-border {
+    border: none;
+  }
+  .reset-html5 {
+    article, aside, details, figcaption, figure,
+    footer, header, hgroup, menu, nav, section {
+      display: block;
+    }
+  }
+}
+
+/* vim: set fenc=utf-8 ts=4 sw=4 expandtab : */

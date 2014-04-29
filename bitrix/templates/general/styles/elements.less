@@ -1,0 +1,83 @@
+/*!
+ * site elements mixins
+ *
+ * @author Viacheslav Lotsmanov (unclechu)
+ */
+
+/* === MIXINS === */
+
+.closeXButton () {
+    .ico-close;
+    background: none;
+    display: inline-block;
+    border: 0; margin: 0; padding: 0;
+    cursor: pointer;
+
+    &:before, &:after {
+        .sprite-ico;
+        .ico-close;
+        .pseudoBlock;
+        .absolute(0, auto, auto, 0);
+        .transitionQ('opacity 200ms');
+        .opacity(1);
+    }
+
+    &:after {
+        .ico-close-active;
+        .opacity(0);
+    }
+
+    &:hover {
+        &:before { .opacity(0); }
+        &:after { .opacity(1); }
+    }
+}
+
+.button (@padding: 0 20px, @height: 39px, @lineHeight: @height, @borderRadius: 20px) {
+    border: 0; margin: 0; padding: 0;
+    display: inline-block;
+    .relative;
+    background: @buttonColor;
+    cursor: pointer;
+    height: @height;
+    .fontMetrics(12px, @lineHeight);
+    font-weight: bold;
+    .border-radius(@borderRadius);
+    padding: @padding;
+    text-transform: uppercase;
+    .transitionQ('color 200ms, background-color 200ms');
+
+    &:hover {
+        color: @buttonColor !important;
+        background: @colorText;
+    }
+}
+
+.button-big (@padding: 0 30px, @height: 51px, @lineHeight: @height, @borderRadius: 25px) {
+    .button;
+    height: @height;
+    .border-radius(@borderRadius);
+    padding: @padding;
+    .fontMetrics(18px, @lineHeight);
+    font-weight: normal;
+}
+
+.button-icon (@top: auto, @right: auto, @bottom: auto, @left: auto) {
+    &:before, &:after {
+        .sprite-ico;
+        .pseudoBlock;
+        .absolute(@top, @right, @bottom, @left);
+        .opacity(1);
+        .transitionQ('opacity 200ms');
+    }
+
+    &:after { .opacity(0); }
+
+    &:hover {
+        &:before { .opacity(0); }
+        &:after { .opacity(1); }
+    }
+
+    //&:before { .ico-...; }
+    //&:after { .ico-...; }
+}
