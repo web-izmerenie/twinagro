@@ -6,42 +6,31 @@
 @import "lesshat";
 @import "bootstrap";
 
+/* === VARIABLES === */
+
+@import "variables";
+
 /* === SPRITES === */
 
-@import "./../assets/ico";
+@import "ico";
 
 /* === FONTS === */
 
-@font-face { .font-face('Days', './../fonts/Days-webfont'); }
-
-/* === CONFIG === */
-
-@minWidth: 1002px;
-@maxSubPagesContentWidth: 1600px;
-@headerHeight: 85px;
-@footerHeight: 173px-55px;
-@contentLineMargin: 35px;
-@minAutoSizeBlockHeight: 700px;
-
-/* === COLORS === */
-
-@colorText: #202f3c;
-@colorActive: #e0b819;
-@buttonColor: #f6f665;
+@import "fonts";
 
 /* === MODULES === */
 
 @import "./elements";
-@import "./elevator_tour.less";
+@import "./elevator_tour";
 
 /* === PAGE SPECIFIC MODULES === */
 
-@import "./pages/main.less";
-@import "./pages/objects.less";
-@import "./pages/error_404.less";
-@import "./pages/contacts.less";
-@import "./pages/service_and_guaranty.less";
-@import "./pages/solutions.less";
+@import "./pages/main";
+@import "./pages/objects";
+@import "./pages/error_404";
+@import "./pages/contacts";
+@import "./pages/service_and_guaranty";
+@import "./pages/solutions";
 
 /* === MIXINS === */
 
@@ -92,6 +81,14 @@
 
 .dynamic {
     &, &:after, & span {border-bottom-style: dashed;}
+}
+
+.bgImg(@path) {
+    background-image: url('@{imgPrefix}@{path}?v=@{revision}');
+}
+
+.bg(@path, @addit) {
+    background: url('@{imgPrefix}@{path}?v=@{revision}') @addit;
 }
 
 /* === COMMON === */
@@ -204,7 +201,7 @@ body {
             & > span:first-child+span+span {
                 display: table-cell;
                 .size(50%, @height);
-                background: url('./../assets/sprite.png') right @topMargin repeat-x;
+                .bg('assets/sprite.png', right @topMargin repeat-x);
             }
 
             & > span:first-child+span+span { background-position: 0 @topMargin; }

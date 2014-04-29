@@ -5,6 +5,7 @@
 *.gz
 
 node_modules
+grunt
 
 # ignore build styles and scripts
 bitrix/templates/general/styles/build

@@ -35,7 +35,7 @@
         window.revision = '<?=$revision?>';
     </script>
 
-    <link rel="stylesheet" type="text/css" href="<?=SITE_TEMPLATE_PATH?>/styles/compiled_styles.css?v=<?=$revision?>" />
+    <link rel="stylesheet" type="text/css" href="<?=SITE_TEMPLATE_PATH?>/styles/build/build.css?v=<?=$revision?>" />
 
     <script src="<?=SITE_TEMPLATE_PATH?>/scripts/libs/modernizr.custom.87787.js"></script>
     <script src="<?=SITE_TEMPLATE_PATH?>/scripts/libs/require.js"></script>
