@@ -6,8 +6,9 @@
 
 define(  [ 'jquery', 'get_height_sum', 'webkit_bug_fix_wrapper', 'animation_img_block' ],
 function (  $,        getHeightSum,     webkitBugFixWrapper,      AnimationImgBlock    ) {
-$(function () { // dom ready
+$(function domReady() {
 $('.contacts').each(function () {
+
     var $map = $(this).find('.map');
     var $callBtn = $(this).find('.call_me_button');
     var $form = $(this).find('.info form');
@@ -46,8 +47,10 @@ $('.contacts').each(function () {
         var bTop = $form.offset().top;
         var bLeft = $form.offset().left;
 
-        if (event.pageY < bTop || event.pageY > bTop + bHeight
-        || event.pageX < bLeft || event.pageX > bLeft + bWidth) {
+        if (
+            event.pageY < bTop || event.pageY > bTop + bHeight ||
+            event.pageX < bLeft || event.pageX > bLeft + bWidth
+        ) {
             $form.stop().fadeOut();
         }
     }
@@ -79,8 +82,10 @@ $('.contacts').each(function () {
         var bTop = $subjectsList.offset().top;
         var bLeft = $subjectsList.offset().left;
 
-        if (event.pageY < bTop || event.pageY > bTop + bHeight
-        || event.pageX < bLeft || event.pageX > bLeft + bWidth) {
+        if (
+            event.pageY < bTop || event.pageY > bTop + bHeight ||
+            event.pageX < bLeft || event.pageX > bLeft + bWidth
+        ) {
             $form.find('.call_subjects .show_list').removeClass('active');
             $form.find('.call_subjects').closest('dd').removeClass('active');
             $subjectsList.stop().slideUp(function () {
@@ -96,23 +101,23 @@ $('.contacts').each(function () {
             var $label = $dl.find('label');
 
             function blurHandler() {
-                if ($(this).attr('name') == 'subject') {
-                    if ($(this).val() == '') {
+                if ($(this).attr('name') === 'subject') {
+                    if ($(this).val() === '') {
                         $label.stop().show();
-                    } else if ($(this).val() != '') {
+                    } else if ($(this).val() !== '') {
                         $label.stop().hide();
                     }
                 } else {
-                    if ($(this).val() == '') {
+                    if ($(this).val() === '') {
                         $label.stop().fadeIn(animationSpeed);
-                    } else if ($(this).val() != '') {
+                    } else if ($(this).val() !== '') {
                         $label.stop().fadeOut(animationSpeed);
                     }
                 }
             }
 
             function focusHandler() {
-                if ($(this).attr('name') != 'subject') {
+                if ($(this).attr('name') !== 'subject') {
                     $label.stop().fadeOut(animationSpeed);
                 }
             }
@@ -132,7 +137,7 @@ $('.contacts').each(function () {
         var $fields = $form.find('.fields');
         var $response = $form.find('.ajax_response');
         if ($response.size() < 1) {
-            $response = $('<div/>', { 'class': 'ajax_response' })
+            $response = $('<div/>', { 'class': 'ajax_response' });
             $fields.before( $response );
         } else {
             $response.slideUp(function () { $response.html(''); });
@@ -167,7 +172,7 @@ $('.contacts').each(function () {
                         $(this).find('input').val('').trigger('blur');
                     });
                 }
-                $fields.slideDown()
+                $fields.slideDown();
             }
 
             function ajaxError(msg) {
@@ -196,36 +201,40 @@ $('.contacts').each(function () {
                         return ajaxError('Parse AJAX-response error');
                     }
 
-                    if (!('status' in json) || !('success_title' in json) || !('error_title' in json)
-                    || !('success_messages' in json) || !('error_messages' in json)) {
+                    if (
+                        !('status' in json) || !('success_title' in json) || !('error_title' in json) ||
+                        !('success_messages' in json) || !('error_messages' in json)
+                    ) {
                         return ajaxError('Not enough data in AJAX response');
                     }
 
                     var messages = '';
                     var list = '';
                     var array;
-                    if (json['status'] == 'success' && json['success_messages'].length > 0) {
-                        array = json['success_messages'];
-                    } else if (json['status'] == 'error' && json['error_messages'].length > 0) {
-                        array = json['error_messages'];
+                    if (json.status === 'success' && json.success_messages.length > 0) {
+                        array = json.success_messages;
+                    } else if (json.status === 'error' && json.error_messages.length > 0) {
+                        array = json.error_messages;
                     }
 
-                    array && $.each(array, function (i, val) {
-                        list += responseMessageTpl.replace(/#MESSAGE#/g, val);
-                    });
+                    if (array) {
+                        $.each(array, function (i, val) {
+                            list += responseMessageTpl.replace(/#MESSAGE#/g, val);
+                        });
+                    }
                     if (list !== '') {
                         messages = responseListTpl
-                            .replace(/#STATUS#/g, json['status'])
+                            .replace(/#STATUS#/g, json.status)
                             .replace(/#MESSAGES#/g, list)
                             ;
                     }
 
                     var html = responseTpl
-                        .replace(/#STATUS#/g, json['status'])
-                        .replace(/#TITLE#/g, ((json['status'] === 'success') ? json['success_title'] : json['error_title']))
+                        .replace(/#STATUS#/g, json.status)
+                        .replace(/#TITLE#/g, ((json.status === 'success') ? json.success_title : json.error_title))
                         .replace(/#LIST#/g, messages)
                         ;
-                    backToForm( html, ((json['status'] === 'success') ? true : false) );
+                    backToForm( html, ((json.status === 'success') ? true : false) );
                 }).error(function () {
                     return ajaxError('AJAX error');
                 });
@@ -297,6 +306,7 @@ $('.contacts').each(function () {
 
     webkitBugFixWrapper(resizeMap);
     $(window).on('resize', resizeMap);
-});
-});
-});
+
+}); // .each()
+}); // domReady()
+}); // define()

@@ -6,7 +6,9 @@
 
 define(  [ 'jquery', 'get_height_sum', 'webkit_bug_fix_wrapper' ],
 function (  $,        getHeightSum,     webkitBugFixWrapper     ) {
-    $(function () { // dom ready
+
+    $(function domReady() {
+
         function stickyFooter() {
             var heightSum = getHeightSum();
 
@@ -16,7 +18,10 @@ function (  $,        getHeightSum,     webkitBugFixWrapper     ) {
                 $('html').removeClass('sticky_footer');
             }
         }
+
         $(window).on('scroll resize', stickyFooter);
         webkitBugFixWrapper(stickyFooter);
-    });
-});
+
+    }); // domReady()
+
+}); // define()

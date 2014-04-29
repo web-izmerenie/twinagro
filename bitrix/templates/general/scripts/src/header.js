@@ -7,6 +7,7 @@
 define(['jquery'], function ($) {
 $(function domReady() {
 $('body > header').each(function () {
+
     var $header = $(this);
     var $bitrix = $('#bitrix_panel');
     var main = ($('html').hasClass('page-main'));
@@ -39,10 +40,13 @@ $('body > header').each(function () {
     $(window).on('resize scroll', fixedHorizontalScroll);
     $(window).on('resize scroll', pointerCursorForCurrentPage);
 
-    ($bitrix.html() != '') && $bitrix.each(function () {
-        watchToBitrixPanel();
-        setInterval(watchToBitrixPanel, 500);
-    });
-}); // $.each
-}); // domReady
-}); // define
+    if ($bitrix.html() !== '') {
+        $bitrix.each(function () {
+            watchToBitrixPanel();
+            setInterval(watchToBitrixPanel, 500);
+        });
+    }
+
+}); // .each()
+}); // domReady()
+}); // define()

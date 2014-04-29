@@ -7,11 +7,11 @@
 define(['jquery'], function ($) {
 
     /** 1x1 px blank png */
-    var blankPNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEA'
-        +'AAABCAYAAAAfFcSJAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAAL'
-        +'EwEAmpwYAAAAB3RJTUUH3gISDgwCLBUYoQAAAB1pVFh0Q29tbWVudAAAAAAA'
-        +'Q3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAADUlEQVQI12NgYGBgAAAABQABXvMq'
-        +'OgAAAABJRU5ErkJggg==';
+    var blankPNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEA'+
+        'AAABCAYAAAAfFcSJAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAAL'+
+        'EwEAmpwYAAAAB3RJTUUH3gISDgwCLBUYoQAAAB1pVFh0Q29tbWVudAAAAAAA'+
+        'Q3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAADUlEQVQI12NgYGBgAAAABQABXvMq'+
+        'OgAAAABJRU5ErkJggg==';
 
     /**
      * @this {DOM}
@@ -52,4 +52,4 @@ define(['jquery'], function ($) {
         $('.solutions.view_compare').each(handler);
     });
 
-});
+}); // define()

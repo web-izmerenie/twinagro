@@ -25,22 +25,40 @@
     <?$APPLICATION->ShowMeta("keywords")?>
     <?$APPLICATION->ShowMeta("description")?>
 
+    <!--
     <script>
         window.SITE_TEMPLATE_PATH = '<?=SITE_TEMPLATE_PATH?>';
         window.LANGUAGE_ID = '<?=LANGUAGE_ID?>';
         <?if ($USER->IsAdmin()) :?>
-            window.less = { env: 'development' };
             window.developmentMode = true;
         <?endif?>
         window.revision = '<?=$revision?>';
     </script>
+    -->
 
     <link rel="stylesheet" type="text/css" href="<?=SITE_TEMPLATE_PATH?>/styles/build/build.css?v=<?=$revision?>" />
 
+    <!--
     <script src="<?=SITE_TEMPLATE_PATH?>/scripts/libs/modernizr.custom.87787.js"></script>
     <script src="<?=SITE_TEMPLATE_PATH?>/scripts/libs/require.js"></script>
 
     <script src="<?=SITE_TEMPLATE_PATH?>/scripts/behavior.js?v=<?=$revision?>"></script>
+    -->
+
+    <script src="<?=SITE_TEMPLATE_PATH?>/scripts/build/build.js?v=<?=$revision?>"></script>
+    <script>
+        //<![CDATA[
+            require(['get_val'], function (getVal) {
+
+                getVal.set('tplPath', '<?=SITE_TEMPLATE_PATH?>');
+                getVal.set('lang', '<?=LANGUAGE_ID?>');
+                getVal.set('revision', '<?=$revision?>');
+
+                require(['main']);
+
+            });
+        //]]>
+    </script>
 
     <?$APPLICATION->ShowCSS()?>
     <?$APPLICATION->ShowHeadStrings()?>

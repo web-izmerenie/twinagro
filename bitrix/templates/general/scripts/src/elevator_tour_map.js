@@ -4,34 +4,36 @@
  * @author Viacheslav Lotsmanov
  */
 
-define(['jquery', 'localization'], function ($, Localization) { $(function () { // dom ready
+define(['jquery', 'get_local_text'], function ($, getLocalText) {
+$(function domReady() {
 $('html.page-main #main .card-elevator_tour').each(function () {
-    var local = new Localization();
+
     var headerHeight = $('header').height();
     $tour = $(this);
-    var popupTpl = '<div class="elevator_tour_popup" style="display:none;">'
-            +'<a class="close">'+ local.getMessage('Close') +'</a>'
-            +'<div class="panorama"></div>'
-        +'</div>';
+    var popupTpl = '<div class="elevator_tour_popup" style="display:none;">'+
+            '<a class="close">'+ getLocalText('CLOSE') +'</a>'+
+            '<div class="panorama"></div>'+
+        '</div>';
     var $bitrix = $('#bitrix_panel');
 
-    var adminMode = ($bitrix.html() != '');
+    var adminMode = ($bitrix.html() !== '');
 
     var panorama; // {Panorama}
     var documentClickHandler; // {function}
     var popupResizeWindowHandler; // {function}
 
     function getPopupSize() {
-        var h = $(window).height()
-            -( ((adminMode) ? $bitrix.height() : 0) + headerHeight + 40 + 80 );
+        var h = $(window).height() - (
+            ((adminMode) ? $bitrix.height() : 0) + headerHeight + 40 + 80
+        );
         var w = h * 12 / 5;
 
         var $popup = $('.elevator_tour_popup');
         if ($popup.size() > 0) {
             var offsetW = document.body.clientWidth - (
-                80
-                + parseFloat($popup.css('padding-left'))
-                + parseFloat($popup.css('padding-right'))
+                80 +
+                parseFloat($popup.css('padding-left')) +
+                parseFloat($popup.css('padding-right'))
             );
 
             if (w > offsetW) {
@@ -101,17 +103,19 @@ $('html.page-main #main .card-elevator_tour').each(function () {
         return false;
     }
 
-    function documentClickHandler(event) {
+    documentClickHandler = function documentClickHandler(event) {
         var $popup = $('.elevator_tour_popup');
-        var width = $popup.width() + parseFloat($popup.css('padding-left'))
-            + parseFloat($popup.css('padding-right'));
-        var height = $popup.height() + parseFloat($popup.css('padding-top'))
-            + parseFloat($popup.css('padding-bottom'));
+        var width = $popup.width() + parseFloat($popup.css('padding-left')) +
+            parseFloat($popup.css('padding-right'));
+        var height = $popup.height() + parseFloat($popup.css('padding-top')) +
+            parseFloat($popup.css('padding-bottom'));
         var x = $popup.offset().left;
         var y = $popup.offset().top;
 
-        if( event.pageY < y || event.pageY > y + height
-        ||  event.pageX < x || event.pageX > x + width ) {
+        if (
+            event.pageY < y || event.pageY > y + height ||
+            event.pageX < x || event.pageX > x + width
+        ) {
             $(document).unbind('click.elevator_tour_popup');
             $(window).unbind('resize.elevator_tour_popup');
 
@@ -123,9 +127,9 @@ $('html.page-main #main .card-elevator_tour').each(function () {
 
             return false;
         }
-    }
+    };
 
-    function popupResizeWindowHandler() {
+    popupResizeWindowHandler = function popupResizeWindowHandler() {
         $('.elevator_tour_popup').each(function () {
             var size = getPopupSize();
             $(this).css({
@@ -133,7 +137,7 @@ $('html.page-main #main .card-elevator_tour').each(function () {
                 'width': size[0] + 'px'
             });
         });
-    }
+    };
 
     $tour.find('ul li').each(function () {
         var x = parseFloat($(this).attr('data-x'));
@@ -142,5 +146,7 @@ $('html.page-main #main .card-elevator_tour').each(function () {
         $(this).addClass('active');
         $(this).find('a').click(markerClick);
     });
-});
-}); });
+
+}); // .each()
+}); // domReady()
+}); // define()

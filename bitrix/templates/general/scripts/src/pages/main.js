@@ -4,13 +4,15 @@
  * @author Viacheslav Lotsmanov
  */
 
-define(['jquery'], function ($) { $(function () { // dom ready
+define(['jquery'], function ($) {
+$(function domReady() {
 $('html.page-main #main').each(function () {
+
     var $mainBlock = $(this);
     var headerHeight = $('header').height();
     var $bitrix = $('#bitrix_panel');
 
-    var adminMode = ($bitrix.html() != '');
+    var adminMode = ($bitrix.html() !== '');
 
     function correctCardHeight() {
         $mainBlock.find('.card .background').each(function () {
@@ -30,11 +32,11 @@ $('html.page-main #main').each(function () {
     if (adminMode) setInterval(correctCardHeight, 500);
 
     /** scroll to card text by click on .title in .background */
-    $mainBlock.find('.card .background .title'
-    +', .card-1 .background .scroll-arrow a').click(function () {
+    $mainBlock.find('.card .background .title'+
+    ', .card-1 .background .scroll-arrow a').click(function () {
         $('html,body').animate({
-            scrollTop: $(this).closest('.card').find('.info').offset().top
-                - ((adminMode) ? $bitrix.height() : 0)
+            scrollTop: $(this).closest('.card').find('.info').offset().top -
+            ((adminMode) ? $bitrix.height() : 0)
         });
 
         return false;
@@ -42,13 +44,15 @@ $('html.page-main #main').each(function () {
 
     $mainBlock.find('.tour-3d').click(function () {
         $('html,body').animate({
-            scrollTop: $mainBlock.find('.card-elevator_tour').offset().top
-                - headerHeight - ((adminMode) ? $bitrix.height() : 0)
+            scrollTop: $mainBlock.find('.card-elevator_tour').offset().top -
+            headerHeight - ((adminMode) ? $bitrix.height() : 0)
         });
         return false;
     });
 
     require(['pages/main_header']);
     require(['elevator_tour_map']);
-});
-}); });
+
+}); // .each()
+}); // domReady()
+}); // define()

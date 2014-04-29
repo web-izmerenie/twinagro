@@ -4,10 +4,9 @@
  * @author Viacheslav Lotsmanov
  */
 
-define(['jquery'], function ($) { $(function () { // dom ready
+define(['get_val', 'jquery'], function (getVal, $) {
+$(function domReady() {
 $('html.page-main #main .card-1').each(function () {
-    var tplDirPrefix = (typeof window.SITE_TEMPLATE_PATH === 'string')
-        ? window.SITE_TEMPLATE_PATH : './';
 
     var $card1 = $(this);
     var $bitrix = $('#bitrix_panel');
@@ -69,9 +68,13 @@ $('html.page-main #main .card-1').each(function () {
     headerFollow();
     $(window).on('resize scroll', headerFollow);
 
-    ($bitrix.html() != '') && $bitrix.each(function () {
-        watchToBitrixPanel();
-        setInterval(watchToBitrixPanel, 500);
-    });
-});
-}); });
+    if ($bitrix.html() !== '') {
+        $bitrix.each(function () {
+            watchToBitrixPanel();
+            setInterval(watchToBitrixPanel, 500);
+        });
+    }
+
+}); // .each()
+}); // domReady()
+}); // define()

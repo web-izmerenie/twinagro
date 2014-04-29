@@ -6,8 +6,9 @@
 
 define(  [ 'jquery', 'get_height_sum', 'webkit_bug_fix_wrapper' ],
 function (  $,        getHeightSum,     webkitBugFixWrapper     ) {
-$(function () { // dom ready
+$(function domReady() {
 $('section.content .objects').each(function () {
+
     var $objects = $(this);
     var resetSizesCss = {
         'height': 'auto',
@@ -16,7 +17,7 @@ $('section.content .objects').each(function () {
     var minHeight = parseInt($objects.css('min-height'), 10);
 
     function nod(w, h) {
-        if (h == 0) return w;
+        if (h === 0) return w;
         else return nod(h, (w % h));
     }
 
@@ -40,11 +41,11 @@ $('section.content .objects').each(function () {
             if (srcAspect[0] > scopeAspect[0]) {
                 height = scopeHeight;
                 width = srcWidth * height / srcHeight;
-                offsetX = -((width - scopeWidth) / 2) 
+                offsetX = -((width - scopeWidth) / 2);
             } else {
                 width = scopeWidth;
                 height = srcHeight * width / srcWidth;
-                offsetY = -((height - scopeHeight) / 2)
+                offsetY = -((height - scopeHeight) / 2);
             }
         }
 
@@ -162,6 +163,7 @@ $('section.content .objects').each(function () {
 
         initScrolling();
     });
-});
-});
-});
+
+}); // .each()
+}); // domReady()
+}); // define()

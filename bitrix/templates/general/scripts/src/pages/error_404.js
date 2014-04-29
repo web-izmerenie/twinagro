@@ -6,8 +6,9 @@
 
 define(  [ 'jquery', 'get_height_sum', 'webkit_bug_fix_wrapper' ],
 function (  $,        getHeightSum,     webkitBugFixWrapper     ) {
-$(function () { // dom ready
+$(function domReady() {
 $('html.error-page .error_404').each(function () {
+
     var $error = $(this);
 
     function resizeArea() {
@@ -30,6 +31,7 @@ $('html.error-page .error_404').each(function () {
 
     webkitBugFixWrapper(resizeArea);
     $(window).on('resize', resizeArea);
-});
-});
-});
+
+}); // .each()
+}); // domReady()
+}); // define()

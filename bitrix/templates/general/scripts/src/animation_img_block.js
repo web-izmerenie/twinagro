@@ -4,16 +4,15 @@
  * @author Viacheslav Lotsmanov
  */
 
-define(['jquery', 'modernizr.apng'], function ($) {
-    var tplDirPrefix = (typeof window.SITE_TEMPLATE_PATH === 'string')
-        ? window.SITE_TEMPLATE_PATH : './';
+define(['get_val', 'jquery', 'modernizr.apng'], function (getVal, $) {
 
-    var ajaxAnimSprite = tplDirPrefix + '/images/loading_animation_sprite.png'; 
-    var ajaxAnimAPNG = tplDirPrefix + '/images/loading_animation.png';
+    var ajaxAnimSprite = getVal('tplPath') + '/images/loading_animation_sprite.png'; 
+    var ajaxAnimAPNG = getVal('tplPath') + '/images/loading_animation.png';
 
     // preload images
-    $('<img/>').attr('src', ajaxAnimSprite);
-    $('<img/>').attr('src', ajaxAnimAPNG);
+    //$('<img/>').attr('src', ajaxAnimSprite);
+    //$('<img/>').attr('src', ajaxAnimAPNG);
+    // TODO to styles
 
     /**
      * For AJAX loading (APNG or PNG sprite with frames)
@@ -21,7 +20,8 @@ define(['jquery', 'modernizr.apng'], function ($) {
      * @constructor
      */
     return function Constructor(callback, srcAPNG, srcSprite, width, height, interval, startFrame) {
-        var self = this;
+
+        /** @private */ var self = this;
 
         /** properties */
         self.$img = $('<img/>');
@@ -29,13 +29,13 @@ define(['jquery', 'modernizr.apng'], function ($) {
         self.srcAPNG = srcAPNG || ajaxAnimAPNG;
         self.srcSprite = srcSprite || ajaxAnimSprite;
         self.interval = interval || 100;
-        self.frames;
+        self.frames = null;
         self.curFrame = startFrame || 0;
         self.timer = null;
         self.apng = false;
 
         /** methods */
-        self.kill;
+        self.kill = null;
 
         if ($('html').hasClass('apng')) {
             self.apng = true;
@@ -75,7 +75,7 @@ define(['jquery', 'modernizr.apng'], function ($) {
                 if ( ! self.apng) {
                     self.timer = setInterval(function () {
                         if (++self.curFrame >= self.frames) self.curFrame = 0;
-                        self.$img.css('background-position', -(self.width * self.curFrame) + 'px 0')
+                        self.$img.css('background-position', -(self.width * self.curFrame) + 'px 0');
                     }, self.interval);
                 }
             }, 1);
@@ -88,14 +88,16 @@ define(['jquery', 'modernizr.apng'], function ($) {
         };
 
         /** 1x1 px blank png */
-        var blankPNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEA'
-            +'AAABCAYAAAAfFcSJAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAAL'
-            +'EwEAmpwYAAAAB3RJTUUH3gISDgwCLBUYoQAAAB1pVFh0Q29tbWVudAAAAAAA'
-            +'Q3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAADUlEQVQI12NgYGBgAAAABQABXvMq'
-            +'OgAAAABJRU5ErkJggg==';
+        var blankPNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEA'+
+            'AAABCAYAAAAfFcSJAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAAL'+
+            'EwEAmpwYAAAAB3RJTUUH3gISDgwCLBUYoQAAAB1pVFh0Q29tbWVudAAAAAAA'+
+            'Q3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAADUlEQVQI12NgYGBgAAAABQABXvMq'+
+            'OgAAAABJRU5ErkJggg==';
 
         self.$sprite.load(init);
         self.$img.attr('src', blankPNG);
         self.$sprite.attr('src', self.srcSprite);
+
     };
+
 });

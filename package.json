@@ -27,6 +27,12 @@
       }
     ],
     "scripts": [
+      {
+        "path": "bitrix/templates/general/scripts",
+        "buildFile": "build.js",
+        "notAmdFiles": [ "*require*.js" ],
+        "amd": true
+      }
     ],
     "jshint": {
       "development": true,
