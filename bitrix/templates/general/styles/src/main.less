@@ -260,6 +260,19 @@ body {
             p + ul, p + ol, ul + ul, ol + ol, ul + ol, ol + ul { margin-top: 6px; }
 
             b, strong { font-weight: bold; }
+
+            .interactive_map {
+                .size(auto);
+                background: none;
+                border: 0;
+
+                &:before {
+                    display: none;
+                    content: '';
+                    line-height: inherit;
+                    .size(auto);
+                }
+            }
         }
     }
 

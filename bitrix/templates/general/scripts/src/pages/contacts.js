@@ -4,19 +4,23 @@
  * @author Viacheslav Lotsmanov
  */
 
-define(  [ 'jquery', 'get_height_sum', 'webkit_bug_fix_wrapper', 'animation_img_block' ],
-function (  $,        getHeightSum,     webkitBugFixWrapper,      AnimationImgBlock    ) {
+define(  [ 'get_val', 'jquery', 'get_height_sum', 'webkit_bug_fix_wrapper', 'animation_img_block' ],
+function (  getVal,    $,        getHeightSum,     webkitBugFixWrapper,      AnimationImgBlock    ) {
 $(function domReady() {
 $('.contacts').each(function () {
 
-    var $map = $(this).find('.map');
-    var $callBtn = $(this).find('.call_me_button');
-    var $form = $(this).find('.info form');
+    var $contacts = $(this);
+    var $map = $contacts.find('.interactive_map');
+    var $callBtn = $contacts.find('.call_me_button');
+    var $form = $contacts.find('.info form');
     var process = false;
     var subjectsListVisible = false;
     var $subjectsList = null;
 
     var minHeight = parseInt($map.css('min-height'), 10);
+
+    var mapId = 'interactive_yandex_map';
+    $map.attr('id', mapId);
 
     function resizeMap() {
         var heightSum = getHeightSum();
@@ -26,6 +30,10 @@ $('.contacts').each(function () {
             $map.css('height', newHeight + 'px');
         } else if ($(window).height() < heightSum) {
             $map.css('height', minHeight + 'px');
+        }
+
+        if ($map.data('yamap')) {
+            $map.data('yamap').container.fitToViewport();
         }
     }
 
@@ -306,6 +314,50 @@ $('.contacts').each(function () {
 
     webkitBugFixWrapper(resizeMap);
     $(window).on('resize', resizeMap);
+
+    require(['dynamic_api'], function (dynamicLoadApi) {
+
+        var mapLang = (getVal('lang') === 'ru') ? 'ru-RU' : 'en-US';
+
+        dynamicLoadApi(
+            'http://api-maps.yandex.ru/2.0/?load=package.standard&lang=ru-RU',
+            'ymaps',
+            function (err, ymaps) {
+
+                if (err) throw err;
+
+                ymaps.ready(function () {
+
+                    var map = new ymaps.Map(mapId, {
+                        center: [
+                            parseFloat($map.attr('data-coord-y')),
+                            parseFloat($map.attr('data-coord-x'))
+                        ],
+                        zoom: parseInt($map.attr('data-zoom'), 10)
+                    });
+
+                    map.controls
+                        .add('zoomControl', { left: 15, top: 15 })
+                        .add('typeSelector', { right: 15, top: 15 });
+
+                    var mark = new ymaps.Placemark([
+                        $map.attr('data-coord-y'),
+                        $map.attr('data-coord-x')
+                    ], {
+                        hintContent: $contacts.find('address_text').text()
+                    });
+
+                    map.geoObjects.add(mark);
+                    $map.data('yamap', map);
+
+                    $(window).trigger('resize');
+
+                }); // ymaps.ready()
+
+            }
+        ); // dynamicLoadApi()
+
+    });
 
 }); // .each()
 }); // domReady()

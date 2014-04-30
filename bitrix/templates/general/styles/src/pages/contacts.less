@@ -2,7 +2,7 @@
  * @author Viacheslav Lotsmanov (unclechu)
  */
 
-.page_content .contacts {
+body section.content .page_content .contacts {
     display: block;
     .relative;
 
@@ -235,11 +235,12 @@
         }
     }
 
-    .map {
+    .interactive_map {
         @height: @minAutoSizeBlockHeight; // minimal
         min-height: @height;
         height: @height;
         .relative;
+        background: @plugColor;
 
         .styles () {
             content: '';
