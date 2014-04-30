@@ -8,18 +8,29 @@
 define(['get_val', 'jquery'], function (getVal, $) {
 
     require.config({
+
+        baseUrl: getVal('tplPath') + '/scripts',
+
+        paths: {
+            'threejs': 'libs_not_build/three.min'
+        },
+
         map: {
             '*': {
 
                 /* short name aliases */
 
-                'threejs': 'libs/three',
                 'jquery.mousewheel': 'libs/jquery.mousewheel',
                 'modernizr': 'libs/modernizr-2.7.2',
                 '3d_panorama': 'libs/3d_panorama'
 
             }
-        }
+        },
+
+        urlArgs: 'v=' + getVal('revision'),
+
+        waitSeconds: getVal('requireTimeout')
+
     });
 
     require(['modernizr']);

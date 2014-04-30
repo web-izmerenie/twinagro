@@ -7,7 +7,7 @@
     endif;
 
     $revision = 2;
-    if ($USER->IsAdmin()) $revision = 'dev' . 5;
+    if ($USER->IsAdmin()) $revision = 'dev' . 9;
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?=LANGUAGE_ID

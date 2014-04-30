@@ -10,7 +10,8 @@ define(function () {
     /** @public */ var exports = {};
 
     exports.values = {
-        dynamicApiLoadInterval: 100 // ms
+        dynamicApiLoadInterval: 100, // ms
+        requireTimeout: 60 // sec
     };
 
     /** Required set before "getVal" */

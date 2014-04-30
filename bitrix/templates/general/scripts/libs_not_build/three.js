@@ -4,8 +4,8 @@
  * @author bhouston / http://exocortex.com
  */
 
-// AMD wrapped by Viacheslav Lotsmanov
-define(function AMDWrapper() {
+// AMD wrapper by Viacheslav Lotsmanov
+define(function () {
 
 var THREE = { REVISION: '67' };
 
@@ -38494,4 +38494,4 @@ THREE.ShaderFlares = {
 
 return THREE;
 
-}); // AMDWrapper()
+}); // define()
