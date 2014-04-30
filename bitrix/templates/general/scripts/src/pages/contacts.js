@@ -344,7 +344,7 @@ $('.contacts').each(function () {
                         $map.attr('data-coord-y'),
                         $map.attr('data-coord-x')
                     ], {
-                        hintContent: $contacts.find('address_text').text()
+                        hintContent: $contacts.find('address .address_text').text()
                     });
 
                     map.geoObjects.add(mark);

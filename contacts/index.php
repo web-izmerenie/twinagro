@@ -13,6 +13,6 @@ $APPLICATION->SetTitle("Контакты");
             );?> </div>
    </div>
  
-  <div class="interactive_map" data-zoom="10" data-coord-x="39.705383" data-coord-y="47.212353"></div>
+  <div class="interactive_map" data-zoom="16" data-coord-x="39.705383" data-coord-y="47.212353"></div>
  </div>
  <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
