@@ -33,7 +33,7 @@ bitrix/activities
 bitrix/activity_limit.php
 bitrix/admin
 bitrix/click.php
-bitrix/components
+bitrix/components/bitrix
 bitrix/coupon_activation.php
 bitrix/fonts
 bitrix/footer.php
