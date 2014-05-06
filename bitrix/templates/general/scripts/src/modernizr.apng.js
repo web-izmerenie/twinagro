@@ -4,7 +4,7 @@
  * @author Viacheslav Lotsmanov
  */
 
-define(['modernizr'], function () {
+define(['modernizr'], function (Modernizr) {
 
     var testImage = new Image();
     var canvasContext = document.createElement('canvas').getContext('2d');

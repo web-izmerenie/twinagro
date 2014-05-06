@@ -25,7 +25,8 @@
 // AMD wrapped by Viacheslav Lotsmanov
 define(function AMDWrapper() {
 
-window.Modernizr = (function( window, document, undefined ) {
+// export to AMD
+return (function(window, document, undefined) {
 
     var version = '2.7.2',
 

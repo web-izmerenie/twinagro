@@ -13,7 +13,8 @@ define(function () {
 		animationSpeed: 200,
 		objectsBlockRatio: [4, 3],
 		dynamicApiLoadInterval: 100, // ms
-		requireTimeout: 60 // sec
+		requireTimeout: 60, // sec
+		loadImgTimeout: 30000 // ms
 	};
 
 	/** Required set before "getVal" */

@@ -4,7 +4,7 @@
  * @author Viacheslav Lotsmanov
  */
 
-define(['get_val', 'jquery', 'modernizr.apng'], function (getVal, $) {
+define(['get_val', 'jquery', 'modernizr', 'modernizr.apng'], function (getVal, $, Modernizr) {
 
     var ajaxAnimSprite = getVal('tplPath') + '/images/loading_animation_sprite.png'; 
     var ajaxAnimAPNG = getVal('tplPath') + '/images/loading_animation.png';
@@ -37,7 +37,7 @@ define(['get_val', 'jquery', 'modernizr.apng'], function (getVal, $) {
         /** methods */
         self.kill = null;
 
-        if ($('html').hasClass('apng')) {
+        if (Modernizr.apng) {
             self.apng = true;
         }
 
