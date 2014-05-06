@@ -7,22 +7,24 @@
 
 define(function () {
 
-    /** @public */ var exports = {};
+	/** @public */ var exports = {};
 
-    exports.values = {
-        dynamicApiLoadInterval: 100, // ms
-        requireTimeout: 60 // sec
-    };
+	exports.values = {
+		animationSpeed: 200,
+		objectsBlockRatio: [4, 3],
+		dynamicApiLoadInterval: 100, // ms
+		requireTimeout: 60 // sec
+	};
 
-    /** Required set before "getVal" */
-    exports.required = [
-        'lang',
-        'revision',
-        'tplPath'
-    ];
+	/** Required set before "getVal" */
+	exports.required = [
+		'lang',
+		'revision',
+		'tplPath'
+	];
 
-    return exports;
+	return exports;
 
 }); // define
 
-// vim: set sw=4 ts=4 et foldmethod=marker :
+// vim: set noet ts=4 sts=4 sw=4 fenc=utf-8 foldmethod=marker :

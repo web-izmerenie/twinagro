@@ -7,10 +7,10 @@
     </div>
     <ul>
         <?foreach ($arResult["ITEMS"] as $arItem) :?>
-            <li>
+            <li data-img-src="<?=$arItem["FIELDS"]["DETAIL_PICTURE"]["SRC"]
+				?>">
                 <figure>
-                    <p><img alt="<?=$arItem["FIELDS"]["DETAIL_PICTURE"]["DESCRIPTION"]
-                        ?>" src="<?=$arItem["FIELDS"]["DETAIL_PICTURE"]["SRC"]?>" /></p>
+                    <p></p>
                     <figcaption><?=$arItem["FIELDS"]["NAME"]?></figcaption>
                 </figure>
             </li>
