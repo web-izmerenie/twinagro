@@ -6,8 +6,8 @@
         define('MAIN_PAGE', 'Y');
     endif;
 
-    $revision = 3;
-    if ($USER->IsAdmin()) $revision = 'dev' . 10;
+    $revision = 4;
+    if ($USER->IsAdmin()) $revision = $revision . 'dev' . 11;
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?=LANGUAGE_ID

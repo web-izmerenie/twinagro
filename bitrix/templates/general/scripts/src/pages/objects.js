@@ -128,7 +128,29 @@ $('section.content .objects').each(function () {
 			}).animate(
 				{ opacity: 1 },
 				getVal('animationSpeed'),
-				recalcImgSize
+				function () {
+					recalcImgSize();
+
+					var index = $item.index();
+					var $ul = $item.closest('ul');
+					var $elems = $ul.find('li');
+					var $next = $item.next();
+					var $prev = $item.prev();
+
+					if ($next.size() < 1) $next = $elems.eq(0);
+					if ($prev.size() < 1) $prev = $elems.eq(-1);
+
+					if (!$prev.data('loading_started')) {
+						$('<img/>')
+							.on('load', function () { $(this).remove(); })
+							.attr('src', $prev.attr('data-img-src'));
+					}
+					if (!$next.data('loading_started')) {
+						$('<img/>')
+							.on('load', function () { $(this).remove(); })
+							.attr('src', $next.attr('data-img-src'));
+					}
+				}
 			);
 		}
 
