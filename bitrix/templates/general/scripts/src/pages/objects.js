@@ -235,7 +235,7 @@ $('section.content .objects').each(function () {
 			var animationSpeed;
 
 			if (slowMotion) {
-				animationSpeed = getVal('animationSpeed') * liCount;
+				animationSpeed = getVal('animationSpeed') * 4;
 				slowMotion = false;
 			} else {
 				animationSpeed = getVal('animationSpeed') * 2;
