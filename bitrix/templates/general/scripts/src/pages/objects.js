@@ -212,6 +212,8 @@ $('section.content .objects').each(function () {
 
 		if ($objects.data('no_scrolling')) return;
 
+		if (liCount > 0) $elems.eq(0).each(setActive);
+
 		if (liCount < 2) {
 			$controls.hide();
 			$objects.data('no_scrolling', true);
@@ -229,7 +231,6 @@ $('section.content .objects').each(function () {
 
 		$elems.removeClass('active').eq(0).addClass('active');
 		$objects.data('scrolling_active_index', 0);
-		$elems.eq(0).each(setActive);
 
 		function calcXOffset(index) {
 			return -($ul.width() * index);
