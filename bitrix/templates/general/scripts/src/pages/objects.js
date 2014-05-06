@@ -115,17 +115,12 @@ $('section.content .objects').each(function () {
 					src: img.src,
 					width: img.width,
 					height: img.height,
-					class: 'photo',
-					opacity: 0,
-					visibility: 'hidden'
+					class: 'photo'
 				});
 
 			$p.append($img);
 			recalcImgSize();
-			$img.css({
-				opacity: 0,
-				visibility: 'visible'
-			}).animate(
+			$img.css({ opacity: 0 }).animate(
 				{ opacity: 1 },
 				getVal('animationSpeed'),
 				function () {
