@@ -110,7 +110,7 @@ $('section.content .objects').each(function () {
 		var $p = $item.find('p');
 		var $loader = null;
 
-		function loadedCallback(img) {
+		function loadedCallback(img) { // {{{2
 			var $img = $('<img/>', {
 					src: img.src,
 					width: img.width,
@@ -131,30 +131,34 @@ $('section.content .objects').each(function () {
 				function () {
 					recalcImgSize();
 
-					var index = $item.index();
+					// preloading next and prev elements {{{3
+
 					var $ul = $item.closest('ul');
 					var $elems = $ul.find('li');
-					var $next = $item.next();
 					var $prev = $item.prev();
+					var $next = $item.next();
 
-					if ($next.size() < 1) $next = $elems.eq(0);
 					if ($prev.size() < 1) $prev = $elems.eq(-1);
+					if ($next.size() < 1) $next = $elems.eq(0);
 
 					if (!$prev.data('loading_started')) {
 						$('<img/>')
 							.on('load', function () { $(this).remove(); })
 							.attr('src', $prev.attr('data-img-src'));
 					}
+
 					if (!$next.data('loading_started')) {
 						$('<img/>')
 							.on('load', function () { $(this).remove(); })
 							.attr('src', $next.attr('data-img-src'));
 					}
+
+					// preloading next and prev elements }}}3
 				}
 			);
-		}
+		} // loadedCallback }}}2
 
-		function startLoad() {
+		function startLoad() { // {{{2
 			require(['loadimg'], function (loadImg) {
 				loadImg($item.attr('data-img-src'), function (err, img) {
 					if (err) {
@@ -176,7 +180,7 @@ $('section.content .objects').each(function () {
 					);
 				});
 			});
-		}
+		} // startLoad }}}2
 
 		$item.data(
 			'loader_animation',
