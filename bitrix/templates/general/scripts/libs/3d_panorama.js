@@ -14,9 +14,9 @@
  * @license GPLv3
  */
 
-define(['jquery', 'threejs'],
+define(['jquery', 'threejs', 'modernizr'],
 /** @lends Panorama */
-function ($, THREE) {
+function ($, THREE, Modernizr) {
     var sides = ['right', 'left', 'top', 'bottom', 'back', 'front'];
 
     /**
@@ -35,6 +35,8 @@ function ($, THREE) {
      * @exception {Panorama~NoContainer}
      * @exception {Panorama~ContainerZeroSize}
      * @exception {Panorama~SinglePanoramaPerContainer}
+     * @exception {Panorama~NoSupportedRenderer}
+     * @exception {Panorama~RendererInitError}
      */
     function Panorama($selector, params/*[, callback]*/) {
         /** @private */
@@ -189,7 +191,32 @@ function ($, THREE) {
              * @type {Panorama~handlerState}
              * @name Panorama.touchStartState
              */
-            touchStartState: null
+            touchStartState: null,
+
+            /**
+             * @private
+             * @instance
+             * @type {string}
+             * @name Panorama.fillColor
+             * @default '#eaeaea'
+             */
+            fillColor: '#eaeaea',
+
+            /**
+             * @private
+             * @instance
+             * @type {THREE.BoxGeometry}
+             * @name Panorama.geometry
+             */
+            geometry: null,
+
+            /**
+             * @private
+             * @instance
+             * @type {THREE.MeshFaceMaterial}
+             * @name Panorama.materialToMesh
+             */
+            materialToMesh: null
 
         }; // private }}}1
 
@@ -392,11 +419,11 @@ function ($, THREE) {
         private.scene = new THREE.Scene();
 
         private.$texturePlaceholder = $('<canvas/>');
-        private.$texturePlaceholder.width(128);
-        private.$texturePlaceholder.height(128);
+        private.$texturePlaceholder.width(1200);
+        private.$texturePlaceholder.height(1200);
 
         private.textureContext = private.$texturePlaceholder.get(0).getContext('2d');
-        private.textureContext.fillStyle = 'rgb(200, 200, 200)';
+        private.textureContext.fillStyle = private.fillColor;
         private.textureContext.fillRect(
             0, 0,
             private.$texturePlaceholder.width(),
@@ -424,20 +451,46 @@ function ($, THREE) {
             });
         }
 
-        private.mesh = new THREE.Mesh(
-            new THREE.BoxGeometry(300, 300, 300, 7, 7, 7),
-            new THREE.MeshFaceMaterial(private.materials)
-        );
+        private.geometry = new THREE.BoxGeometry(300, 300, 300, 7, 7, 7);
+        private.materialToMesh = new THREE.MeshFaceMaterial(private.materials);
+
+        private.mesh = new THREE.Mesh(private.geometry, private.materialToMesh);
         private.mesh.scale.x = -1;
         private.scene.add(private.mesh);
 
         private.target = new THREE.Vector3();
 
-        private.renderer = new THREE.CanvasRenderer();
-        private.renderer.setSize(
-            this.$container.width(),
-            this.$container.height()
-        );
+        // renderer init {{{1
+        if (Modernizr.webgl) {
+            try {
+                private.renderer = new THREE.WebGLRenderer();
+            } catch (err) {
+                // chromium bug
+                if (Modernizr.canvas) {
+                    try {
+                        private.renderer = new THREE.CanvasRenderer();
+                    } catch (err) {
+                        self.makeError(new self.exceptions.RendererInitError());
+                        return false;
+                    }
+                } else {
+                    self.makeError(new self.exceptions.NoSupportedRenderer());
+                    return false;
+                }
+            } // try-catch
+        } else if (Modernizr.canvas) {
+            try {
+                private.renderer = new THREE.CanvasRenderer();
+            } catch (err) {
+                self.makeError(new self.exceptions.RendererInitError());
+                return false;
+            }
+        } else {
+            self.makeError(new self.exceptions.NoSupportedRenderer());
+            return false;
+        }
+        private.renderer.setSize(this.$container.width(), this.$container.height());
+        // renderer init }}}1
 
         /**
          * Time in milliseconds when last animation frame was drawn
@@ -793,6 +846,22 @@ function ($, THREE) {
 		Error.call(this);
 		this.name = 'HandlerCannotFoundThePanorama';
         this.message = message || 'Panorama removed but handler still triggers';
+    };
+
+    /** @typedef {Error} Panorama~NoSupportedRenderer */
+    Panorama.exceptions.NoSupportedRenderer =
+	function NoSupportedRenderer(message) {
+		Error.call(this);
+		this.name = 'NoSupportedRenderer';
+        this.message = message || 'Your browser must support WebGL or Canvas';
+    };
+
+    /** @typedef {Error} Panorama~RendererInitError */
+    Panorama.exceptions.RendererInitError =
+	function RendererInitError(message) {
+		Error.call(this);
+		this.name = 'RendererInitError';
+        this.message = message || 'Cannot initialize THREE-renderer';
     };
 
 	function inherit(proto) {
