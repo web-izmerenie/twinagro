@@ -154,7 +154,7 @@ $('section.content .objects').each(function () {
 		} // loadedCallback }}}2
 
 		function startLoad() { // {{{2
-			require(['loadimg'], function (loadImg) {
+			require(['load_img'], function (loadImg) {
 				loadImg($item.attr('data-img-src'), function (err, img) {
 					if (err) {
 						console.log(err);

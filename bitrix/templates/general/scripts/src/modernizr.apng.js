@@ -3,7 +3,8 @@
  *
  * @version r2
  * @author Viacheslav Lotsmanov
- * @license GNU/GPLv3 by Free Software Foundation
+ * @license GNU/GPLv3 by Free Software Foundation (https://github.com/unclechu/js-useful-amd-modules/blob/master/GPLv3-LICENSE)
+ * @see {@link https://github.com/unclechu/js-useful-amd-modules/|GitHub}
  */
 
 define(['modernizr'], function (Modernizr) {

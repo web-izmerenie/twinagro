@@ -3,7 +3,8 @@
  *
  * @version r2
  * @author Viacheslav Lotsmanov
- * @license GNU/GPLv3 by Free Software Foundation
+ * @license GNU/GPLv3 by Free Software Foundation (https://github.com/unclechu/js-useful-amd-modules/blob/master/GPLv3-LICENSE)
+ * @see {@link https://github.com/unclechu/js-useful-amd-modules/|GitHub}
  */
 
 define(['get_val', 'jquery'], function (getVal, $) {
@@ -11,7 +12,7 @@ define(['get_val', 'jquery'], function (getVal, $) {
 	/**
 	 * @public
 	 * @example
-	 *   define(['loadimg'], function (loadImg) {
+	 *   define(['load_img'], function (loadImg) {
 	 *     loadImg('/images/picture.png', function (err, img) {
 	 *       if (err) alert(err.toString());
 	 *       $('body').append('<img alt="" src="'+ img.src +'" width="'+ img.width +'" height="'+ img.height +'" />');
