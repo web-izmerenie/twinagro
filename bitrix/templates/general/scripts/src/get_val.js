@@ -1,149 +1,156 @@
-/**
+/*!
  * Provide "getVal" for getting values from "values" module
  *
- * @module get_val
+ * @version r3
  * @author Viacheslav Lotsmanov
- * @version 0.2
+ * @license GNU/GPLv3 by Free Software Foundation
  */
 
 define(['values'],
 function (values) {
 
-    var required = values.required;
-    values = values.values;
+	var required = values.required;
+	values = values.values;
 
-    function getVal() {
+	function getVal() {
 
-        // delegate to "get" method
-        return getVal.get.apply(this, arguments);
+		// delegate to "get" method
+		return getVal.get.apply(this, arguments);
 
-    }
+	}
 
-    function checkRequired() {
+	function checkRequired() {
 
-        $.each(required, function (i, key) {
+		$.each(required, function (i, key) {
 
-            if (!(key in values)) {
-                throw new getVal.exceptions.RequiredIsNotSet(null, key);
-            }
+			if (!(key in values)) {
+				throw new getVal.exceptions.RequiredIsNotSet(null, key);
+			}
 
-        });
+		});
 
-    }
+	}
 
-    /**
-     * Only for "required" keys
-     *
-     * @public
-     */
-    getVal.set =
-    function set(key, val) {
+	/**
+	 * Only for "required" keys
+	 *
+	 * @public
+	 */
+	getVal.set =
+	function set(key, val) {
 
-        if (typeof key !== 'string') {
-            throw new getVal.exceptions.IncorrectKey(null, typeof(key));
-        }
+		if (typeof key !== 'string') {
+			throw new getVal.exceptions.IncorrectKey(null, typeof(key));
+		}
 
-        var found = false;
+		var found = false;
 
-        $.each(required, function(i, rKey) {
+		$.each(required, function(i, rKey) {
 
-            if (rKey === key) found = true;
+			if (rKey === key) found = true;
 
-        });
+		});
 
-        if (!found) {
-            throw new getVal.exceptions.NotInRequiredList(null, key);
-        }
+		if (!found) {
+			throw new getVal.exceptions.NotInRequiredList(null, key);
+		}
 
-        values[key] = val;
+		values[key] = val;
 
-    };
+	};
 
-    /** @public */
-    getVal.get =
-    function get(key, ignoreRequired) {
+	/** @public */
+	getVal.get =
+	function get(key, ignoreRequired) {
 
-        if (!ignoreRequired) checkRequired();
+		if (!ignoreRequired) checkRequired();
 
-        if (typeof key !== 'string') {
-            throw new getVal.exceptions.IncorrectKey(null, typeof(key));
-        }
+		if (typeof key !== 'string') {
+			throw new getVal.exceptions.IncorrectKey(null, typeof(key));
+		}
 
-        if (!(key in values)) {
-            throw new getVal.exceptions.KeyIsNotExists(null, key);
-        }
+		if (!(key in values)) {
+			throw new getVal.exceptions.KeyIsNotExists(null, key);
+		}
 
-        return values[key];
+		return values[key];
 
-    };
+	};
 
-    /* exceptions {{{1 */
+	/* exceptions {{{1 */
 
-    /**
-     * @static
-     * @public
-     */
-    getVal.exceptions = {};
+	/**
+	 * @static
+	 * @public
+	 */
+	getVal.exceptions = {};
 
-    getVal.exceptions.IncorrectKey =
-    function IncorrectKey(message, keyType) {
-        Error.call(this);
-        this.name = 'IncorrectKey';
-        if (message) {
-            this.message = message;
-        } else {
-            this.message = 'Incorrect key type';
-            if (key) this.message += ' ("'+ keyType +'")';
-            this.message += ', must be a string';
-        }
-    };
+	getVal.exceptions.IncorrectKey =
+	function IncorrectKey(message, keyType) {
+		Error.call(this);
+		this.name = 'IncorrectKey';
+		if (message) {
+			this.message = message;
+		} else {
+			this.message = 'Incorrect key type';
+			if (key) this.message += ' ("'+ keyType +'")';
+			this.message += ', must be a string';
+		}
+	};
 
-    getVal.exceptions.KeyIsNotExists =
-    function KeyIsNotExists(message, key) {
-        Error.call(this);
-        this.name = 'KeyIsNotExists';
-        if (message) {
-            this.message = message;
-        } else {
-            this.message = 'Key';
-            if (key) this.message += ' "'+ key +'"';
-            this.message += ' is not exists';
-        }
-    };
+	getVal.exceptions.KeyIsNotExists =
+	function KeyIsNotExists(message, key) {
+		Error.call(this);
+		this.name = 'KeyIsNotExists';
+		if (message) {
+			this.message = message;
+		} else {
+			this.message = 'Key';
+			if (key) this.message += ' "'+ key +'"';
+			this.message += ' is not exists';
+		}
+	};
 
-    getVal.exceptions.RequiredIsNotSet =
-    function RequiredIsNotSet(message, key) {
-        Error.call(this);
-        this.name = 'RequiredIsNotSet';
-        if (message) {
-            this.message = message;
-        } else {
-            this.message = 'Required key is not set';
-            if (key) this.message += ': "'+ key +'"';
-        }
-    };
+	getVal.exceptions.RequiredIsNotSet =
+	function RequiredIsNotSet(message, key) {
+		Error.call(this);
+		this.name = 'RequiredIsNotSet';
+		if (message) {
+			this.message = message;
+		} else {
+			this.message = 'Required key is not set';
+			if (key) this.message += ': "'+ key +'"';
+		}
+	};
 
-    getVal.exceptions.NotInRequiredList =
-    function NotInRequiredList(message, key) {
-        Error.call(this);
-        this.name = 'NotInRequiredList';
-        if (message) {
-            this.message = message;
-        } else {
-            this.message = 'Key';
-            if (key) this.message += ' "'+ key +'"';
-            this.message += ' not in the required list';
-        }
-    };
+	getVal.exceptions.NotInRequiredList =
+	function NotInRequiredList(message, key) {
+		Error.call(this);
+		this.name = 'NotInRequiredList';
+		if (message) {
+			this.message = message;
+		} else {
+			this.message = 'Key';
+			if (key) this.message += ' "'+ key +'"';
+			this.message += ' not in the required list';
+		}
+	};
 
-    for (var key in getVal.exceptions) {
-        getVal.exceptions[key].prototype = Error.prototype;
-    }
+	function inherit(proto) {
+		if (Object.create) return Object.create(proto);
+		function F() {}
+		F.prototype = proto;
+		return new F();
+	}
 
-    /* exceptions }}}1 */
+	for (var key in getVal.exceptions) {
+		getVal.exceptions[key].prototype = inherit(Error.prototype);
+	}
 
-    return getVal;
+	/* exceptions }}}1 */
 
-}); // define
+	return getVal;
 
-// vim: set sw=4 ts=4 et foldmethod=marker :
+}); // define()
+
+// vim: set noet ts=4 sts=4 sw=4 fenc=utf-8 foldmethod=marker :

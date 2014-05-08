@@ -74,7 +74,7 @@ $('html.page-main #main .card-elevator_tour').each(function () {
 			$(document).bind('click.elevator_tour_popup', documentClickHandler);
 			$(window).bind('resize.elevator_tour_popup', popupResizeWindowHandler);
 
-			require(['3d_panorama'], function (Panorama) {
+			require(['box_panorama'], function (Panorama) {
 				new Panorama($('.elevator_tour_popup .panorama'), {
 					panoramaCode: panoramaCode,
 					imgPathMask: '/upload/elevator_tour/#PANORAMA_CODE#/#SIDE#.jpg',

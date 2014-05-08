@@ -6,22 +6,24 @@
 
 define(['jquery'], function ($) {
 
-    return function webkitBugFixWrapper(callback) {
+	return function webkitBugFixWrapper(callback) {
 
-        /** webkit detected */
-        if ('webkitRequestAnimationFrame' in window) {
+		/** webkit detected */
+		if ('webkitRequestAnimationFrame' in window) {
 
-            $('body').append('<div class="webkit_bugfix"></div>');
+			$('body').append('<div class="webkit_bugfix"></div>');
 
-            setTimeout(function () {
+			setTimeout(function () {
 
-                $('body .webkit_bugfix').remove();
-                setTimeout(callback, 1);
+				$('body .webkit_bugfix').remove();
+				setTimeout(callback, 1);
 
-            }, 1);
+			}, 1);
 
-        } else callback();
+		} else callback();
 
-    }; // return
+	}; // return webkitBugFixWrapper()
 
 }); // define()
+
+// vim: set noet ts=4 sts=4 sw=4 fenc=utf-8 foldmethod=marker :

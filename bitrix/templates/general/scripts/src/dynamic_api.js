@@ -2,153 +2,161 @@
  * Dynamic loading API
  * Required values by getVal: dynamicApiLoadInterval
  *
- * @module dynamic_api
+ * @version r2
  * @author Viacheslav Lotsmanov
+ * @license GNU/GPLv3 by Free Software Foundation
  */
 
 define(['jquery', 'get_val'], function ($, getVal) {
 
-    var toLoadList = [];
+	var toLoadList = [];
 
-    function getItem(scriptPath) { // {{{1
+	function getItem(scriptPath) { // {{{1
 
-        var retVal;
+		var retVal;
 
-        $.each(toLoadList, function (i, item) {
+		$.each(toLoadList, function (i, item) {
 
-            if (item.scriptPath === scriptPath) {
-                retVal = item;
-                return false;
-            }
+			if (item.scriptPath === scriptPath) {
+				retVal = item;
+				return false;
+			}
 
-        });
+		});
 
-        if (!retVal) {
-            throw new dynamicLoadApi.exceptions.ItemNotFound(null, scriptPath);
-        }
+		if (!retVal) {
+			throw new dynamicLoadApi.exceptions.ItemNotFound(null, scriptPath);
+		}
 
-        return retVal;
+		return retVal;
 
-    } // getItem() }}}1
+	} // getItem() }}}1
 
-    /**
-     * @typedef {function} apiLoadedCallback
-     * @prop {Error} err Exception
-     * @prop {*} globalVarValue window[globalVarName]
-     */
+	/**
+	 * @typedef {function} apiLoadedCallback
+	 * @prop {Error} err Exception
+	 * @prop {*} globalVarValue window[globalVarName]
+	 */
 
-    /**
-     * @param {string} scriptPath Path to .js script of API
-     * @param {string} globalVarName Name of global variable to wait
-     * @param {apiLoadedCallback} callback
-     */
-    function dynamicLoadApi(scriptPath, globalVarName, callback) { // {{{1
+	/**
+	 * @param {string} scriptPath Path to .js script of API
+	 * @param {string} globalVarName Name of global variable to wait
+	 * @param {apiLoadedCallback} callback
+	 */
+	function dynamicLoadApi(scriptPath, globalVarName, callback) { // {{{1
 
-        var alreadyInList = false;
-        var item;
+		var alreadyInList = false;
+		var item;
 
-        $.each(toLoadList, function (i, item) {
+		$.each(toLoadList, function (i, item) {
 
-            if (item.scriptPath === scriptPath) {
-                alreadyInList = true;
-            }
+			if (item.scriptPath === scriptPath) {
+				alreadyInList = true;
+			}
 
-        });
+		});
 
-        if (!alreadyInList) {
+		if (!alreadyInList) {
 
-            toLoadList.push({
-                scriptPath: scriptPath,
-                loaded: false,
-                timerId: null,
-                varName: globalVarName,
-                cb: []
-            });
+			toLoadList.push({
+				scriptPath: scriptPath,
+				loaded: false,
+				timerId: null,
+				varName: globalVarName,
+				cb: []
+			});
 
-            var $script = $('<script/>');
-            $script.attr('src', scriptPath);
-            $('head').append( $script );
+			var $script = $('<script/>');
+			$script.attr('src', scriptPath);
+			$('head').append( $script );
 
-        }
+		}
 
-        try {
+		try {
 
-            item = getItem(scriptPath);
+			item = getItem(scriptPath);
 
-        } catch (err) {
+		} catch (err) {
 
-            setTimeout( $.proxy(callback, null, err), 1 );
-            return;
+			setTimeout( $.proxy(callback, null, err), 1 );
+			return;
 
-        }
+		}
 
-        function waiter() {
+		function waiter() {
 
-            if (item.varName in window) {
+			if (item.varName in window) {
 
-                item.loaded = true;
-                item.timerId = null;
+				item.loaded = true;
+				item.timerId = null;
 
-                if (item.cb) {
-                    $.each(item.cb, function (i, cbFunc) {
+				if (item.cb) {
+					$.each(item.cb, function (i, cbFunc) {
 
-                        cbFunc( null, window[item.varName] );
+						cbFunc( null, window[item.varName] );
 
-                    });
-                }
+					});
+				}
 
-                item.cb = undefined;
+				item.cb = undefined;
 
-                return;
+				return;
 
-            }
+			}
 
-            setTimeout( waiter, getVal('dynamicApiLoadInterval') );
+			setTimeout( waiter, getVal('dynamicApiLoadInterval') );
 
-        }
+		}
 
-        if (item.loaded) {
+		if (item.loaded) {
 
-            setTimeout( $.proxy(callback, null, null, window[item.varName]), 1 );
+			setTimeout( $.proxy(callback, null, null, window[item.varName]), 1 );
 
-        } else {
+		} else {
 
-            item.cb.push(callback);
-            item.timerId = setTimeout(waiter, 1);
+			item.cb.push(callback);
+			item.timerId = setTimeout(waiter, 1);
 
-        }
+		}
 
-    } // dynamicLoadApi() }}}1
+	} // dynamicLoadApi() }}}1
 
-    /* exceptions {{{1 */
+	/* exceptions {{{1 */
 
-    /**
-     * @static
-     * @public
-     */
-    dynamicLoadApi.exceptions = {};
+	/**
+	 * @static
+	 * @public
+	 */
+	dynamicLoadApi.exceptions = {};
 
-    dynamicLoadApi.exceptions.ItemNotFound =
-    function ItemNotFound(message, scriptPath) {
-        Error.call(this);
-        this.name = 'ItemNotFound';
-        if (this.message) {
-            this.message = message;
-        } else {
-            this.message = 'Cannot get item by script path';
-            if (scriptPath) this.message += ': "'+ scriptPath +'"';
-            this.message += '.';
-        }
-    };
+	dynamicLoadApi.exceptions.ItemNotFound =
+	function ItemNotFound(message, scriptPath) {
+		Error.call(this);
+		this.name = 'ItemNotFound';
+		if (this.message) {
+			this.message = message;
+		} else {
+			this.message = 'Cannot get item by script path';
+			if (scriptPath) this.message += ': "'+ scriptPath +'"';
+			this.message += '.';
+		}
+	};
 
-    for (var key in dynamicLoadApi.exceptions) {
-        dynamicLoadApi.exceptions[key].prototype = Error.prototype;
-    }
+	function inherit(proto) {
+		if (Object.create) return Object.create(proto);
+		function F() {}
+		F.prototype = proto;
+		return new F();
+	}
 
-    /* exceptions }}}1 */
+	for (var key in dynamicLoadApi.exceptions) {
+		dynamicLoadApi.exceptions[key].prototype = inherit(Error.prototype);
+	}
 
-    return dynamicLoadApi;
+	/* exceptions }}}1 */
+
+	return dynamicLoadApi;
 
 }); // define
 
-// vim: set sw=4 ts=4 et foldmethod=marker :
+// vim: set noet ts=4 sts=4 sw=4 fenc=utf-8 foldmethod=marker :

@@ -1,7 +1,6 @@
 /**
  * Values for "get_val" module
  *
- * @module values
  * @author Viacheslav Lotsmanov
  */
 

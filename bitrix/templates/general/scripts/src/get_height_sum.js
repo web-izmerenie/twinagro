@@ -7,12 +7,14 @@
 
 define(['jquery'], function ($) {
 
-    return function getHeightSum() {
-        return (
-            parseInt($('body section.content').css('padding-top'), 10) +
-            $('body section.content').height() + $('body footer').height() +
-            $('#bitrix_panel').height()
-        );
-    };
+	return function getHeightSum() {
+		return (
+			parseInt($('body section.content').css('padding-top'), 10) +
+			$('body section.content').height() + $('body footer').height() +
+			$('#bitrix_panel').height()
+		);
+	};
 
 }); // define()
+
+// vim: set noet ts=4 sts=4 sw=4 fenc=utf-8 foldmethod=marker :

@@ -1,138 +1,141 @@
-/**
- * @module loadimg
+/*!
+ * Dynamic loading images
+ *
+ * @version r2
  * @author Viacheslav Lotsmanov
+ * @license GNU/GPLv3 by Free Software Foundation
  */
 
 define(['get_val', 'jquery'], function (getVal, $) {
 
-    /**
-     * @public
-     * @example
-     *   define(['loadimg'], function (loadImg) {
-     *     loadImg('/images/picture.png', function (err, img) {
-     *       if (err) alert(err.toString());
-     *       $('body').append('<img alt="" src="'+ img.src +'" width="'+ img.width +'" height="'+ img.height +'" />');
-     *     });
-     *   });
-     */
-    function loadImg(link, callback) {
+	/**
+	 * @public
+	 * @example
+	 *   define(['loadimg'], function (loadImg) {
+	 *     loadImg('/images/picture.png', function (err, img) {
+	 *       if (err) alert(err.toString());
+	 *       $('body').append('<img alt="" src="'+ img.src +'" width="'+ img.width +'" height="'+ img.height +'" />');
+	 *     });
+	 *   });
+	 */
+	function loadImg(link, callback) {
 
-        if (typeof callback !== 'function') {
-            throw new Error('Incorrect "callback" argument ("'+
-                typeof(callback) +'"), must be a "function"');
-        }
+		if (typeof callback !== 'function') {
+			throw new Error('Incorrect "callback" argument ("'+
+				typeof(callback) +'"), must be a "function"');
+		}
 
-        if (typeof link !== 'string') {
-            callback(new loadImg.exceptions.IncorrectLink(null, typeof(link)));
-        }
+		if (typeof link !== 'string') {
+			callback(new loadImg.exceptions.IncorrectLink(null, typeof(link)));
+		}
 
-        var $img = $('<img/>');
-        var timerId;
-        var loaded = false;
+		var $img = $('<img/>');
+		var timerId;
+		var loaded = false;
 
-        /** @private */
-        function destroy() {
+		/** @private */
+		function destroy() {
 
-            killTimer();
-            $img.off('load');
-            $img = undefined;
+			killTimer();
+			$img.off('load');
+			$img = undefined;
 
-        }
+		}
 
-        /** @private */
-        function timeout() {
+		/** @private */
+		function timeout() {
 
-            if (loaded) return false;
+			if (loaded) return false;
 
-            destroy();
-            callback(new loadImg.exceptions.Timeout());
+			destroy();
+			callback(new loadImg.exceptions.Timeout());
 
-        }
+		}
 
-        /** @private */
-        function killTimer() {
+		/** @private */
+		function killTimer() {
 
-            if (timerId !== undefined) {
+			if (timerId !== undefined) {
 
-                clearTimeout(timerId);
-                timerId = undefined;
+				clearTimeout(timerId);
+				timerId = undefined;
 
-            }
+			}
 
-        }
+		}
 
-        /** @private */
-        function loadHandler() {
+		/** @private */
+		function loadHandler() {
 
-            var img = this;
+			var img = this;
 
-            loaded = true;
-            killTimer();
+			loaded = true;
+			killTimer();
 
-            // async
-            setTimeout(function () {
+			// async
+			setTimeout(function () {
 
-                callback(null, {
-                    src: img.src,
-                    width: img.width,
-                    height: img.height
-                });
+				callback(null, {
+					src: img.src,
+					width: img.width,
+					height: img.height
+				});
 
-                destroy();
+				destroy();
 
-            }, 1);
+			}, 1);
 
-        }
+		}
 
-        $img.on('load', loadHandler).attr('src', link);
+		$img.on('load', loadHandler).attr('src', link);
 
-        timerId = setTimeout(timeout, getVal('loadImgTimeout'));
+		timerId = setTimeout(timeout, getVal('loadImgTimeout'));
 
-    } // loadImg
+	} // loadImg
 
-    /* exceptions {{{ */
+	/* exceptions {{{ */
 
-    /**
-     * @static
-     * @public
-     */
-    loadImg.exceptions = {};
+	/**
+	 * @static
+	 * @public
+	 */
+	loadImg.exceptions = {};
 
-    loadImg.exceptions.IncorrectLink =
-    function IncorrectLink(message, type) {
-        Error.call(this);
-        this.name = 'IncorrectLink';
-        if (message) {
-            this.message = message;
-        } else {
-            this.message = 'Incorrect "link" argument';
-            if (type) this.message += ' ("'+ type +'")';
-            this.message += ', must be a "string"';
-        }
-    };
+	loadImg.exceptions.IncorrectLink =
+	function IncorrectLink(message, type) {
+		Error.call(this);
+		this.name = 'IncorrectLink';
+		if (message) {
+			this.message = message;
+		} else {
+			this.message = 'Incorrect "link" argument';
+			if (type) this.message += ' ("'+ type +'")';
+			this.message += ', must be a "string"';
+		}
+	};
 
-    loadImg.exceptions.Timeout =
-    function Timeout(message) {
-        Error.call(this);
-        this.name = 'Timeout';
-        this.message = message || 'Loading image timeout';
-    };
+	loadImg.exceptions.Timeout =
+	function Timeout(message) {
+		Error.call(this);
+		this.name = 'Timeout';
+		this.message = message || 'Loading image timeout';
+	};
 
-    function inherit(proto) {
-        if (Object.create) return Object.create(proto);
-        function F() {}
-        F.prototype = proto;
-        return new F();
-    }
+	function inherit(proto) {
+		if (Object.create) return Object.create(proto);
+		function F() {}
+		F.prototype = proto;
+		return new F();
+	}
 
-    for (var key in loadImg.exceptions) {
-        loadImg.exceptions[key].prototype = inherit(Error.prototype);
-    }
+	for (var key in loadImg.exceptions) {
+		loadImg.exceptions[key].prototype = inherit(Error.prototype);
+	}
 
-    /* exceptions }}} */
+	/* exceptions }}} */
 
-    return loadImg;
+	return loadImg;
 
-}); // define
+}); // define()
 
-// vim: set sw=4 ts=4 et foldmethod=marker :
+// vim: set noet ts=4 sts=4 sw=4 fenc=utf-8 foldmethod=marker :

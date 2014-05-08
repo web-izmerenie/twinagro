@@ -4,24 +4,26 @@
  * @author Viacheslav Lotsmanov
  */
 
-define(  [ 'jquery', 'get_height_sum', 'webkit_bug_fix_wrapper' ],
-function (  $,        getHeightSum,     webkitBugFixWrapper     ) {
+define(['jquery', 'get_height_sum', 'webkit_bug_fix_wrapper'],
+function ($, getHeightSum, webkitBugFixWrapper) {
 
-    $(function domReady() {
+	$(function domReady() {
 
-        function stickyFooter() {
-            var heightSum = getHeightSum();
+		function stickyFooter() {
+			var heightSum = getHeightSum();
 
-            if (heightSum < $(window).height()) {
-                $('html').addClass('sticky_footer');
-            } else {
-                $('html').removeClass('sticky_footer');
-            }
-        }
+			if (heightSum < $(window).height()) {
+				$('html').addClass('sticky_footer');
+			} else {
+				$('html').removeClass('sticky_footer');
+			}
+		}
 
-        $(window).on('scroll resize', stickyFooter);
-        webkitBugFixWrapper(stickyFooter);
+		$(window).on('scroll resize', stickyFooter);
+		webkitBugFixWrapper(stickyFooter);
 
-    }); // domReady()
+	}); // domReady()
 
 }); // define()
+
+// vim: set noet ts=4 sts=4 sw=4 fenc=utf-8 foldmethod=marker :
