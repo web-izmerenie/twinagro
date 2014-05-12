@@ -7,11 +7,7 @@
                 <ul>
                     <?foreach ($arType["CHILDREN"] as $arItem) :?>
                         <li>
-							<?if ($i <= 0) :?>
                             <a href="<?=$arItem["SECTION_PAGE_URL"]?>">
-							<?else :?>
-							<span class="plug">
-							<?endif?>
                                 <figure>
                                     <?if (!empty($arItem["PREVIEW_PICTURE"])) :?>
                                         <p><?if (!empty($arItem["PICTURE"])) :
@@ -44,11 +40,7 @@ false
                                     <?endif?>
                                     <figcaption><?=$arItem["NAME"]?></figcaption>
                                 </figure>
-							<?if ($i <= 0) :?>
                             </a>
-							<?else :?>
-							</span>
-							<?endif?>
                         </li>
                     <?endforeach?>
                 </ul>
