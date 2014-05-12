@@ -1,79 +1,83 @@
-/*!
- * @author Viacheslav Lotsmanov (unclechu)
+/**
+ * "Service And Guaranty" page styles
+ *
+ * @author Viacheslav Lotsmanov
  */
 
 .page_content .service_and_guaranty {
-    .text {
-        display: block;
-        padding-right: 257px;
-        padding-top: 22px-9px;
-    }
+	.text {
+		display: block;
+		padding-right: 257px;
+		padding-top: 22px-9px;
+	}
 
-    .instructions {
-        display: block;
-        float: right;
-        width: 257px;
-        line-height: 0;
-        text-align: center;
-        overflow: hidden;
-        position: relative;
+	.instructions {
+		display: block;
+		float: right;
+		width: 257px;
+		line-height: 0;
+		text-align: center;
+		overflow: hidden;
+		position: relative;
 
-        h3 {
-            display: block;
-            .fontMetrics(18px, 18px);
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 32px;
-            color: #0e0e0f;
-            padding-top: 15px;
-        }
+		h3 {
+			display: block;
+			.fontMetrics(18px, 18px);
+			font-weight: bold;
+			text-transform: uppercase;
+			margin-bottom: 32px;
+			color: #0e0e0f;
+			padding-top: 15px;
+		}
 
-        ul {
-            border: 0; margin: 0; padding: 0;
+		ul {
+			border: 0; margin: 0; padding: 0;
 
-            li {
-                border: 0; margin: 0; padding: 0;
-                background: none;
-                display: block;
+			li {
+				border: 0; margin: 0; padding: 0;
+				background: none;
+				display: block;
 
-                a {
-                    border: 0; margin: 0; padding: 0;
-                    display: block;
-                    width: 138px;
-                    margin: 0 auto;
-                    .relative;
-                    padding-bottom: 1px;
+				a {
+					border: 0; margin: 0; padding: 0;
+					display: block;
+					width: 138px;
+					margin: 0 auto;
+					.relative;
+					padding-bottom: 1px;
 
-                    &:before {
-                        .sprite-ico;
-                        .ico-corver;
-                        .pseudoBlock;
-                        .absolute(0, auto, auto, 0);
-                    }
+					&:before {
+						.sprite-ico;
+						.ico-corver;
+						.pseudoBlock;
+						.absolute(0, auto, auto, 0);
+					}
 
-                    &:after {
-                        @posY: -29px - 192px + 1px;
-                        .sprite-ico;
-                        .ico-corver;
-                        .pseudoBlock;
-                        .absolute(auto, auto, 0, 0);
-                        background-position: -249px @posY;
-                        height: 1px;
-                    }
+					&:after {
+						@posY: -29px - 192px + 1px;
+						.sprite-ico;
+						.ico-corver;
+						.pseudoBlock;
+						.absolute(auto, auto, 0, 0);
+						background-position: -249px @posY;
+						height: 1px;
+					}
 
-                    img {
-                        margin-left: 3px;
-                        margin-top: 1px;
-                    }
-                }
-            }
+					img {
+						margin-left: 3px;
+						margin-top: 1px;
+					}
+				}
+			}
 
-            li + li { margin-top: 31px; }
-        }
-    }
+			li + li { margin-top: 31px; }
+		}
+	}
 
-    &:after {
-        .pseudoBlock;
-        clear: both;
-    }
+	&:after {
+		.pseudoBlock;
+		clear: both;
+	}
 }
+
+// vim: set noet ts=4 sts=4 sw=4 fenc=utf-8 foldmethod=marker :

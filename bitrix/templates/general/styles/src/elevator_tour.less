@@ -1,114 +1,118 @@
-/*!
- * @author Viacheslav Lotsmanov (unclechu)
+/**
+ * Elevator tour styles
+ *
+ * @author Viacheslav Lotsmanov
  */
 
 .page_content#main .card.card-elevator_tour {
-    .relative;
+	.relative;
 
-    .title {
-        font-family: Days, sans-serif;
-        .fontMetrics(44px, 53px);
-        color: white;
-        text-shadow: 0 1px 1px fade(black, 75%);
-        text-transform: uppercase;
-        display: block;
-        .absolute(0, auto, auto, 0);
-        width: 100%;
-        text-align: center;
-        padding-top: 78-13px;
-    }
+	.title {
+		font-family: Days, sans-serif;
+		.fontMetrics(44px, 53px);
+		color: white;
+		text-shadow: 0 1px 1px fade(black, 75%);
+		text-transform: uppercase;
+		display: block;
+		.absolute(0, auto, auto, 0);
+		width: 100%;
+		text-align: center;
+		padding-top: 78-13px;
+	}
 
-    img {
-        display: block;
-        max-width: 100%;
-        min-width: 100%;
-        height: auto;
-        margin: 0 auto;
-    }
+	img {
+		display: block;
+		max-width: 100%;
+		min-width: 100%;
+		height: auto;
+		margin: 0 auto;
+	}
 
-    ul.points {
-        list-style: none;
-        margin: 0; padding: 0; border: 0;
-        display: block;
-        .absolute(0, auto, auto, 0);
-        width: 100%;
-        height: 100%;
+	ul.points {
+		list-style: none;
+		margin: 0; padding: 0; border: 0;
+		display: block;
+		.absolute(0, auto, auto, 0);
+		width: 100%;
+		height: 100%;
 
-        li {
-            background: none;
-            margin: 0; padding: 0; border: 0;
-            overflow: inherit;
-            .size(1px, 1px);
-            .absolute(0, auto, auto, 0);
-            display: none;
-            &.active { display: block; }
+		li {
+			background: none;
+			margin: 0; padding: 0; border: 0;
+			overflow: inherit;
+			.size(1px, 1px);
+			.absolute(0, auto, auto, 0);
+			display: none;
+			&.active { display: block; }
 
-            a {
-                .sprite-ico;
-                .ico-3dtour-mark-bg;
-                display: block;
-                overflow: inherit;
-                .absolute(-59px, auto, auto, -22px);
-                cursor: pointer;
-                border: 0;
+			a {
+				.sprite-ico;
+				.ico-3dtour-mark-bg;
+				display: block;
+				overflow: inherit;
+				.absolute(-59px, auto, auto, -22px);
+				cursor: pointer;
+				border: 0;
 
-                &:before, &:after {
-                    .sprite-ico;
-                    .ico-3dtour-mark-circle;
-                    .pseudoBlock;
-                    .absolute(4px, auto, auto, 5px);
-                    overflow: inherit;
-                    .transitionQ('opacity 200ms');
-                    .opacity(1);
-                }
-                &:after {
-                    .ico-3dtour-mark-circle-active;
-                    .pseudoBlock;
-                    .opacity(0);
-                }
-                &:hover {
-                    &:before { .opacity(0); }
-                    &:after { .opacity(1); }
-                }
-            }
-        }
-    }
+				&:before, &:after {
+					.sprite-ico;
+					.ico-3dtour-mark-circle;
+					.pseudoBlock;
+					.absolute(4px, auto, auto, 5px);
+					overflow: inherit;
+					.transitionQ('opacity 200ms');
+					.opacity(1);
+				}
+				&:after {
+					.ico-3dtour-mark-circle-active;
+					.pseudoBlock;
+					.opacity(0);
+				}
+				&:hover {
+					&:before { .opacity(0); }
+					&:after { .opacity(1); }
+				}
+			}
+		}
+	}
 }
 
 .elevator_tour_popup {
-    display: block;
-    .fixed(auto, 40px, 20px, 40px);
-    .size(auto, 400px-80px);
-    max-width: 1066px-26px;
-    padding: 40px 13px;
-    max-height: 775px-80px;
-    background: white;
-    z-index: 2;
-    margin: 0 auto;
-    .border-radius(10px);
-    .box-shadow(0 0 5px fade(black, 40%));
+	display: block;
+	.fixed(auto, 40px, 20px, 40px);
+	.size(auto, 400px-80px);
+	max-width: 1066px-26px;
+	padding: 40px 13px;
+	max-height: 775px-80px;
+	background: white;
+	z-index: 2;
+	margin: 0 auto;
+	.border-radius(10px);
+	.box-shadow(0 0 5px fade(black, 40%));
 
-    .close {
-        .closeXButton;
-        display: block;
-        .size(auto, auto);
-        .absolute(15px, 0, auto, auto);
-        cursor: pointer;
-        text-transform: uppercase;
-        .fontMetrics(15, 15px);
-        border: 0;
-        padding-right: 20px;
-        margin-right: 15px;
+	.close {
+		.closeXButton;
+		display: block;
+		.size(auto, auto);
+		.absolute(15px, 0, auto, auto);
+		cursor: pointer;
+		text-transform: uppercase;
+		.fontMetrics(15, 15px);
+		border: 0;
+		padding-right: 20px;
+		margin-right: 15px;
 
-        &:before, &:after {
-            .absolute(0, 0, auto, auto);
-        }
-    }
+		&:before, &:after {
+			.absolute(0, 0, auto, auto);
+		}
+	}
 
-    .panorama {
-        display: block;
-        width: 100%;
-        height: 100%;
-        background: gray;
-    }
+	.panorama {
+		display: block;
+		width: 100%;
+		height: 100%;
+		background: gray;
+	}
 }
+
+// vim: set noet ts=4 sts=4 sw=4 fenc=utf-8 foldmethod=marker :

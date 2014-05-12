@@ -1,282 +1,286 @@
-/*!
+/**
+ * Main page styles
+ *
  * @author Fedor Pudeyan
- * @author Viacheslav Lotsmanov (unclechu)
+ * @author Viacheslav Lotsmanov
  */
 
 @mainPageCardsMinHeight: 400px;
 
 .header_main {
-    padding-top: 0;
+	padding-top: 0;
 
-    header {
-        .absolute(0, auto, auto, 0);
-        .size(100%, @headerHeight);
-        background: none;
-        min-width: @minWidth;
+	header {
+		.absolute(0, auto, auto, 0);
+		.size(100%, @headerHeight);
+		background: none;
+		min-width: @minWidth;
 
-        .logo {
-            .absolute(19px, auto, auto, @contentLineMargin);
-            font-size: 0;
-            @logoWhiteWidth: 172px;
-            @logoDarkWidth: 171px;
-            @logoHeight: 51px;
+		.logo {
+			.absolute(19px, auto, auto, @contentLineMargin);
+			font-size: 0;
+			@logoWhiteWidth: 172px;
+			@logoDarkWidth: 171px;
+			@logoHeight: 51px;
 
-            a, img { display: block; }
+			a, img { display: block; }
 
-            a {
-                border: 0;
-                text-decoration: none;
-                min-width: @logoWhiteWidth;
-                height: @logoHeight;
-            }
+			a {
+				border: 0;
+				text-decoration: none;
+				min-width: @logoWhiteWidth;
+				height: @logoHeight;
+			}
 
-            img {
-                &.white { .size(@logoWhiteWidth, @logoHeight); }
-                &.dark { .size(@logoDarkWidth, @logoHeight); }
+			img {
+				&.white { .size(@logoWhiteWidth, @logoHeight); }
+				&.dark { .size(@logoDarkWidth, @logoHeight); }
 
-                &.dark { display: none; }
-            }
+				&.dark { display: none; }
+			}
 
-        }
+		}
 
-        .menu {
-            .absolute(40px-3px, @contentLineMargin);
-            z-index: 1000;
-            text-transform: uppercase;
-            .fontMetrics(14px, 16px);
+		.menu {
+			.absolute(40px-3px, @contentLineMargin);
+			z-index: 1000;
+			text-transform: uppercase;
+			.fontMetrics(14px, 16px);
 
-            a, span {
-                margin-left: 25-4px;
-                color: white;
-                cursor: pointer;
-            }
+			a, span {
+				margin-left: 25-4px;
+				color: white;
+				cursor: pointer;
+			}
 
-            span {
-                color: #acc5d4;
-                cursor: default;
-            }
+			span {
+				color: #acc5d4;
+				cursor: default;
+			}
 
-            a { border-bottom-color: fade(white, 30%); }
-        }
-    }
+			a { border-bottom-color: fade(white, 30%); }
+		}
+	}
 
-    section.content { padding-top: 0; }
+	section.content { padding-top: 0; }
 }
 
 html.page-main body {
-    .header_main;
+	.header_main;
 
-    section.content {
-        margin-left: 0;
-        margin-right: 0;
+	section.content {
+		margin-left: 0;
+		margin-right: 0;
 
-        .page_content {
-            max-width: none;
-            margin: auto;
-        }
-    }
+		.page_content {
+			max-width: none;
+			margin: auto;
+		}
+	}
 }
 
 .page_content#main {
-    /** cards and map minimal height */
-    @cardsMinHeight: @mainPageCardsMinHeight;
+	/** cards and map minimal height */
+	@cardsMinHeight: @mainPageCardsMinHeight;
 
-    .card {
-        .background { min-height: @cardsMinHeight; }
+	.card {
+		.background { min-height: @cardsMinHeight; }
 
-        .presentation {
-            .absolute(105px, 30px);
-            opacity: 0.85;
+		.presentation {
+			.absolute(105px, 30px);
+			opacity: 0.85;
 
-            a {
-                display: block;
-                .relative;
-                .fontMetrics(12px, 14px);
-                font-weight: bold;
-                .box-sizing(border-box);
-                padding: 11px 16px 9px 39px;
-                .border-radius(17px);
-                text-transform: uppercase;
-                border: none;
-                color: @colorText;
-                background-color: white;
-                .transitionQ('background-color 200ms, color 200ms');
+			a {
+				display: block;
+				.relative;
+				.fontMetrics(12px, 14px);
+				font-weight: bold;
+				.box-sizing(border-box);
+				padding: 11px 16px 9px 39px;
+				.border-radius(17px);
+				text-transform: uppercase;
+				border: none;
+				color: @colorText;
+				background-color: white;
+				.transitionQ('background-color 200ms, color 200ms');
 
-                &:before, &:after {
-                    .pseudoBlock;
-                    .sprite-ico;
-                    .absolute(50%, auto, auto, 10px);
-                    .transitionQ('opacity 200ms');
-                    margin-top: -11px;
-                }
-                &:before {
-                    .ico-download;
-                    .opacity(1);
-                }
-                &:after {
-                    .ico-download-hvr;
-                    .opacity(0);
-                }
+				&:before, &:after {
+					.pseudoBlock;
+					.sprite-ico;
+					.absolute(50%, auto, auto, 10px);
+					.transitionQ('opacity 200ms');
+					margin-top: -11px;
+				}
+				&:before {
+					.ico-download;
+					.opacity(1);
+				}
+				&:after {
+					.ico-download-hvr;
+					.opacity(0);
+				}
 
-                &:hover {
-                    color: @colorActive !important;
-                    background-color: @colorText;
+				&:hover {
+					color: @colorActive !important;
+					background-color: @colorText;
 
-                    &:before {.opacity(0)}
-                    &:after {.opacity(1)}
-                }
-            }
-        }
+					&:before {.opacity(0)}
+					&:after {.opacity(1)}
+				}
+			}
+		}
 
-        .background {
-            .relative;
-            background-attachment: fixed;
-            background-size: cover;
-            background-color: #f0f0f0;
-            text-align: center;
-            .verticalCenterContainer;
+		.background {
+			.relative;
+			background-attachment: fixed;
+			background-size: cover;
+			background-color: #f0f0f0;
+			text-align: center;
+			.verticalCenterContainer;
 
-            .title {
-                display: inline-block;
-                vertical-align: middle;
-                font-family: Days, sans-serif;
-                .fontMetrics(44px, 53px);
-                color: white;
-                text-shadow: 0 1px 1px fade(black, 75%);
-                text-transform: uppercase;
-                cursor: pointer;
-            }
-        }
-        .info {
-            .relative;
-            width: 831px;
-            margin: 0 auto;
-            padding: 100px 0 135px 0;
+			.title {
+				display: inline-block;
+				vertical-align: middle;
+				font-family: Days, sans-serif;
+				.fontMetrics(44px, 53px);
+				color: white;
+				text-shadow: 0 1px 1px fade(black, 75%);
+				text-transform: uppercase;
+				cursor: pointer;
+			}
+		}
+		.info {
+			.relative;
+			width: 831px;
+			margin: 0 auto;
+			padding: 100px 0 135px 0;
 
-            &:after {
-                .pseudoBlock;
-                .sprite-ico;
-                .ico-hr;
-                .absolute(auto, 50%, 60px);
-                margin-right: -226px;
-            }
+			&:after {
+				.pseudoBlock;
+				.sprite-ico;
+				.ico-hr;
+				.absolute(auto, 50%, 60px);
+				margin-right: -226px;
+			}
 
-            &.three-column {
-                overflow: hidden;
+			&.three-column {
+				overflow: hidden;
 
-                .column {
-                    float: left;
-                    width: 196px;
-                    & + .column {
-                        margin-left: 120px-6px;
-                    }
-                }
-            }
-        }
-        &.card-1 {
-            .fontMetrics(16px,26px);
-            p + p {margin-top: 26px}
+				.column {
+					float: left;
+					width: 196px;
+					& + .column {
+						margin-left: 120px-6px;
+					}
+				}
+			}
+		}
+		&.card-1 {
+			.fontMetrics(16px,26px);
+			p + p {margin-top: 26px}
 
-            .background {
-                .bgImg('main-1.jpg');
+			.background {
+				.bgImg('main-1.jpg');
 
-                .title {
-                    text-align: left;
-                    .absolute(auto, auto, 38px, 32px);
-                }
-            }
+				.title {
+					text-align: left;
+					.absolute(auto, auto, 38px, 32px);
+				}
+			}
 
-            .info {
-                padding-top: 100px-11px; /* pixel perfecting */
-                padding-bottom: 135px-3px; /* pixel perfecting */
+			.info {
+				padding-top: 100px-11px; /* pixel perfecting */
+				padding-bottom: 135px-3px; /* pixel perfecting */
 
-                width: 585px;
-            }
+				width: 585px;
+			}
 
-            .scroll-arrow {
-                a {
-                    .size(26px, 16px);
-                    .absolute(auto, 50%, -27px);
-                    z-index: 1;
-                    margin-right: -13px;
-                    border: none;
-                    outline: none;
+			.scroll-arrow {
+				a {
+					.size(26px, 16px);
+					.absolute(auto, 50%, -27px);
+					z-index: 1;
+					margin-right: -13px;
+					border: none;
+					outline: none;
 
-                    &:before {
-                        .pseudoBlock;
-                        .sprite-ico;
-                        .ico-scroll-arrow;
-                        .absoluteStretch;
-                        .opacity(1);
-                        .transitionQ('opacity 200ms');
-                    }
+					&:before {
+						.pseudoBlock;
+						.sprite-ico;
+						.ico-scroll-arrow;
+						.absoluteStretch;
+						.opacity(1);
+						.transitionQ('opacity 200ms');
+					}
 
-                    &:after {
-                        .pseudoBlock;
-                        .sprite-ico;
-                        .ico-scroll-arrow-hvr;
-                        .absoluteStretch;
-                        .opacity(0);
-                        .transitionQ('opacity 200ms');
-                    }
+					&:after {
+						.pseudoBlock;
+						.sprite-ico;
+						.ico-scroll-arrow-hvr;
+						.absoluteStretch;
+						.opacity(0);
+						.transitionQ('opacity 200ms');
+					}
 
-                    &:hover {
-                        &:before {.opacity(0)};
-                        &:after {.opacity(1)};
-                    }
-                }
-            }
+					&:hover {
+						&:before {.opacity(0)};
+						&:after {.opacity(1)};
+					}
+				}
+			}
 
-            .tour-3d {
-                .sprite-ico;
-                .ico-3dtour;
-                display: block;
-                .absolute(auto, 29px, 23px, auto);
-                background: none;
-                cursor: pointer;
-                border: 0;
+			.tour-3d {
+				.sprite-ico;
+				.ico-3dtour;
+				display: block;
+				.absolute(auto, 29px, 23px, auto);
+				background: none;
+				cursor: pointer;
+				border: 0;
 
-                &:before, &:after {
-                    .sprite-ico;
-                    .ico-3dtour;
-                    .pseudoBlock;
-                    .absolute(0, auto, auto, 0);
-                    .transitionQ('opacity 200ms');
-                    .opacity(1);
-                }
-                &:after {
-                    .ico-3dtour-active;
-                    .opacity(0);
-                }
-                &:hover {
-                    &:before { .opacity(0); }
-                    &:after { .opacity(1); }
-                }
-            }
-        }
-        &.card-2 {
-            .background { .bgImg('main-2.jpg'); }
+				&:before, &:after {
+					.sprite-ico;
+					.ico-3dtour;
+					.pseudoBlock;
+					.absolute(0, auto, auto, 0);
+					.transitionQ('opacity 200ms');
+					.opacity(1);
+				}
+				&:after {
+					.ico-3dtour-active;
+					.opacity(0);
+				}
+				&:hover {
+					&:before { .opacity(0); }
+					&:after { .opacity(1); }
+				}
+			}
+		}
+		&.card-2 {
+			.background { .bgImg('main-2.jpg'); }
 
-            .info {
-                padding-top: 100px-2px; /* pixel perfecting */
-                padding-bottom: 135px-6px; /* pixel perfecting */
+			.info {
+				padding-top: 100px-2px; /* pixel perfecting */
+				padding-bottom: 135px-6px; /* pixel perfecting */
 
-                &:after {
-                    bottom: 60px+17px; /* pixel perfecting */
-                }
-            }
-        }
-        &.card-3 {
-            .background { .bgImg('main-3.jpg'); }
+				&:after {
+					bottom: 60px+17px; /* pixel perfecting */
+				}
+			}
+		}
+		&.card-3 {
+			.background { .bgImg('main-3.jpg'); }
 
-            .info {
-                padding-top: 100px+2px; /* pixel perfecting */
-                padding-bottom: 135+16px; /* pixel perfecting */
+			.info {
+				padding-top: 100px+2px; /* pixel perfecting */
+				padding-bottom: 135+16px; /* pixel perfecting */
 
-                &:after {
-                    bottom: 60px+17px; /* pixel perfecting */
-                }
-            }
-        }
-    }
+				&:after {
+					bottom: 60px+17px; /* pixel perfecting */
+				}
+			}
+		}
+	}
 }
+
+// vim: set noet ts=4 sts=4 sw=4 fenc=utf-8 foldmethod=marker :

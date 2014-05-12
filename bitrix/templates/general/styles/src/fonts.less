@@ -1,19 +1,20 @@
 /**
  * Font-faces
+ *
  * @author Viacheslav Lotsmanov
  */
 
 // @fileName without extension
 .fontDefine(@fontName, @fileName) {
-    font-family: '@{fontName}';
-    src: url('@{fontsPrefix}@{fileName}.eot?v=@{revision}');
-    src: url('@{fontsPrefix}@{fileName}.eot?v=@{revision}#iefix') format('embedded-opentype'),
-         url('@{fontsPrefix}@{fileName}.woff?v=@{revision}') format('woff'),
-         url('@{fontsPrefix}@{fileName}.ttf?v=@{revision}') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+	font-family: '@{fontName}';
+	src: url('@{fontsPrefix}@{fileName}.eot?v=@{revision}');
+	src: url('@{fontsPrefix}@{fileName}.eot?v=@{revision}#iefix') format('embedded-opentype'),
+		url('@{fontsPrefix}@{fileName}.woff?v=@{revision}') format('woff'),
+		url('@{fontsPrefix}@{fileName}.ttf?v=@{revision}') format('truetype');
+	font-weight: normal;
+	font-style: normal;
 }
 
 @font-face { .fontDefine('Days', 'Days-webfont'); }
 
-// vim: set sw=4 ts=4 et foldmethod=marker ff=unix :
+// vim: set noet ts=4 sts=4 sw=4 fenc=utf-8 foldmethod=marker :

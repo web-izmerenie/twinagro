@@ -1,78 +1,80 @@
-/*!
- * @author Viacheslav Lotsmanov (unclechu)
+/**
+ * "Solutions" page styles
+ *
+ * @author Viacheslav Lotsmanov
  */
 
 /* === MIXINS === */
 
 .go_to_list () {
-    display: inline-block;
-    .relative;
-    .fontMetrics(14px, 16px);
-    text-transform: uppercase;
-    color: #0e0e0f;
+	display: inline-block;
+	.relative;
+	.fontMetrics(14px, 16px);
+	text-transform: uppercase;
+	color: #0e0e0f;
 
-    &:after {
-        .pseudoBlock("→");
-        .absolute(0, -18px, auto, auto);
-    }
+	&:after {
+		.pseudoBlock("→");
+		.absolute(0, -18px, auto, auto);
+	}
 
-    & > span {
-        .absolute(0, auto, auto, 0);
-        display: block;
+	& > span {
+		.absolute(0, auto, auto, 0);
+		display: block;
 
-        &:before, &:after {
-            .sprite-ico;
-            .ico-go-to-list;
-            .pseudoBlock;
-            .absolute(-3px, auto, auto, -31px);
-            .transitionQ('opacity 200ms');
-            .opacity(1);
-        }
+		&:before, &:after {
+			.sprite-ico;
+			.ico-go-to-list;
+			.pseudoBlock;
+			.absolute(-3px, auto, auto, -31px);
+			.transitionQ('opacity 200ms');
+			.opacity(1);
+		}
 
-        &:after {
-            .ico-go-to-list-active;
-            .opacity(0);
-        }
-    }
+		&:after {
+			.ico-go-to-list-active;
+			.opacity(0);
+		}
+	}
 
-    &:hover {
-        & > span:before { .opacity(0); }
-        & > span:after { .opacity(1); }
-    }
+	&:hover {
+		& > span:before { .opacity(0); }
+		& > span:after { .opacity(1); }
+	}
 }
 
 .go_to_list_revert () {
-    display: inline-block;
-    .relative;
-    .fontMetrics(14px, 16px);
-    text-transform: uppercase;
-    color: #0e0e0f;
-    padding-left: 20px;
+	display: inline-block;
+	.relative;
+	.fontMetrics(14px, 16px);
+	text-transform: uppercase;
+	color: #0e0e0f;
+	padding-left: 20px;
 
-    &:before {
-        .pseudoBlock("←");
-        .absolute(0, auto, auto, 2px);
-    }
+	&:before {
+		.pseudoBlock("←");
+		.absolute(0, auto, auto, 2px);
+	}
 }
 
 .bottomBackToTheFuture() {
-    display: block;
-    text-align: center;
+	display: block;
+	text-align: center;
 
-    .ico-hr {
-        display: block;
-        margin: 0 auto;
-        margin-bottom: 33px;
-        margin-top: 10px;
-    }
+	.ico-hr {
+		display: block;
+		margin: 0 auto;
+		margin-bottom: 33px;
+		margin-top: 10px;
+	}
 
-    .go_to_list {
-        .go_to_list();
-        display: inline-block;
-        margin-bottom: 35px;
-        .relative;
-        left: 5px;
-    }
+	.go_to_list {
+		.go_to_list();
+		display: inline-block;
+		margin-bottom: 35px;
+		.relative;
+		left: 5px;
+	}
 }
 
 /* === SUBMODULES === */
@@ -84,89 +86,91 @@
 /* === STYLES === */
 
 body section.content .page_content .list_solutions {
-    display: block;
-    font-size: 0;
-    line-height: 0;
-    @colorOdd: #6e7e8c;
-    @colorEven: #38556e;
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	@colorOdd: #6e7e8c;
+	@colorEven: #38556e;
 
-    .reset () {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        background: none;
-    }
+	.reset () {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background: none;
+	}
 
-    ul, li, figure, figcaption, p, img, a { display: block; .reset(); }
+	ul, li, figure, figcaption, p, img, a { display: block; .reset(); }
 
-    & > ul { .relative(-2px); }
+	& > ul { .relative(-2px); }
 
-    & > ul > li {
-        padding-top: 5px + 17px + 20px;
-        .bg('assets/sprite.png', 0 -500px+20px repeat-x);
+	& > ul > li {
+		padding-top: 5px + 17px + 20px;
+		.bg('assets/sprite.png', 0 -500px+20px repeat-x);
 
-        &:first-child {
-            padding-top: 0;
-            background: none;
-        }
+		&:first-child {
+			padding-top: 0;
+			background: none;
+		}
 
-        & > ul > li {
-            @height: 93px;
-            height: @height;
-            padding-top: 1px;
-            .bg('assets/sprite.png', 0 -1000px repeat-x);
-            .relative;
+		& > ul > li {
+			@height: 93px;
+			height: @height;
+			padding-top: 1px;
+			.bg('assets/sprite.png', 0 -1000px repeat-x);
+			.relative;
 
-            &:first-child {
-                background: none;
-                padding-top: 0;
-                a { top: 0; }
-            }
+			&:first-child {
+				background: none;
+				padding-top: 0;
+				a { top: 0; }
+			}
 
-            figure figcaption, figure img { .absolute(0, auto, auto, 0); }
+			figure figcaption, figure img { .absolute(0, auto, auto, 0); }
 
-            figure figcaption {
-                font-family: Days, sans-serif;
-                .fontMetrics(28px, @height);
-                color: @colorOdd;
-                text-transform: uppercase;
-                left: 137px;
-                .transitionQ('color 200ms');
-            }
+			figure figcaption {
+				font-family: Days, sans-serif;
+				.fontMetrics(28px, @height);
+				color: @colorOdd;
+				text-transform: uppercase;
+				left: 137px;
+				.transitionQ('color 200ms');
+			}
 
-            figure img {
-                max-width: 77px;
-                max-height: 77px;
-                .border-radius(39px);
-                left: 43px;
-                top: 8px;
-            }
+			figure img {
+				max-width: 77px;
+				max-height: 77px;
+				.border-radius(39px);
+				left: 43px;
+				top: 8px;
+			}
 
-            a {
-                .absolute(1px, auto, auto, 0);
-                .size(100%, 100%);
+			a {
+				.absolute(1px, auto, auto, 0);
+				.size(100%, 100%);
 
-                &:hover figure figcaption { color: @colorActive; }
-            }
-        }
+				&:hover figure figcaption { color: @colorActive; }
+			}
+		}
 
-        &:nth-child(even) { padding-top: 5px + 17px + 20px - 3px; }
-        &:nth-child(even) > ul > li {
-            @height: 91px;
-            height: @height;
+		&:nth-child(even) { padding-top: 5px + 17px + 20px - 3px; }
+		&:nth-child(even) > ul > li {
+			@height: 91px;
+			height: @height;
 
-            figure figcaption {
-                color: @colorEven;
-                line-height: @height;
-            }
+			figure figcaption {
+				color: @colorEven;
+				line-height: @height;
+			}
 
-            figure img {
-                max-width: 69px;
-                max-height: 69px;
-                .border-radius(8px);
-                top: 11px;
-                left: 47px;
-            }
-        }
-    }
+			figure img {
+				max-width: 69px;
+				max-height: 69px;
+				.border-radius(8px);
+				top: 11px;
+				left: 47px;
+			}
+		}
+	}
 }
+
+// vim: set noet ts=4 sts=4 sw=4 fenc=utf-8 foldmethod=marker :
