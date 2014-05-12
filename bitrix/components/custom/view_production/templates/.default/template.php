@@ -20,7 +20,7 @@
     <div class="items">
         <?foreach ($arResult["ITEMS"] as $arItem) :?>
             <div class="item">
-                <div class="note_column">
+                <div class="note_column<?=(!empty($arItem["non_break_advantages"]["VALUE"]))?" non_break":""?>">
                     <?foreach ($arItem["advantages"] as $i=>$advantage) :?>
                         <figure>
                             <p><img alt="<?=$advantage["FILE"]["DESCRIPTION"]

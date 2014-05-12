@@ -52,6 +52,9 @@ body section.content .page_content .solutions.view_production {
 		display: block;
 
 		.item {
+			@rightColumnWidth: 257px;
+			@offsetRightColumn: @rightColumnWidth + 28px;
+
 			display: block;
 			.relative;
 			width: 100%;
@@ -62,10 +65,11 @@ body section.content .page_content .solutions.view_production {
 				font-weight: bold;
 				text-transform: uppercase;
 				padding-bottom: 25-12px;
+				padding-right: @offsetRightColumn;
 			}
 
 			.description {
-				padding-right: 285px;
+				padding-right: @offsetRightColumn;
 				color: #333132;
 
 				h4 {
@@ -75,18 +79,20 @@ body section.content .page_content .solutions.view_production {
 					text-transform: uppercase;
 					margin-bottom: 25-12px;
 				}
-				p + h4, ul + h4 {
-					margin-top: 62-7px;
-				}
+
+				p + h4, ul + h4 { margin-top: 62-7px; }
 
 				&:after { .pseudoBlock; clear: both; }
 			}
 
 			.note_column {
+				@width: @rightColumnWidth;
+
 				float: right;
-				@width: 257px;
 				width: @width;
 				padding-top: 10px;
+
+				&.non_break { .absolute(auto, 0); }
 
 				figure {
 					display: block;

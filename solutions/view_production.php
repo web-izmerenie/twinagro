@@ -11,7 +11,7 @@ $APPLICATION->AddChainItem("Продукция");
 		"SECTION_CODE" => $_GET["section_code"],
 		"SORT_BY" => "SORT",
 		"SORT_ORDER" => "ASC",
-		"PROPERTY_CODE" => array("hide_name", "advantages", "advantages_descriptions", "splitter_line"),
+		"PROPERTY_CODE" => array("hide_name", "advantages", "advantages_descriptions", "splitter_line", "non_break_advantages"),
 		"CACHE_TYPE" => "A",
 		"CACHE_TIME" => "36000000",
 		"CACHE_FILTER" => "N"
