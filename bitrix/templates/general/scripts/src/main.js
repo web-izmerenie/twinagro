@@ -5,7 +5,7 @@
  * @author Viacheslav Lotsmanov
  */
 
-define(['get_val', 'jquery'], function (getVal, $) {
+define(['basics/get_val', 'jquery'], function (getVal, $) {
 
 	require.config({
 
@@ -20,9 +20,17 @@ define(['get_val', 'jquery'], function (getVal, $) {
 
 				/* short name aliases */
 
+				// outsource modules
 				'jquery.mousewheel': 'libs/jquery.mousewheel',
 				'modernizr': 'libs/modernizr-2.7.2',
-				'box_panorama': 'libs/box_panorama'
+				'box_panorama': 'libs/box_panorama',
+
+				// basics aliases
+				'dynamic_api': 'basics/dynamic_api',
+				'get_local_text': 'basics/get_local_text',
+				'get_val': 'basics/get_val',
+				'load_img': 'basics/load_img',
+				'modernizr.apng': 'basics/modernizr.apng'
 
 			}
 		},

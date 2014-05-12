@@ -6,7 +6,7 @@
         define('MAIN_PAGE', 'Y');
     endif;
 
-    $revision = 10;
+    $revision = 11;
     if ($USER->IsAdmin()) $revision = $revision . 'dev' . 11;
 ?>
 <!DOCTYPE html>
@@ -30,7 +30,7 @@
     <script src="<?=SITE_TEMPLATE_PATH?>/scripts/build/build.js?v=<?=$revision?>"></script>
     <script>
         //<![CDATA[
-            require(['get_val'], function (getVal) {
+            require(['basics/get_val'], function (getVal) {
 
                 getVal.set('tplPath', '<?=SITE_TEMPLATE_PATH?>');
                 getVal.set('lang', '<?=LANGUAGE_ID?>');
