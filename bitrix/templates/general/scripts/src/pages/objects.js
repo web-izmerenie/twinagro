@@ -7,6 +7,7 @@
 define(['get_val', 'get_local_text', 'jquery', 'get_height_sum', 'webkit_bug_fix_wrapper', 'animation_img_block'],
 function (getVal, getLocalText, $, getHeightSum, webkitBugFixWrapper, AnimationImgBlock) {
 $(function domReady() {
+var $window = $(window);
 $('section.content .objects').each(function () {
 
 	var $objects = $(this);
@@ -77,13 +78,13 @@ $('section.content .objects').each(function () {
 
 	function initHeight() { // {{{1
 		var heightSum = getHeightSum();
-		var newObjHeight = $(window).height() - (heightSum - $objects.height());
+		var newObjHeight = $window.height() - (heightSum - $objects.height());
 
-		if ($(window).height() > heightSum || newObjHeight >= minHeight) {
+		if ($window.height() > heightSum || newObjHeight >= minHeight) {
 			$objects.css($.extend({}, resetSizesCss, {
 				'height': newObjHeight + 'px'
 			}));
-		} else if ($(window).height() < heightSum) {
+		} else if ($window.height() < heightSum) {
 			$objects.css($.extend({}, resetSizesCss, {
 				'height': minHeight + 'px'
 			}));
@@ -309,7 +310,7 @@ $('section.content .objects').each(function () {
 	} // initScrolling }}}1
 
 	webkitBugFixWrapper(function initObjects() { // {{{1
-		$(window)
+		$window
 			.on('resize', function () {
 				initHeight();
 				if (resizeCallback) resizeCallback();
@@ -317,7 +318,7 @@ $('section.content .objects').each(function () {
 			.trigger('resize');
 
 		initScrolling();
-		$(window).trigger('resize');
+		$window.trigger('resize');
 	}); // webkitBugFixWrapper() }}}1
 
 }); // .each()

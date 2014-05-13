@@ -13,7 +13,8 @@ define(function () {
 		objectsBlockRatio: [4, 3],
 		dynamicApiLoadInterval: 100, // ms
 		requireTimeout: 60, // sec
-		loadImgTimeout: 30000 // ms
+		loadImgTimeout: 30000, // ms
+		bitrixCorrectionInterval: 500 // ms
 	};
 
 	/** Required set before "getVal" */

@@ -7,6 +7,8 @@
 define(['get_val', 'jquery', 'get_height_sum', 'webkit_bug_fix_wrapper', 'animation_img_block'],
 function (getVal, $, getHeightSum, webkitBugFixWrapper, AnimationImgBlock) {
 $(function domReady() {
+var $window = $(window);
+var $document = $(document);
 $('.contacts').each(function () {
 
 	var $contacts = $(this);
@@ -24,11 +26,11 @@ $('.contacts').each(function () {
 
 	function resizeMap() {
 		var heightSum = getHeightSum();
-		var newHeight = $(window).height() - (heightSum - $map.height());
+		var newHeight = $window.height() - (heightSum - $map.height());
 
-		if ($(window).height() > heightSum || newHeight >= minHeight) {
+		if ($window.height() > heightSum || newHeight >= minHeight) {
 			$map.css('height', newHeight + 'px');
-		} else if ($(window).height() < heightSum) {
+		} else if ($window.height() < heightSum) {
 			$map.css('height', minHeight + 'px');
 		}
 
@@ -41,8 +43,8 @@ $('.contacts').each(function () {
 		if (subjectsListVisible) return;
 
 		if ($(this).hasClass('call_me_button')) {
-			if ($form.is(':hidden')) $form.stop().fadeIn();
-			else $form.stop().fadeOut();
+			if ($form.is(':hidden')) $form.stop().fadeIn(getVal('animationSpeed'));
+			else $form.stop().fadeOut(getVal('animationSpeed'));
 			return false;
 		} else {
 			if ($form.is(':hidden')) return;
@@ -59,7 +61,7 @@ $('.contacts').each(function () {
 			event.pageY < bTop || event.pageY > bTop + bHeight ||
 			event.pageX < bLeft || event.pageX > bLeft + bWidth
 		) {
-			$form.stop().fadeOut();
+			$form.stop().fadeOut(getVal('animationSpeed'));
 		}
 	}
 
@@ -68,13 +70,13 @@ $('.contacts').each(function () {
 			if ($subjectsList.is(':hidden')) {
 				$form.find('.call_subjects .show_list').addClass('active');
 				$form.find('.call_subjects').closest('dd').addClass('active');
-				$subjectsList.stop().slideDown(function () {
+				$subjectsList.stop().slideDown(getVal('animationSpeed'), function () {
 					subjectsListVisible = true;
 				});
 			} else {
 				$form.find('.call_subjects .show_list').removeClass('active');
 				$form.find('.call_subjects').closest('dd').removeClass('active');
-				$subjectsList.stop().slideUp(function () {
+				$subjectsList.stop().slideUp(getVal('animationSpeed'), function () {
 					subjectsListVisible = false;
 				});
 			}
@@ -96,14 +98,13 @@ $('.contacts').each(function () {
 		) {
 			$form.find('.call_subjects .show_list').removeClass('active');
 			$form.find('.call_subjects').closest('dd').removeClass('active');
-			$subjectsList.stop().slideUp(function () {
+			$subjectsList.stop().slideUp(getVal('animationSpeed'), function () {
 				subjectsListVisible = false;
 			});
 		}
 	}
 
 	function placeholderInit() {
-		var animationSpeed = 200;
 		$form.find('dl.text').each(function () {
 			var $dl = $(this);
 			var $label = $dl.find('label');
@@ -117,16 +118,16 @@ $('.contacts').each(function () {
 					}
 				} else {
 					if ($(this).val() === '') {
-						$label.stop().fadeIn(animationSpeed);
+						$label.stop().fadeIn(getVal('animationSpeed'));
 					} else if ($(this).val() !== '') {
-						$label.stop().fadeOut(animationSpeed);
+						$label.stop().fadeOut(getVal('animationSpeed'));
 					}
 				}
 			}
 
 			function focusHandler() {
 				if ($(this).attr('name') !== 'subject') {
-					$label.stop().fadeOut(animationSpeed);
+					$label.stop().fadeOut(getVal('animationSpeed'));
 				}
 			}
 
@@ -148,7 +149,7 @@ $('.contacts').each(function () {
 			$response = $('<div/>', { 'class': 'ajax_response' });
 			$fields.before( $response );
 		} else {
-			$response.slideUp(function () { $response.html(''); });
+			$response.slideUp(getVal('animationSpeed'), function () { $response.html(''); });
 		}
 		var $loader = $('<div/>', { 'class': 'ajax_loader' });
 		$fields.before( $loader );
@@ -157,11 +158,11 @@ $('.contacts').each(function () {
 			function backToForm(response, clearFields, callback) {
 				if (response) {
 					$response.html( response );
-					$response.slideDown();
+					$response.slideDown(getVal('animationSpeed'));
 				} else {
-					$response.slideUp(function () { $response.html(''); });
+					$response.slideUp(getVal('animationSpeed'), function () { $response.html(''); });
 				}
-				$loader.slideUp(function () {
+				$loader.slideUp(getVal('animationSpeed'), function () {
 					$loader.remove();
 					anim.kill();
 					anim = void(0);
@@ -180,7 +181,7 @@ $('.contacts').each(function () {
 						$(this).find('input').val('').trigger('blur');
 					});
 				}
-				$fields.slideDown();
+				$fields.slideDown(getVal('animationSpeed'));
 			}
 
 			function ajaxError(msg) {
@@ -193,8 +194,8 @@ $('.contacts').each(function () {
 			}
 
 			$loader.html( this.$img );
-			$fields.slideUp();
-			$loader.slideDown(function () {
+			$fields.slideUp(getVal('animationSpeed'));
+			$loader.slideDown(getVal('animationSpeed'), function () {
 				$.ajax({
 					url: '/contacts/ajax_post.php?ajax=Y&post=Y',
 					data: $form.serialize(),
@@ -255,17 +256,17 @@ $('.contacts').each(function () {
 	$form.submit(submitHandler);
 	$form.find('dl.submit dt').click(function () { $form.submit(); });
 
-	$(document).click(formShowHideHandler);
+	$document.click(formShowHideHandler);
 	$callBtn.click(formShowHideHandler);
 	$form.find('.close').click(function () {
-		$form.stop().fadeOut();
+		$form.stop().fadeOut(getVal('animationSpeed'));
 	});
 
 	function showSubjectsList() {
 		if ($subjectsList.is(':hidden')) {
 			$form.find('.call_subjects .show_list').addClass('active');
 			$form.find('.call_subjects').closest('dd').addClass('active');
-			$subjectsList.stop().slideDown(function () {
+			$subjectsList.stop().slideDown(getVal('animationSpeed'), function () {
 				subjectsListVisible = true;
 			});
 		}
@@ -275,7 +276,7 @@ $('.contacts').each(function () {
 		if ($subjectsList.is(':visible')) {
 			$form.find('.call_subjects .show_list').removeClass('active');
 			$form.find('.call_subjects').closest('dd').removeClass('active');
-			$subjectsList.stop().slideUp(function () {
+			$subjectsList.stop().slideUp(getVal('animationSpeed'), function () {
 				subjectsListVisible = false;
 			});
 		}
@@ -283,7 +284,7 @@ $('.contacts').each(function () {
 
 	$form.find('.call_subjects').each(function () {
 		$subjectsList = $(this).find('ul');
-		$(document).click(subjectsListShowHideHandler);
+		$document.click(subjectsListShowHideHandler);
 		$(this).find('.show_list').each(function () {
 			var $showList = $(this);
 			$showList.click(subjectsListShowHideHandler);
@@ -303,7 +304,7 @@ $('.contacts').each(function () {
 			$(this).closest('dl.text').find('input').val( $(this).text() ).trigger('blur').focus();
 			$form.find('.call_subjects .show_list').removeClass('active');
 			$form.find('.call_subjects').closest('dd').removeClass('active');
-			$subjectsList.stop().slideUp(function () {
+			$subjectsList.stop().slideUp(getVal('animationSpeed'), function () {
 				subjectsListVisible = false;
 			});
 			return false;
@@ -313,7 +314,7 @@ $('.contacts').each(function () {
 	placeholderInit();
 
 	webkitBugFixWrapper(resizeMap);
-	$(window).on('resize', resizeMap);
+	$window.on('resize', resizeMap);
 
 	require(['dynamic_api'], function (dynamicLoadApi) {
 
@@ -350,7 +351,7 @@ $('.contacts').each(function () {
 					map.geoObjects.add(mark);
 					$map.data('yamap', map);
 
-					$(window).trigger('resize');
+					$window.trigger('resize');
 
 				}); // ymaps.ready()
 

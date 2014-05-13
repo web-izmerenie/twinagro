@@ -44,16 +44,18 @@ define(['basics/get_val', 'jquery'], function (getVal, $) {
 	require(['modernizr']);
 
 	/** menu scroll to up by click on current page */
-	$(function () {
+	$(function domReady() {
+
+		var $page = $('html,body');
 
 		$('.menu > span').click(function () {
 
-			$('html,body').animate({ scrollTop: 0 });
+			$page.animate({ scrollTop: 0 }, getVal('animationSpeed')*6);
 			return false;
 
 		});
 
-	});
+	}); // domReady()
 
 	// preload sub-pages sprite
 	//$('<img/>').attr('src', tplDirPrefix + '/assets/sprite.png');

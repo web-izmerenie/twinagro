@@ -4,7 +4,7 @@
  * @author Viacheslav Lotsmanov
  */
 
-define(['jquery', 'get_local_text'], function ($, getLocalText) {
+define(['get_val', 'jquery', 'get_local_text'], function (getVal, $, getLocalText) {
 $(function domReady() {
 $('html.page-main #main .card-elevator_tour').each(function () {
 
@@ -70,7 +70,7 @@ $('html.page-main #main .card-elevator_tour').each(function () {
 			'width': size[0] + 'px'
 		});
 
-		$popup.stop().animate({opacity: 1}, function () {
+		$popup.stop().animate({opacity: 1}, getVal('animationSpeed'), function () {
 			$(document).bind('click.elevator_tour_popup', documentClickHandler);
 			$(window).bind('resize.elevator_tour_popup', popupResizeWindowHandler);
 
@@ -88,7 +88,7 @@ $('html.page-main #main .card-elevator_tour').each(function () {
 						$(document).unbind('click.elevator_tour_popup');
 						$(window).unbind('resize.elevator_tour_popup');
 
-						$('.elevator_tour_popup').stop().fadeOut(function () {
+						$('.elevator_tour_popup').stop().fadeOut(getVal('animationSpeed'), function () {
 							panorama.destroy();
 							panorama = null;
 							$(this).remove();
@@ -119,7 +119,7 @@ $('html.page-main #main .card-elevator_tour').each(function () {
 			$(document).unbind('click.elevator_tour_popup');
 			$(window).unbind('resize.elevator_tour_popup');
 
-			$popup.stop().fadeOut(function () {
+			$popup.stop().fadeOut(getVal('animationSpeed'), function () {
 				panorama.destroy();
 				panorama = null;
 				$(this).remove();

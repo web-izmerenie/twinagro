@@ -9,17 +9,20 @@ function ($, getHeightSum, webkitBugFixWrapper) {
 
 	$(function domReady() {
 
+		var $html = $('html');
+		var $window = $(window);
+
 		function stickyFooter() {
 			var heightSum = getHeightSum();
 
-			if (heightSum < $(window).height()) {
-				$('html').addClass('sticky_footer');
+			if (heightSum < $window.height()) {
+				$html.addClass('sticky_footer');
 			} else {
-				$('html').removeClass('sticky_footer');
+				$html.removeClass('sticky_footer');
 			}
 		}
 
-		$(window).on('scroll resize', stickyFooter);
+		$window.on('scroll resize', stickyFooter);
 		webkitBugFixWrapper(stickyFooter);
 
 	}); // domReady()

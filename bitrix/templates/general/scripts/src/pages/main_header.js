@@ -6,6 +6,9 @@
 
 define(['get_val', 'jquery'], function (getVal, $) {
 $(function domReady() {
+var $document = $(document);
+var $window = $(window);
+var $html = $('html');
 $('html.page-main #main .card-1').each(function () {
 
 	var $card1 = $(this);
@@ -15,7 +18,7 @@ $('html.page-main #main .card-1').each(function () {
 
 	function watchToBitrixPanel() {
 		if (!$bitrix.find('#bx-panel').hasClass('bx-panel-fixed')) {
-			if ($('html').hasClass('header_follow')) {
+			if ($html.hasClass('header_follow')) {
 				$header.css('top', 0);
 			} else {
 				$header.css('top', $bitrix.height());
@@ -24,27 +27,27 @@ $('html.page-main #main .card-1').each(function () {
 	}
 
 	function headerFollow() {
-		if ($(document).scrollTop() > $card1.find('.background').height() - headerHeight) {
-			if ($('html').hasClass('header_follow')) {
-				$header.css('left', -($(document).scrollLeft()) + 'px');
+		if ($document.scrollTop() > $card1.find('.background').height() - headerHeight) {
+			if ($html.hasClass('header_follow')) {
+				$header.css('left', -($document.scrollLeft()) + 'px');
 				return;
 			}
 			$header.css({
 				height: 0,
 				opacity: 0
 			});
-			$('html').addClass('header_follow');
-			$header.stop().css('left', -($(document).scrollLeft()) + 'px').animate({
+			$html.addClass('header_follow');
+			$header.stop().css('left', -($document.scrollLeft()) + 'px').animate({
 				height: headerHeight,
 				opacity: 1
-			}, headerFollow);
+			}, getVal('animationSpeed')*2, headerFollow);
 		} else {
-			if ( ! $('html').hasClass('header_follow')) return;
+			if ( ! $html.hasClass('header_follow')) return;
 			$header.stop().animate({
 				height: 0,
 				opacity: 0
-			}, function () {
-				$('html').removeClass('header_follow');
+			}, getVal('animationSpeed')*2, function () {
+				$html.removeClass('header_follow');
 				$(this).css({
 					height: headerHeight,
 					opacity: 1,
@@ -55,8 +58,8 @@ $('html.page-main #main .card-1').each(function () {
 		}
 
 		/** scrolled to top of page before fade-out animation finished */
-		if ($(document).scrollTop() < headerHeight) {
-			$('html').removeClass('header_follow');
+		if ($document.scrollTop() < headerHeight) {
+			$html.removeClass('header_follow');
 			$header.stop().css({
 				height: headerHeight,
 				opacity: 1,
@@ -66,12 +69,12 @@ $('html.page-main #main .card-1').each(function () {
 	}
 
 	headerFollow();
-	$(window).on('resize scroll', headerFollow);
+	$window.on('resize scroll', headerFollow);
 
 	if ($bitrix.html() !== '') {
 		$bitrix.each(function () {
 			watchToBitrixPanel();
-			setInterval(watchToBitrixPanel, 500);
+			setInterval(watchToBitrixPanel, getVal('bitrixCorrectionInterval'));
 		});
 	}
 
