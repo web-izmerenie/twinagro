@@ -6,7 +6,7 @@
         define('MAIN_PAGE', 'Y');
     endif;
 
-    $revision = 12;
+    $revision = 13;
     if ($USER->IsAdmin()) $revision = $revision . 'dev' . 11;
 ?>
 <!DOCTYPE html>
