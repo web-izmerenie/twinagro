@@ -4,7 +4,7 @@
 	"IBLOCK_CODE" => "call_me_later",
 	"SAVE_RESULTS_TO_IBLOCK" => "Y",
 	"EMAIL_FROM" => "Твин Агро <noreply@twinagro.ru>",
-	"ADMIN_EMAIL" => "m-dolgopolov@yandex.ru",
+	"ADMIN_EMAIL" => "twinagro@yandex.ru",
 	"HIDDEN_COPY_ADMIN" => "vialot@web-izmerenie.ru, epriganova@web-izmerenie.ru",
 	"HIDDEN_COPY_USER" => "",
 	"MANY_USER_EMAILS" => "N",
