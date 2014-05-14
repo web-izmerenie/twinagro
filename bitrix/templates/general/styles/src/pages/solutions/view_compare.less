@@ -4,22 +4,10 @@
  * @author Viacheslav Lotsmanov
  */
 
-.left_sticker {
-	float: left;
-	margin-right: 23px;
-	margin-bottom: 20px;
-}
-
-.right_sticker {
-	float: right;
-	margin-left: 23px;
-	margin-bottom: 20px;
-}
-
 body section.content .page_content .solutions.view_compare {
 	.bg('assets/gray_dot.png', center 0 repeat-y);
 
-	.title {
+	.title { // {{{1
 		display: block;
 		.relative;
 		background: white;
@@ -45,14 +33,14 @@ body section.content .page_content .solutions.view_compare {
 			z-index: 1;
 			.bg('assets/sprite.png', 0 -1000px repeat-x);
 		}
-	}
+	} // .title }}}1
 
-	.top_variants {
+	.top_variants { // {{{1
 		display: block;
 		width: 100%;
 		.relative;
 
-		.variant_1, .variant_2 {
+		.variant_1, .variant_2 { // {{{2
 			display: block;
 			width: 50%;
 			text-align: center;
@@ -84,7 +72,7 @@ body section.content .page_content .solutions.view_compare {
 					padding-top: 30px;
 				}
 			}
-		}
+		} // .variant_1, .variant_2 }}}2
 
 		&:after { .pseudoBlock; clear: both; }
 		&:before {
@@ -94,68 +82,67 @@ body section.content .page_content .solutions.view_compare {
 			.absolute(0, auto, auto, 45%);
 			z-index: 1;
 		}
-	}
+	} // .top_variants }}}1
 
 	.description {
 		text-align: center;
 	}
 
-	.items {
-		.item {
-			display: block;
+	.items .item { // {{{1
+		display: block;
 
-			h4 {
-				background: white;
-				.fontMetrics(24px, 100px);
-				text-align: center;
-				font-weight: bold;
-				text-transform: uppercase;
-			}
-
-			.variant_1, .variant_2 {
-				display: block;
-				float: left;
-				.relative;
-				width: 50%;
-				text-align: center;
-
-				figure {
-					display: block;
-					margin: 0 auto;
-
-					figcaption { padding-top: 15px; } 
-
-					padding: 40px 0 20px 0;
-				}
-			}
-
-			.detail {
-				clear: both;
-				background: white;
-				padding-top: 15px;
-				&:before { .pseudoBlock; clear: both; }
-
-				.footnote {
-					display: block;
-					text-align: left;
-					width: 460px;
-					margin: 0 auto;
-				}
-			}
-
-			.footnote_mark, .footnote .mark {
-				color: red;
-			}
-
-			&:after { .pseudoBlock; clear: both; }
+		h4 {
+			background: white;
+			.fontMetrics(24px, 100px);
+			text-align: center;
+			font-weight: bold;
+			text-transform: uppercase;
 		}
-	}
 
-	.back_to_the_future {
+		.variant_1, .variant_2 { // {{{2
+			display: block;
+			float: left;
+			.relative;
+			width: 50%;
+			text-align: center;
+
+			figure {
+				display: block;
+				margin: 0 auto;
+
+				figcaption { padding-top: 15px; } 
+
+				padding: 40px 0 20px 0;
+			}
+		} // .variant_1, .variant_2 }}}2
+
+		.detail {
+			clear: both;
+			background: white;
+			padding-top: 15px;
+			&:before { .pseudoBlock; clear: both; }
+
+			.footnote {
+				display: block;
+				text-align: left;
+				width: 460px;
+				margin: 0 auto;
+			}
+		}
+
+		.footnote_mark, .footnote .mark {
+			color: red;
+		}
+
+		&:after { .pseudoBlock; clear: both; }
+	} // .item }}}1
+
+	.back_to_the_future { // {{{1
 		display: block;
 		text-align: center;
 		background: white;
 		padding-top: 100px;
+		clear: both;
 
 		.ico-hr {
 			display: block;
@@ -170,7 +157,12 @@ body section.content .page_content .solutions.view_compare {
 			margin-bottom: 35px;
 			.relative;
 		}
-	}
-}
+
+		&:before {
+			.pseudoBlock;
+			clear: both;
+		}
+	} // .back_to_the_future }}}1
+} // .solutions.view_compare
 
 // vim: set noet ts=4 sts=4 sw=4 fenc=utf-8 foldmethod=marker :

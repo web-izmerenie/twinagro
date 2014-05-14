@@ -6,7 +6,7 @@
 
 /* === MIXINS === */
 
-.go_to_list () {
+.go_to_list() { // {{{1
 	display: inline-block;
 	.relative;
 	.fontMetrics(14px, 16px);
@@ -35,15 +35,15 @@
 			.ico-go-to-list-active;
 			.opacity(0);
 		}
-	}
+	} // & > span
 
 	&:hover {
 		& > span:before { .opacity(0); }
 		& > span:after { .opacity(1); }
 	}
-}
+} // .go_to_list() }}}1
 
-.go_to_list_revert () {
+.go_to_list_revert() { // {{{1
 	display: inline-block;
 	.relative;
 	.fontMetrics(14px, 16px);
@@ -55,11 +55,12 @@
 		.pseudoBlock("←");
 		.absolute(0, auto, auto, 2px);
 	}
-}
+} // .go_to_list_revert() }}}1
 
-.bottomBackToTheFuture() {
+.bottomBackToTheFuture() { // {{{1
 	display: block;
 	text-align: center;
+	clear: both;
 
 	.ico-hr {
 		display: block;
@@ -75,7 +76,12 @@
 		.relative;
 		left: 5px;
 	}
-}
+
+	&:before {
+		.pseudoBlock;
+		clear: both;
+	}
+} // .bottomBackToTheFuture() }}}1
 
 /* === SUBMODULES === */
 
@@ -103,7 +109,7 @@ body section.content .page_content .list_solutions {
 
 	& > ul { .relative(-2px); }
 
-	& > ul > li {
+	& > ul > li { // {{{1
 		padding-top: 5px + 17px + 20px;
 		.bg('assets/sprite.png', 0 -500px+20px repeat-x);
 
@@ -112,7 +118,7 @@ body section.content .page_content .list_solutions {
 			background: none;
 		}
 
-		& > ul > li {
+		& > ul > li { // {{{2
 			@height: 93px;
 			height: @height;
 			padding-top: 1px;
@@ -124,6 +130,8 @@ body section.content .page_content .list_solutions {
 				padding-top: 0;
 				a { top: 0; }
 			}
+
+			// figure {{{3
 
 			figure figcaption, figure img { .absolute(0, auto, auto, 0); }
 
@@ -144,16 +152,18 @@ body section.content .page_content .list_solutions {
 				top: 8px;
 			}
 
+			// figure }}}3
+
 			a {
 				.absolute(1px, auto, auto, 0);
 				.size(100%, 100%);
 
 				&:hover figure figcaption { color: @colorActive; }
 			}
-		}
+		} // & > ul > li > ul > li }}}2
 
 		&:nth-child(even) { padding-top: 5px + 17px + 20px - 3px; }
-		&:nth-child(even) > ul > li {
+		&:nth-child(even) > ul > li { // {{{2
 			@height: 91px;
 			height: @height;
 
@@ -169,8 +179,8 @@ body section.content .page_content .list_solutions {
 				top: 11px;
 				left: 47px;
 			}
-		}
-	}
-}
+		} // }}}2
+	} // & > ul > li }}}1
+} // .list_solutions
 
 // vim: set noet ts=4 sts=4 sw=4 fenc=utf-8 foldmethod=marker :
