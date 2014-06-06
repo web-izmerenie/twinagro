@@ -3,7 +3,7 @@
 <div class="card card-1">
     <div class="background">
         <div class="title"><?$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."index.innovations_for_professionals.title.inc.php", Array(), Array("MODE" => "php"));?></div>
-        <div class="presentation"><a href="/upload/twinagro_booklet.pdf">Скачать презентацию</a></div>
+        <div class="presentation"><a href="/upload/twinagro_booklet.pdf" target="_blank">Скачать презентацию</a></div>
         <div class="scroll-arrow"><a href="#cut"></a></div>
         <a class="tour-3d"></a>
     </div>
