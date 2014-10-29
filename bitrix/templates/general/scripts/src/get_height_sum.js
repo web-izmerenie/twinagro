@@ -7,12 +7,20 @@
 
 define(['jquery'], function ($) {
 
+	var $content;
+	var $footer;
+	var $bitrixPanel;
+
 	return function getHeightSum() {
-		return (
-			parseInt($('body section.content').css('padding-top'), 10) +
-			$('body section.content').height() + $('body footer').height() +
-			$('#bitrix_panel').height()
-		);
+		if (!$content) {
+			$content = $('body section.content');
+			$footer = $('body footer');
+			$bitrixPanel = $('#bitrix_panel');
+		}
+
+		return $content.innerHeight() +
+			$footer.height() +
+			$bitrixPanel.height();
 	};
 
 }); // define()
