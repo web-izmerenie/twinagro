@@ -22,6 +22,7 @@ define(['basics/get_val', 'jquery'], function (getVal, $) {
 
 				// outsource modules
 				'jquery.mousewheel': 'libs/jquery.mousewheel',
+				'jquery.formstyler': 'libs/jquery.formstyler',
 				'modernizr': 'libs/modernizr-2.7.2',
 				'box_panorama': 'libs/box_panorama',
 
