@@ -351,7 +351,11 @@ function ($, AnimationImgBlock, getVal, getHeightSum) {
 					var $ul = $(this).find('.jq-selectbox__dropdown ul');
 					var $li = $ul.find('>li');
 					var heightSum = 0;
-					$li.each(function () { heightSum += $(this).innerHeight(); });
+					$li.each(function () {
+						heightSum += $(this).innerHeight() +
+							parseInt($(this).css('border-top-width'), 10) +
+							parseInt($(this).css('border-bottom-width'), 10);
+					});
 					$ul.css('height', heightSum + 'px');
 				},
 				onSelectClosed: function () {
