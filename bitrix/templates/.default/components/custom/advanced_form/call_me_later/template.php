@@ -24,7 +24,7 @@
 <?$uid = $arResult['FORM_UID']?>
 
 <form method="post" action="<?=$arResult['POST_PATHNAME']
-    ?>" class="advanced_form" id="advanced_form_<?=$uid?>">
+    ?>" class="advanced_form call_me_later_form" id="advanced_form_<?=$uid?>">
     <dl class="hidden">
         <dd><input type="hidden" name="form_uid" value="<?=$uid?>" /></dd>
     </dl>
@@ -76,53 +76,7 @@
                     <dt><label for="<?=$id?>"><?=$title?><?=$requiredTag?></label></dt>
                     <dd><input type="text" name="<?=$name?>" id="<?=$id
                         ?>" value="<?=$arResult['POST_DATA'][$name]
-                        ?>"<?=($name == 'subject') ? ' readonly="readonly"' : ''
-                        ?><?=$required?> /><?
-                        ?><?if ($name == 'subject') :?><?$APPLICATION->IncludeComponent(
-                            "bitrix:news.list",
-                            "call_subjects",
-                            Array(
-                                "IBLOCK_TYPE" => "forms",
-                                "IBLOCK_ID" => "2",
-                                "NEWS_COUNT" => "",
-                                "SORT_BY1" => "SORT",
-                                "SORT_ORDER1" => "ASC",
-                                "SORT_BY2" => "",
-                                "SORT_ORDER2" => "",
-                                "FILTER_NAME" => "",
-                                "FIELD_CODE" => array(0=>"",1=>"",),
-                                "PROPERTY_CODE" => array(0=>"subject",1=>"",),
-                                "CHECK_DATES" => "Y",
-                                "DETAIL_URL" => "",
-                                "AJAX_MODE" => "N",
-                                "AJAX_OPTION_JUMP" => "N",
-                                "AJAX_OPTION_STYLE" => "N",
-                                "AJAX_OPTION_HISTORY" => "N",
-                                "CACHE_TYPE" => "A",
-                                "CACHE_TIME" => "36000000",
-                                "CACHE_FILTER" => "N",
-                                "CACHE_GROUPS" => "N",
-                                "PREVIEW_TRUNCATE_LEN" => "",
-                                "ACTIVE_DATE_FORMAT" => "",
-                                "SET_TITLE" => "N",
-                                "SET_STATUS_404" => "N",
-                                "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-                                "ADD_SECTIONS_CHAIN" => "N",
-                                "HIDE_LINK_WHEN_NO_DETAIL" => "N",
-                                "PARENT_SECTION" => "",
-                                "PARENT_SECTION_CODE" => "call_subjects",
-                                "INCLUDE_SUBSECTIONS" => "N",
-                                "PAGER_TEMPLATE" => "",
-                                "DISPLAY_TOP_PAGER" => "N",
-                                "DISPLAY_BOTTOM_PAGER" => "N",
-                                "PAGER_TITLE" => "",
-                                "PAGER_SHOW_ALWAYS" => "N",
-                                "PAGER_DESC_NUMBERING" => "N",
-                                "PAGER_DESC_NUMBERING_CACHE_TIME" => "",
-                                "PAGER_SHOW_ALL" => "N",
-                                "AJAX_OPTION_ADDITIONAL" => ""
-                            )
-                        );?><?endif?><?
+                        ?>"<?=$required?> /><?
                     ?></dd>
                 </dl>
             <?elseif ($arItem['FIELD_TYPE'] == 'TEXTAREA') :?>

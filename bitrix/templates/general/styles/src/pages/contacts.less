@@ -32,29 +32,10 @@ body section.content .page_content .contacts {
 				.absolute(50%, 0);
 				margin-top: -20px;
 			}
-
-			form {
-				.formMixin();
-				.fields {
-					dl dd {
-						// TODO remove and replace to jquery.formstyler
-						.call_subjects {
-							.fontMetrics(0, 0);
-
-							.show_list {
-								.arrowMixin();
-								.absolute(1px, 1px);
-							}
-
-							ul { .selectUlMixin(); }
-						}
-					}
-				} // .fields
-			}
 		}
 	}
 
-	form.order_services { .formMixin(); }
+	form { .formMixin(); }
 
 	.interactive_map {
 		@height: @minAutoSizeBlockHeight; // minimal

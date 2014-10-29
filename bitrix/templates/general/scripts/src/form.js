@@ -9,8 +9,6 @@ define(['jquery', 'animation_img_block', 'get_val', 'get_height_sum', 'jquery.fo
 function ($, AnimationImgBlock, getVal, getHeightSum) {
 
 	function formShowHideHandler(data, event) {
-		if (data.subjectsListVisible) return; // TODO remove
-
 		if ($(this).hasClass('call_form_button')) {
 			if (data.$form.is(':hidden'))
 				data.fadeIn();
@@ -38,50 +36,6 @@ function ($, AnimationImgBlock, getVal, getHeightSum) {
 			event.pageX < bLeft || event.pageX > bLeft + bWidth
 		) {
 			data.fadeOut();
-		}
-	}
-
-	// TODO remove
-	function subjectsListShowHideHandler(data, event) {
-		if ($(this).hasClass('show_list')) {
-			if (data.$subjectsList.is(':hidden')) {
-				data.$form.find('.call_subjects .show_list').addClass('active');
-				data.$form.find('.call_subjects').closest('dd').addClass('active');
-				data.$subjectsList.stop().slideDown(getVal('animationSpeed'), function () {
-					data.subjectsListVisible = true;
-				});
-			} else {
-				data.$form.find('.call_subjects .show_list').removeClass('active');
-				data.$form.find('.call_subjects').closest('dd').removeClass('active');
-				data.$subjectsList.stop().slideUp(getVal('animationSpeed'), function () {
-					data.subjectsListVisible = false;
-				});
-			}
-			return false;
-		} else {
-			if (data.$subjectsList.is(':hidden')) return;
-		}
-
-		if (event.pageX < 1 && event.pageY < 1) return;
-
-		var bWidth = data.$subjectsList.width() +
-			parseInt(data.$subjectsList.css('padding-left'), 10) +
-			parseInt(data.$subjectsList.css('padding-right'), 10);
-		var bHeight = data.$subjectsList.height() +
-			parseInt(data.$subjectsList.css('padding-top'), 10) +
-			parseInt(data.$subjectsList.css('padding-bottom'), 10);
-		var bTop = data.$subjectsList.offset().top;
-		var bLeft = data.$subjectsList.offset().left;
-
-		if (
-			event.pageY < bTop || event.pageY > bTop + bHeight ||
-			event.pageX < bLeft || event.pageX > bLeft + bWidth
-		) {
-			data.$form.find('.call_subjects .show_list').removeClass('active');
-			data.$form.find('.call_subjects').closest('dd').removeClass('active');
-			data.$subjectsList.stop().slideUp(getVal('animationSpeed'), function () {
-				data.subjectsListVisible = false;
-			});
 		}
 	}
 
@@ -234,28 +188,6 @@ function ($, AnimationImgBlock, getVal, getHeightSum) {
 		return false;
 	}
 
-	// TODO remove
-	function showSubjectsList(data) {
-		if (data.$subjectsList.is(':hidden')) {
-			data.$form.find('.call_subjects .show_list').addClass('active');
-			data.$form.find('.call_subjects').closest('dd').addClass('active');
-			data.$subjectsList.stop().slideDown(getVal('animationSpeed'), function () {
-				data.subjectsListVisible = true;
-			});
-		}
-	}
-
-	// TODO remove
-	function hideSubjectsList(data) {
-		if (data.$subjectsList.is(':visible')) {
-			data.$form.find('.call_subjects .show_list').removeClass('active');
-			data.$form.find('.call_subjects').closest('dd').removeClass('active');
-			data.$subjectsList.stop().slideUp(getVal('animationSpeed'), function () {
-				data.subjectsListVisible = false;
-			});
-		}
-	}
-
 	return function handler($callButton) {
 		var $form = $(this);
 		var $document = $(document);
@@ -317,11 +249,7 @@ function ($, AnimationImgBlock, getVal, getHeightSum) {
 							$form.css('display', 'none');
 							onClose();
 						});
-			},
-
-			// TODO remove
-			$subjectsList: null,
-			subjectsListVisible: false
+			}
 		};
 
 		$form.submit(function () { return submitHandler.call(this, data); });
@@ -364,40 +292,6 @@ function ($, AnimationImgBlock, getVal, getHeightSum) {
 				onFormStyled: function () {
 					$option.remove();
 				}
-			});
-		});
-
-		// TODO remove
-		$form.find('.call_subjects').each(function () {
-			data.$subjectsList = $(this).find('ul');
-			$document.click(function (event) {
-				return subjectsListShowHideHandler.call(this, data, event);
-			});
-			$(this).find('.show_list').each(function () {
-				var $showList = $(this);
-				$showList.click(function (event) {
-					return subjectsListShowHideHandler.call(this, data, event);
-				});
-				$showList.closest('dd').find('input').focus(function () {
-					showSubjectsList(data);
-					return false;
-				}).blur(function () {
-					hideSubjectsList(data);
-					return false;
-				}).click(function () {
-					$(this).focus();
-					return false;
-				}).css('cursor', 'pointer');
-				$showList.closest('dl').find('dt label').css('cursor', 'pointer');
-			});
-			data.$subjectsList.find('li').click(function () {
-				$(this).closest('dl.text').find('input').val( $(this).text() ).trigger('blur').focus();
-				$form.find('.call_subjects .show_list').removeClass('active');
-				$form.find('.call_subjects').closest('dd').removeClass('active');
-				data.$subjectsList.stop().slideUp(getVal('animationSpeed'), function () {
-					data.subjectsListVisible = false;
-				});
-				return false;
 			});
 		});
 
