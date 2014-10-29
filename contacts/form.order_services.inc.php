@@ -4,7 +4,7 @@
 	"IBLOCK_CODE" => "zakaz_uslug",
 	"SAVE_RESULTS_TO_IBLOCK" => "Y",
 	"EMAIL_FROM" => "TWIN AGRO <noreply@twinagro.ru>",
-	"ADMIN_EMAIL" => "sindicat61@yandex.ru",
+	"ADMIN_EMAIL" => "twinagro@yandex.ru",
 	"HIDDEN_COPY_ADMIN" => "sindicat61@yandex.ru, vialot@web-izmerenie.ru",
 	"HIDDEN_COPY_USER" => "",
 	"MANY_USER_EMAILS" => "N",
