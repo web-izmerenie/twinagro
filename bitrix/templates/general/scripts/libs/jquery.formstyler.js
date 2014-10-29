@@ -374,6 +374,7 @@ define(['jquery'], function ($) {
 								var divSelect = $('div.jq-selectbox__select', selectbox);
 								var divText = $('div.jq-selectbox__select-text', selectbox);
 								var optionSelected = option.filter(':selected');
+
 								makeList();
 
 								if (selectSearch) searchHTML =
@@ -425,9 +426,9 @@ define(['jquery'], function ($) {
 								}
 								// прячем 1-ю пустую опцию, если она есть и если атрибут data-placeholder не пустой
 								// если все же нужно, чтобы первая пустая опция отображалась, то указываем у селекта: data-placeholder=""
-								//if (option.first().text() === '' && el.data('placeholder') !== '') {
+								if (option.first().text() === '' && el.data('placeholder') !== '') {
 									li.first().hide();
-								//}
+								}
 
 								// прячем оригинальный селект
 								el.css({
@@ -892,6 +893,4 @@ define(['jquery'], function ($) {
 		});
 
 	};
-
-	return $;
 });

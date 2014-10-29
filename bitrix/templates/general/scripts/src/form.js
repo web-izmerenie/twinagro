@@ -303,7 +303,28 @@ function ($, AnimationImgBlock, getVal) {
 		});
 
 		$form.find('dl dd select').each(function () {
-			$(this).styler();
+			var $select = $(this);
+			var $dl = $select.closest('dl');
+			var $dt = $dl.find('dt');
+			var $option = $('<option/>');
+
+			$select.prepend($option).val('');
+			$select.styler({
+				selectPlaceholder: $dt.text(),
+				onSelectOpened: function (a, b, c) {
+					var $ul = $(this).find('.jq-selectbox__dropdown ul');
+					var $li = $ul.find('>li');
+					var heightSum = 0;
+					$li.each(function () { heightSum += $(this).innerHeight(); });
+					$ul.css('height', heightSum + 'px');
+				},
+				onSelectClosed: function () {
+					$(this).find('.jq-selectbox__dropdown ul').css('height', 0);
+				},
+				onFormStyled: function () {
+					$option.remove();
+				}
+			});
 		});
 
 		// TODO remove

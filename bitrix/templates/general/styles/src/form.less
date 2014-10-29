@@ -205,7 +205,8 @@
 						&:after { .opacity(1); }
 					}
 
-					&.opened .jq-selectbox__select {
+					&.opened .jq-selectbox__select,
+					&.focused .jq-selectbox__select {
 						border-color: @colorActive;
 					}
 
@@ -220,6 +221,8 @@
 
 						ul {
 							border: 0; margin: 0; padding: 0;
+							height: 0;
+							.transitionQ('height 200ms');
 
 							& > li {
 								border: 0; margin: 0; padding: 0;
