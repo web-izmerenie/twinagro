@@ -5,8 +5,8 @@
  * @author Andrey Chechkin
  */
 
-define(['jquery', 'animation_img_block', 'get_val', 'get_height_sum', 'jquery.formstyler'],
-function ($, AnimationImgBlock, getVal, getHeightSum) {
+define(['jquery', 'animation_img_block', 'get_val', 'jquery.formstyler'],
+function ($, AnimationImgBlock, getVal) {
 
 	function formShowHideHandler(data, event) {
 		if (data.$form.find('.jq-selectbox.opened').size() > 0) return;
@@ -214,11 +214,8 @@ function ($, AnimationImgBlock, getVal, getHeightSum) {
 		}
 
 		function timerIter() {
-			var wh = getHeightSum() + headerHeight;
-			var ch = $content.height();
-			var dh;
-
-			dh = $form.offset().top + $form.innerHeight();
+			var wh = $content.innerHeight() + $footer.height();
+			var dh = $form.offset().top + $form.innerHeight();
 
 			if (wh < dh) $content.css('min-height', dh + 'px');
 		}
