@@ -5,8 +5,8 @@
  * @author Andrey Chechkin
  */
 
-define(['jquery', 'animation_img_block', 'get_val', 'jquery.formstyler'],
-function ($, AnimationImgBlock, getVal) {
+define(['jquery', 'animation_img_block', 'get_val', 'get_height_sum', 'jquery.formstyler'],
+function ($, AnimationImgBlock, getVal, getHeightSum) {
 
 	function formShowHideHandler(data, event) {
 		if (data.subjectsListVisible) return; // TODO remove
@@ -259,6 +259,40 @@ function ($, AnimationImgBlock, getVal) {
 	return function handler($callButton) {
 		var $form = $(this);
 		var $document = $(document);
+		var $body = $('body');
+		var $header = $body.find('header');
+		var $footer = $body.find('footer');
+		var $content = $body.find('section.content');
+
+		var headerHeight = $header.height();
+		var timerId = null;
+
+		function onClose() {
+			clearInterval(timerId);
+			timerId = null;
+			setTimeout(function () {
+				$content.css('min-height', '');
+			}, 1);
+		}
+
+		function timerIter() {
+			var wh = getHeightSum() + headerHeight;
+			var ch = $content.height();
+			var dh;
+
+			dh = $form.offset().top + $form.innerHeight();
+
+			if (wh < dh) $content.css('min-height', dh + 'px');
+		}
+
+		function onShow() {
+			if (timerId) return;
+
+			timerIter();
+			$(window).trigger('resize').trigger('scroll');
+			timerIter();
+			timerId = setInterval(timerIter, 300);
+		}
 
 		var data = {
 			$form: $form,
@@ -271,6 +305,7 @@ function ($, AnimationImgBlock, getVal) {
 					.animate(
 						{ opacity: 1 },
 						getVal('animationSpeed'));
+				onShow();
 			},
 
 			fadeOut: function () {
@@ -280,6 +315,7 @@ function ($, AnimationImgBlock, getVal) {
 						getVal('animationSpeed'),
 						function () {
 							$form.css('display', 'none');
+							onClose();
 						});
 			},
 
