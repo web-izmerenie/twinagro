@@ -1,0 +1,3 @@
+[submodule "bitrix/components/custom/advanced_form"]
+	path = bitrix/components/custom/advanced_form
+	url = https://github.com/unclechu/bitrix-advanced-form
