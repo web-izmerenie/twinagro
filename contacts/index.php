@@ -13,6 +13,12 @@ $APPLICATION->SetTitle("Контакты");
             );?> </div>
    </div>
 
+	<div class="order_services"> <a class="order_services_button call_form_button" >Заказать услуги</a> <?$APPLICATION->IncludeFile(
+                $APPLICATION->GetCurDir()."form.order_services.inc.php",
+                Array(),
+                Array("MODE" => "php", "SHOW_BORDER" => false)
+            );?> </div>
+
   <p>
     <br />
    </p>
