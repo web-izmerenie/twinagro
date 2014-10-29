@@ -7,7 +7,7 @@ $APPLICATION->SetTitle("Контакты");
     <address> <?$APPLICATION->IncludeFile("/index.map_address.inc.php", Array(), Array("MODE" => "html"));?> </address>
 
     <div class="call_me_later"> <a class="call_me_button call_form_button" >Заказать звонок</a> <?$APPLICATION->IncludeFile(
-                $APPLICATION->GetCurDir()."form.inc.php",
+                $APPLICATION->GetCurDir()."form.call_me_later.inc.php",
                 Array(),
                 Array("MODE" => "php", "SHOW_BORDER" => false)
             );?> </div>

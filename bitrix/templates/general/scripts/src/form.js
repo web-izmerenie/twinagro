@@ -138,7 +138,7 @@ function ($, AnimationImgBlock, getVal) {
 			$fields.slideUp(getVal('animationSpeed'));
 			$loader.slideDown(getVal('animationSpeed'), function () {
 				$.ajax({
-					url: '/contacts/ajax_post.php?ajax=Y&post=Y',
+					url: data.postURL,
 					data: data.$form.serialize(),
 					cache: false,
 					type: 'POST',
@@ -194,7 +194,7 @@ function ($, AnimationImgBlock, getVal) {
 		return false;
 	}
 
-	return function handler($callButton) {
+	return function handler($callButton, postURL) {
 		var $form = $(this);
 		var $document = $(document);
 		var $body = $('body');
@@ -232,6 +232,7 @@ function ($, AnimationImgBlock, getVal) {
 		var data = {
 			$form: $form,
 			process: false,
+			postURL: postURL,
 
 			fadeIn: function () {
 				$form.stop()

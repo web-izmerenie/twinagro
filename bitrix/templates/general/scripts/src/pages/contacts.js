@@ -16,16 +16,20 @@ $('.contacts').each(function () {
 
 	$contacts.find('form').each(function () {
 		var _this = this;
-		var $callBtn;
+		var $callBtn, postURL;
 
 		if ($(this).hasClass('order_services')) {
 			$callBtn = $contacts.find('.order_services_button');
-		} else {
+			postURL = '/contacts/ajax_post.order_services.php?ajax=Y&post=Y';
+		} else if ($(this).hasClass('call_me_later_form')) {
 			$callBtn = $contacts.find('.call_me_button');
+			postURL = '/contacts/ajax_post.call_me_later.php?ajax=Y&post=Y';
+		} else {
+			throw new Error('Unknown <form>!');
 		}
 
 		require(['form'], function (handler) {
-			handler.call(_this, $callBtn);
+			handler.call(_this, $callBtn, postURL);
 		});
 	});
 
