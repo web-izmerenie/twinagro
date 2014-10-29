@@ -9,6 +9,12 @@ define(['jquery', 'animation_img_block', 'get_val', 'get_height_sum', 'jquery.fo
 function ($, AnimationImgBlock, getVal, getHeightSum) {
 
 	function formShowHideHandler(data, event) {
+		if (data.$form.find('.jq-selectbox.opened').size() > 0) return;
+		if (data.bugFixer) {
+			data.bugFixer = false;
+			return;
+		}
+
 		if ($(this).hasClass('call_form_button')) {
 			if (data.$form.is(':hidden'))
 				data.fadeIn();
@@ -249,7 +255,9 @@ function ($, AnimationImgBlock, getVal, getHeightSum) {
 							$form.css('display', 'none');
 							onClose();
 						});
-			}
+			},
+
+			bugFixer: false
 		};
 
 		$form.submit(function () { return submitHandler.call(this, data); });
@@ -287,6 +295,7 @@ function ($, AnimationImgBlock, getVal, getHeightSum) {
 					$ul.css('height', heightSum + 'px');
 				},
 				onSelectClosed: function () {
+					data.bugFixer = true;
 					$(this).find('.jq-selectbox__dropdown ul').css('height', 0);
 				},
 				onFormStyled: function () {
