@@ -210,12 +210,13 @@ function ($, AnimationImgBlock, getVal) {
 			timerId = null;
 			setTimeout(function () {
 				$content.css('min-height', '');
+				$(window).trigger('resize').trigger('scroll');
 			}, 1);
 		}
 
 		function timerIter() {
 			var wh = $content.innerHeight() + $footer.height();
-			var dh = $form.offset().top + $form.innerHeight();
+			var dh = $form.offset().top + $form.innerHeight() + $footer.height();
 
 			if (wh < dh) $content.css('min-height', dh + 'px');
 		}
