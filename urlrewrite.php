@@ -18,6 +18,12 @@ $arUrlRewrite = array(
 		"ID" => "",
 		"PATH" => "/solutions/view_service.php",
 	),
+	array(
+		"CONDITION" => "#^/robots.txt(\\?|\$)#",
+		"RULE" => "",
+		"ID" => "",
+		"PATH" => "/robots.php",
+	),
 );
 
 ?>
