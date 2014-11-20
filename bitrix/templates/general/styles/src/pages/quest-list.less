@@ -1,0 +1,132 @@
+/**
+ * Quest-list form
+ *
+ * @author Andrey Chechkin
+ */
+ts-alert {
+	padding: 10px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+    background: none repeat scroll 0 0 #EBF7FD;
+    border: 1px solid rgba(45, 112, 145, 0.3);
+    border-radius: 4px;
+    color: #2D7091;
+    padding: 10px;
+    text-shadow: 0 1px 0 #FFFFFF;
+    margin: 15px 0;
+    display: block;
+    font-size: 14px;
+    line-height: 21px;
+    p {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+}
+.ts-alert-success {
+    background: none repeat scroll 0 0 #F2FAE3;
+    border-color: rgba(101, 159, 19, 0.3);
+    color: #659F13;
+	padding: 10px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+}
+.ts-alert-warning {
+    background: none repeat scroll 0 0 #FFFCEB;
+    border-color: rgba(226, 131, 39, 0.3);
+    color: #E28327;
+	padding: 10px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+}
+.ts-alert-danger {
+    background: none repeat scroll 0 0 #FFF1F0;
+    border-color: rgba(216, 80, 48, 0.3);
+    color: #D85030;
+	padding: 10px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+}
+
+.tpl_white_grey{
+	position: relative;
+	
+	.hidden_protection{
+		display:none;
+	}
+	
+	label{
+		font-family: Arial;
+		font-size: 16px;
+		min-width: 200px;
+		display: block;
+		float: left;
+		padding-top: 10px;
+	}
+	
+	.option-qroup{
+		display: inline-block;
+		vertical-align: middle;
+	}
+	
+	.input-block{
+		margin-bottom: 10px;
+		
+		input[type=text], input[type=number]{
+			width: 240px;
+			height: 25px;
+			-moz-appearance: textfield;
+			-webkit-appearance: none; margin: 0px;
+			margin: 0px;
+			border: 1px solid #CECECE;
+			border-radius: 3px;
+			padding: 5px;
+			font-size: 16px;
+			
+			&:focus{
+				border: 1px solid #E0B819;
+			}
+		}
+	}
+	#tpl_white_grey_custom_field_2{input{width:125px;}}
+	#tpl_white_grey_custom_field_4, #tpl_white_grey_custom_field_5{
+		input{width: 60px;}
+		span{padding-left: 10px;}
+	}
+	input[type=submit]{
+		.button;
+		margin-left: 200px;
+		margin-top: 50px;
+	}
+	#tpl_white_grey_custom_field_9, #tpl_white_grey_custom_field_8{
+		.option-qroup{
+			label{
+				display: none; 
+			}
+		}
+			#switch-off{
+				background: url('../../images/switch-off.png') no-repeat;
+				width: 82px;
+				height: 32px;
+				cursor: pointer;
+			}
+			#switch-on{
+				display: none;
+				background: url('../../images/switch-on.png') no-repeat;
+				width: 82px;
+				height: 32px;
+				cursor: pointer;
+			}
+		}
+	#tpl_white_grey_custom_field_7{
+		position: absolute;
+		top: 477px;
+		left: 276px;
+		
+		label{
+			display: none;
+		}
+		input{
+			width:160px;
+		}
+	}
+}//tpl_white_grey

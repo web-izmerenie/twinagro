@@ -97,6 +97,8 @@ define(['basics/get_val', 'jquery'], function (getVal, $) {
 	require(['pages/service_and_guaranty']);
 
 	require(['pages/solutions']);
+	
+	require(['pages/quest-list']);
 
 }); // define()
 

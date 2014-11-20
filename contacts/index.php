@@ -13,17 +13,13 @@ $APPLICATION->SetTitle("Контакты");
             );?> </div>
    </div>
  	 
-  <div class="order_services"> <a class="order_services_button call_form_button" >Заказать услуги</a> <?$APPLICATION->IncludeFile(
-                $APPLICATION->GetCurDir()."form.order_services.inc.php",
-                Array(),
-                Array("MODE" => "php", "SHOW_BORDER" => false)
-            );?> </div>
+  <div class="order_services"> <a href="/oprosnyy-list/" class="order_services_button call_form_button" >Опросный лист</a> </div>
  
   <p> 
     <br />
    </p>
  
-  <table cellspacing="1" cellpadding="1" border="0" width="100%" height="100%" style="border-collapse: collapse;"> 
+  <table width="100%" height="100%" cellspacing="1" cellpadding="1" border="0" style="border-collapse: collapse;"> 
     <tbody> 
       <tr><td> Представительство в Липецкой обл. 
           <br />
@@ -75,7 +71,7 @@ $APPLICATION->SetTitle("Контакты");
           <br />
          		 </td> 		 <td>Северо-Западное представительство 
           <br />
-         <span class="js-extracted-address daria-action mail-message-map-link" data-action="map-up.showAddress" data-params="address=г.Санкт-Петербург, Яковлевский пер., д.2, лит. А, оф.28">Адрес: </span><span class="js-extracted-address daria-action mail-message-map-link" data-action="map-up.showAddress" data-params="address=г.Санкт-Петербург, Яковлевский пер., д.2, лит. А, оф.28">196105, г.Санкт-Петербург, Яковлевский пер., д.2, лит. А, <span class="mail-message-map-nobreak">оф.28<span class="mail-message-map-link-icon icon"></span></span></span> 
+         <span data-params="address=г.Санкт-Петербург, Яковлевский пер., д.2, лит. А, оф.28" data-action="map-up.showAddress" class="js-extracted-address daria-action mail-message-map-link">Адрес: </span><span data-params="address=г.Санкт-Петербург, Яковлевский пер., д.2, лит. А, оф.28" data-action="map-up.showAddress" class="js-extracted-address daria-action mail-message-map-link">196105, г.Санкт-Петербург, Яковлевский пер., д.2, лит. А, <span class="mail-message-map-nobreak">оф.28<span class="mail-message-map-link-icon icon"></span></span></span> 
           <br />
          Телефоны: +7(812) <span><span class="wmi-callto">411-40-28</span></span>, +7(931) <span><span class="wmi-callto">221-78-58 
               <br />
@@ -85,7 +81,7 @@ $APPLICATION->SetTitle("Контакты");
      </tbody>
    </table>
  <a style="cursor:pointer" onclick="toggle_show('hideText')" >Реквизиты</a> 
-  <p id="hideText" style="display: none;"> Юридический адрес: 344011, Россия, г. Ростов-на-Дону, ул. Варфоломеева, 150, офис 401 
+  <p style="display: none;" id="hideText"> Юридический адрес: 344011, Россия, г. Ростов-на-Дону, ул. Варфоломеева, 150, офис 401 
     <br />
    ОГРН 1116195011096 
     <br />
