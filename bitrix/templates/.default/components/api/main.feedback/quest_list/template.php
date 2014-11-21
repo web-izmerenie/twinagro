@@ -47,6 +47,7 @@ $tpl_class_name = 'tpl_white_grey';
 		<? endif; ?>
 		<? if($arParams['INCLUDE_FORM_STYLER']): ?>
 			$('#<?= $arParams['UNIQUE_FORM_ID']; ?> input[type*="checkbox"]').styler();
+            $("#tpl_white_grey_custom_field_12 input[type*=radio]").styler();
 		<? endif; ?>
 		<? if($arParams['HIDE_FORM_AFTER_SEND'] && !empty($arResult["OK_MESSAGE"])): ?>
 		    $("#<?= $arParams['UNIQUE_FORM_ID']; ?>").detach();

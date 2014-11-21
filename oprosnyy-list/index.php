@@ -8,7 +8,7 @@ $APPLICATION->SetTitle("Опросный лист");
 	"REPLACE_FIELD_FROM" => "Y",
 	"UNIQUE_FORM_ID" => "546c9ba1ddeac",
 	"OK_TEXT" => "Спасибо, ваш опросный лист принят.",
-	"EMAIL_TO" => "twinagro@yandex.ru",
+	"EMAIL_TO" => "twin@twinagro.ru",
 	"DISPLAY_FIELDS" => array(
 	),
 	"REQUIRED_FIELDS" => array(
@@ -26,7 +26,7 @@ $APPLICATION->SetTitle("Опросный лист");
 		9 => "Очистка@input@radio@values=Нет#Да",
 		10 => "Прием@input@checkbox@values=С авто#С ж/д",
 		11 => "Отгрузка@input@checkbox@values=На авто#На ж/д#На воду",
-		12 => "Реализация проекта@input@checkbox@values=Нужно вчера#В этом году#Перспектива",
+		12 => "Реализация проекта@input@radio@values=Нужно вчера#В этом году#Перспектива",
 		13 => "",
 	),
 	"ADMIN_EVENT_MESSAGE_ID" => array(
