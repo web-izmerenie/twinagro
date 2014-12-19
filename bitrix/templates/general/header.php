@@ -77,6 +77,16 @@
     </header>
 
     <section class="content">
+		<div style="display:none;">
+			<ul>
+				<li><h3>в Липецке</h3></li>
+				<li><h3>в Тамбове</h3></li>
+				<li><h3>в Пензе</h3></li>
+				<li><h3>в Ставрополе</h3></li>
+				<li><h3>в Орле</h3></li>
+				<li><h3>в Ростове-на-Дону</h3></li>
+			</ul>
+		</div>
         <?if (!defined('MAIN_PAGE') && !defined('ERROR_404')) :?>
             <h1 class="page_title"><span></span><span><?=$APPLICATION->ShowTitle()?></span><span></span></h1>
         <?endif?>

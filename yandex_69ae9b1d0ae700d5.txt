@@ -1,0 +1,4 @@
+<?
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetTitle("Заголовок страницы");
+?>yandex_69ae9b1d0ae700d5<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
