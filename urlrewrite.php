@@ -24,6 +24,12 @@ $arUrlRewrite = array(
 		"ID" => "",
 		"PATH" => "/robots.php",
 	),
+	array(
+		"CONDITION" => "#^/content/#",
+		"RULE" => "",
+		"ID" => "bitrix:news",
+		"PATH" => "/content/index.php",
+	),
 );
 
 ?>
