@@ -6,7 +6,7 @@
 
 define(['get_val', 'jquery', 'modernizr', 'modernizr.apng'], function (getVal, $, Modernizr) {
 
-	var ajaxAnimSprite = getVal('tplPath') + '/images/loading_animation_sprite.png'; 
+	var ajaxAnimSprite = getVal('tplPath') + '/images/loading_animation_sprite.png';
 	var ajaxAnimAPNG = getVal('tplPath') + '/images/loading_animation.png';
 
 	// preload images
@@ -101,5 +101,3 @@ define(['get_val', 'jquery', 'modernizr', 'modernizr.apng'], function (getVal, $
 	};
 
 });
-
-// vim: set noet ts=4 sts=4 sw=4 fenc=utf-8 foldmethod=marker :

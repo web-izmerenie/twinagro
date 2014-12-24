@@ -97,9 +97,7 @@ define(['basics/get_val', 'jquery'], function (getVal, $) {
 	require(['pages/service_and_guaranty']);
 
 	require(['pages/solutions']);
-	
+
 	require(['pages/quest-list']);
 
 }); // define()
-
-// vim: set noet ts=4 sts=4 sw=4 fenc=utf-8 foldmethod=marker :
