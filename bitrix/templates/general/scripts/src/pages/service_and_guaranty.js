@@ -17,5 +17,3 @@ $('.service_and_guaranty').each(function () {
 }); // define()
 }); // domReady()
 }); // define()
-
-// vim: set noet ts=4 sts=4 sw=4 fenc=utf-8 foldmethod=marker :
