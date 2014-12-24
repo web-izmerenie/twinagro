@@ -6,6 +6,7 @@
 
 node_modules
 grunt
+.source_of_symbolic_links
 
 # ignore build styles and scripts
 bitrix/templates/general/styles/build
