@@ -6,60 +6,60 @@ $arIBlockTypes = CIBlockParameters::GetIBlockTypes(array("-"=>""));
 
 $arIBlockList = array();
 $res = CIBlock::GetList(
-    array("SORT" => "ASC"),
-    array(
-        "ACTIVE" => "Y",
-        "TYPE" => $arCurrentValues["IBLOCK_TYPE"],
-    )
+	array("SORT" => "ASC"),
+	array(
+		"ACTIVE" => "Y",
+		"TYPE" => $arCurrentValues["IBLOCK_TYPE"],
+	)
 );
 while ($arRes = $res->Fetch()) {
-    if (empty($arRes["CODE"])) continue;
-    $arIBlockList[$arRes["ID"]] = $arRes["NAME"];
+	if (empty($arRes["CODE"])) continue;
+	$arIBlockList[$arRes["ID"]] = $arRes["NAME"];
 }
 
 $arComponentParameters = array(
-    "GROUPS" => array(
-        "IBLOCK" => array(
-            "SORT" => 100,
-            "NAME" => GetMessage("G_IBLOCK"),
-        ),
-    ),
-    "PARAMETERS" => array(
+	"GROUPS" => array(
+		"IBLOCK" => array(
+			"SORT" => 100,
+			"NAME" => GetMessage("G_IBLOCK"),
+		),
+	),
+	"PARAMETERS" => array(
 
-        /** iblock */
+		/** iblock */
 
-        "IBLOCK_TYPE" => array(
-            "PARENT" => "IBLOCK",
-            "NAME" => GetMessage("F_IBLOCK_TYPE"),
-            "TYPE" => "LIST",
-            "VALUES" => $arIBlockTypes,
-            "REFRESH" => "Y",
-        ),
-        "IBLOCK_ID" => array(
-            "PARENT" => "IBLOCK",
-            "NAME" => GetMessage("F_IBLOCK_ID"),
-            "TYPE" => "LIST",
-            "VALUES" => $arIBlockList,
-            "REFRESH" => "Y",
-        ),
+		"IBLOCK_TYPE" => array(
+			"PARENT" => "IBLOCK",
+			"NAME" => GetMessage("F_IBLOCK_TYPE"),
+			"TYPE" => "LIST",
+			"VALUES" => $arIBlockTypes,
+			"REFRESH" => "Y",
+		),
+		"IBLOCK_ID" => array(
+			"PARENT" => "IBLOCK",
+			"NAME" => GetMessage("F_IBLOCK_ID"),
+			"TYPE" => "LIST",
+			"VALUES" => $arIBlockList,
+			"REFRESH" => "Y",
+		),
 
-        /** section */
+		/** section */
 
-        "SECTION_CODE" => array(
-            "PARENT" => "IBLOCK",
-            "NAME" => GetMessage("F_SECTION_CODE"),
-            "TYPE" => "TEXT",
-        ),
+		"SECTION_CODE" => array(
+			"PARENT" => "IBLOCK",
+			"NAME" => GetMessage("F_SECTION_CODE"),
+			"TYPE" => "TEXT",
+		),
 
-        /** cache */
+		/** cache */
 
-        "CACHE_TIME" => array("DEFAULT" => 36000000),
-        "CACHE_FILTER" => array(
-            "PARENT" => "CACHE_SETTINGS",
-            "NAME" => GetMessage("F_CACHE_FILTER"),
-            "TYPE" => "CHECKBOX",
-            "DEFAULT" => "N",
-        ),
+		"CACHE_TIME" => array("DEFAULT" => 36000000),
+		"CACHE_FILTER" => array(
+			"PARENT" => "CACHE_SETTINGS",
+			"NAME" => GetMessage("F_CACHE_FILTER"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "N",
+		),
 
-    ),
+	),
 );

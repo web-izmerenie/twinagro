@@ -6,34 +6,34 @@ $arIBlockTypes = CIBlockParameters::GetIBlockTypes(array("-"=>""));
 
 $arIBlockList = array();
 $res = CIBlock::GetList(
-    array("SORT" => "ASC"),
-    array(
-        "ACTIVE" => "Y",
-        "TYPE" => $arCurrentValues["IBLOCK_TYPE"],
-    )
+	array("SORT" => "ASC"),
+	array(
+		"ACTIVE" => "Y",
+		"TYPE" => $arCurrentValues["IBLOCK_TYPE"],
+	)
 );
 while ($arRes = $res->Fetch()) {
-    if (empty($arRes["CODE"])) continue;
-    $arIBlockList[$arRes["ID"]] = $arRes["NAME"];
+	if (empty($arRes["CODE"])) continue;
+	$arIBlockList[$arRes["ID"]] = $arRes["NAME"];
 }
 
 $arSorts = array(
-    "ASC" => GetMessage("FV_SORT_ASC"),
-    "DESC" => GetMessage("FV_SORT_DESC"),
+	"ASC" => GetMessage("FV_SORT_ASC"),
+	"DESC" => GetMessage("FV_SORT_DESC"),
 );
 $arSortFields = array(
-    "ID" => GetMessage("FV_SORT_BY_ID"),
-    "NAME" => GetMessage("FV_SORT_BY_NAME"),
-    "SORT" => GetMessage("FV_SORT_BY_SORT"),
+	"ID" => GetMessage("FV_SORT_BY_ID"),
+	"NAME" => GetMessage("FV_SORT_BY_NAME"),
+	"SORT" => GetMessage("FV_SORT_BY_SORT"),
 );
 
 $arProperty_LNS = array();
 $rsProp = CIBlockProperty::GetList(
-    array("sort"=>"asc", "name"=>"asc"),
-    array(
-        "ACTIVE" => "Y",
-        "IBLOCK_ID" => $arCurrentValues["IBLOCK_ID"],
-    )
+	array("sort"=>"asc", "name"=>"asc"),
+	array(
+		"ACTIVE" => "Y",
+		"IBLOCK_ID" => $arCurrentValues["IBLOCK_ID"],
+	)
 );
 while ($arr = $rsProp->Fetch()) {
 	$arProperty[$arr["CODE"]] = "[".$arr["CODE"]."] ".$arr["NAME"];
@@ -43,59 +43,59 @@ while ($arr = $rsProp->Fetch()) {
 }
 
 $arComponentParameters = array(
-    "GROUPS" => array(
-        "IBLOCK" => array(
-            "SORT" => 100,
-            "NAME" => GetMessage("G_IBLOCK"),
-        ),
-    ),
-    "PARAMETERS" => array(
+	"GROUPS" => array(
+		"IBLOCK" => array(
+			"SORT" => 100,
+			"NAME" => GetMessage("G_IBLOCK"),
+		),
+	),
+	"PARAMETERS" => array(
 
-        /** iblock */
+		/** iblock */
 
-        "IBLOCK_TYPE" => array(
-            "PARENT" => "IBLOCK",
-            "NAME" => GetMessage("F_IBLOCK_TYPE"),
-            "TYPE" => "LIST",
-            "VALUES" => $arIBlockTypes,
-            "REFRESH" => "Y",
-        ),
-        "IBLOCK_ID" => array(
-            "PARENT" => "IBLOCK",
-            "NAME" => GetMessage("F_IBLOCK_ID"),
-            "TYPE" => "LIST",
-            "VALUES" => $arIBlockList,
-            "REFRESH" => "Y",
-        ),
+		"IBLOCK_TYPE" => array(
+			"PARENT" => "IBLOCK",
+			"NAME" => GetMessage("F_IBLOCK_TYPE"),
+			"TYPE" => "LIST",
+			"VALUES" => $arIBlockTypes,
+			"REFRESH" => "Y",
+		),
+		"IBLOCK_ID" => array(
+			"PARENT" => "IBLOCK",
+			"NAME" => GetMessage("F_IBLOCK_ID"),
+			"TYPE" => "LIST",
+			"VALUES" => $arIBlockList,
+			"REFRESH" => "Y",
+		),
 
-        /** section */
+		/** section */
 
-        "SECTION_CODE" => array(
-            "PARENT" => "IBLOCK",
-            "NAME" => GetMessage("F_SECTION_CODE"),
-            "TYPE" => "TEXT",
-        ),
+		"SECTION_CODE" => array(
+			"PARENT" => "IBLOCK",
+			"NAME" => GetMessage("F_SECTION_CODE"),
+			"TYPE" => "TEXT",
+		),
 
-        /** sort */
+		/** sort */
 
-        "SORT_BY" => Array(
-            "PARENT" => "IBLOCK",
-            "NAME" => GetMessage("F_SORT_BY"),
-            "TYPE" => "LIST",
-            "DEFAULT" => "SORT",
-            "VALUES" => $arSortFields,
-            "ADDITIONAL_VALUES" => "Y",
-        ),
-        "SORT_ORDER" => Array(
-            "PARENT" => "IBLOCK",
-            "NAME" => GetMessage("F_SORT_ORDER"),
-            "TYPE" => "LIST",
-            "DEFAULT" => "ASC",
-            "VALUES" => $arSorts,
-            "ADDITIONAL_VALUES" => "Y",
-        ),
+		"SORT_BY" => Array(
+			"PARENT" => "IBLOCK",
+			"NAME" => GetMessage("F_SORT_BY"),
+			"TYPE" => "LIST",
+			"DEFAULT" => "SORT",
+			"VALUES" => $arSortFields,
+			"ADDITIONAL_VALUES" => "Y",
+		),
+		"SORT_ORDER" => Array(
+			"PARENT" => "IBLOCK",
+			"NAME" => GetMessage("F_SORT_ORDER"),
+			"TYPE" => "LIST",
+			"DEFAULT" => "ASC",
+			"VALUES" => $arSorts,
+			"ADDITIONAL_VALUES" => "Y",
+		),
 
-        /** properties */
+		/** properties */
 
 		"PROPERTY_CODE" => array(
 			"PARENT" => "DATA_SOURCE",
@@ -106,15 +106,15 @@ $arComponentParameters = array(
 			"ADDITIONAL_VALUES" => "Y",
 		),
 
-        /** cache */
+		/** cache */
 
-        "CACHE_TIME" => array("DEFAULT" => 36000000),
-        "CACHE_FILTER" => array(
-            "PARENT" => "CACHE_SETTINGS",
-            "NAME" => GetMessage("F_CACHE_FILTER"),
-            "TYPE" => "CHECKBOX",
-            "DEFAULT" => "N",
-        ),
+		"CACHE_TIME" => array("DEFAULT" => 36000000),
+		"CACHE_FILTER" => array(
+			"PARENT" => "CACHE_SETTINGS",
+			"NAME" => GetMessage("F_CACHE_FILTER"),
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "N",
+		),
 
-    ),
+	),
 );
