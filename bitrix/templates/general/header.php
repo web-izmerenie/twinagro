@@ -20,10 +20,9 @@
 	<title><?$APPLICATION->IncludeFile(
 		$APPLICATION->GetTemplatePath("include_areas/page_title.php"),
 		array(),
-		array("MODE" => "PHP", "SHOW_BORDER" => false)
-	);?><?=$arSite["SITE_NAME"]?></title>
-	<?$APPLICATION->ShowMeta("keywords")?>
+		array("MODE" => "PHP", "SHOW_BORDER" => false));?></title>
 	<?$APPLICATION->ShowMeta("description")?>
+	<?$APPLICATION->ShowMeta("keywords")?>
 
 	<link rel="stylesheet" type="text/css" href="<?=SITE_TEMPLATE_PATH?>/styles/build/build.css?v=<?=$revision?>" />
 
@@ -42,9 +41,11 @@
 		//]]>
 	</script>
 
-	<?$APPLICATION->ShowCSS()?>
-	<?$APPLICATION->ShowHeadStrings()?>
-	<?$APPLICATION->ShowHeadScripts()?>
+	<?if($USER->IsAuthorized()):?>
+		<?$APPLICATION->ShowCSS()?>
+		<?$APPLICATION->ShowHeadStrings()?>
+		<?$APPLICATION->ShowHeadScripts()?>
+	<?endif?>
 </head>
 
 <body>
@@ -88,7 +89,7 @@
 			</ul>
 		</div>
 		<?if (!defined('MAIN_PAGE') && !defined('ERROR_404')) :?>
-			<h1 class="page_title"><span></span><span><?=$APPLICATION->ShowTitle()?></span><span></span></h1>
+			<h1 class="page_title"><span></span><span><?$APPLICATION->AddBufferContent(array(&$APPLICATION, 'GetTitle'))?></span><span></span></h1>
 		<?endif?>
 		<div class="page_content" <?if (defined('MAIN_PAGE')) :?> id="main"<?endif?>>
 
