@@ -11,7 +11,7 @@ body section.content .page_content .contacts {
 	display: block;
 	.relative;
 
-	.info {
+	.info {//{{{1
 		display: block;
 		.relative;
 		margin-bottom: 20px;
@@ -24,27 +24,88 @@ body section.content .page_content .contacts {
 		.call_me_later {
 			display: block;
 
-			.call_me_button {
-				.button(0 24px 0 54px);
-				.button-icon(11px, auto, auto, 15px);
-				&:before { .ico-contacts-phone-button; }
-				&:after { .ico-contacts-phone-button-active; }
-				.absolute(50%, 0);
-				margin-top: -20px;
-			}
 		}
-	}
+	}//.info}}}1
+
+	.buttons {//{{{1
+		// reset
+		.fontMetrics(0, 0);
+		margin: 0;
+		padding: 0;
+
+		display: block;
+		float: right;
+		margin-top: 25px;
+
+		ul {//{{{2
+			// reset
+			margin: 0; padding: 0;
+
+			display: block;
+
+			&>li {
+				// reset
+				margin: 0; padding: 0;
+				background: none;
+
+				display: inline-block;
+			}
+
+			&>li+li { margin-left: 10px; }
+		}//ul}}}2
+
+		.call_me_button {
+			.button(0 24px 0 54px);
+			.button-icon(11px, auto, auto, 15px);
+			&:before { .ico-contacts-phone-button; }
+			&:after { .ico-contacts-phone-button-active; }
+			display: inline-block;
+		}
+
+		.order_services_button {
+			.button();
+		}
+	}//.buttons}}}1
 
 	form { .formMixin(); }
 
-	.order_services {
-		.order_services_button {
-			.button();
-			.absolute(15px, 200px);
-		}
-	}
+	ul.addresses {//{{{1
+		// reset
+		.fontMetrics(0, 0);
+		margin: 0; padding: 0;
 
-	.interactive_map {
+		@top: 25px;
+
+		display: block;
+		width: 100%;
+
+		&>li {
+			// reset
+			margin: 0; padding: 0;
+			background: none;
+
+			display: inline-block;
+			width: 50%;
+			vertical-align: top;
+			padding-top: @top;
+
+			&:first-child {
+				&:after {
+					.pseudoBlock;
+					height: 0;
+					clear: both;
+					overflow: hidden;
+				}
+			}
+
+			h3, address {
+				display: block;
+				.fontMetrics(15px, 22px);
+			}
+		}//&>li
+	}//ul.addresses}}}1
+
+	.interactive_map {//{{{1
 		@height: @minAutoSizeBlockHeight; // minimal
 		min-height: @height;
 		height: @height;
@@ -66,5 +127,5 @@ body section.content .page_content .contacts {
 			&:before { .styles; .ico-white-corner-left-bottom; left: 0; bottom: 0; }
 			&:after { .styles; .ico-white-corner-right-bottom; right: 0; bottom: 0; }
 		}
-	}
+	}//.interactive_map}}}1
 }
