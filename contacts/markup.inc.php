@@ -74,33 +74,11 @@
 	false
 );?>
 
-<!--
-<a style="cursor:pointer" onclick="toggle_show('hideText')" >Реквизиты</a>
-<p style="display: none;" id="hideText"> Юридический адрес: 344011, Россия, г. Ростов-на-Дону, ул. Варфоломеева, 150, офис 401
-<br />
-ОГРН 1116195011096
-<br />
-ИНН 6163110057
-<br />
-КПП 616401001
-<br />
-р/с 40702810652090003669
-<br />
-в ОАО &laquo;Юго-Западный банк Сбербанка России&raquo;, г. Ростов-на-Дону
-<br />
-БИК 046015602
-<br />
-к/сч 30101810600000000602
-<br />
-ген. директор Долгополов Михаил Александрович, действует на основании Устава
-<br />
-факс 8(863) 2011-840
-<br />
-тел. 8(863) 2011-850, 279-53-18, 279-53-19
-<br />
-e-mail: twinagro@yandex.ru
-<br />
-</p>
--->
-
+	<a href="#essential-elements" class="essential_elements_caller">Реквизиты</a>
+	<div class="essential_elements" id="essential-elements">
+		<?$APPLICATION->IncludeFile(
+			$APPLICATION->GetCurDir()."essential_elements.inc.php",
+			Array(),
+			Array("MODE" => "php"));?>
+	</div>
 </div>

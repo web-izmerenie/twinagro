@@ -9,6 +9,7 @@ define(['get_val', 'jquery', 'get_height_sum', 'webkit_bug_fix_wrapper'],
 function (getVal, $, getHeightSum, webkitBugFixWrapper) {
 $(function domReady() {
 var $window = $(window);
+var $page = $('html,body');
 $('.contacts').each(function () {
 
 	var $contacts = $(this);
@@ -102,6 +103,37 @@ $('.contacts').each(function () {
 			); // dynamicLoadApi()
 
 		});
+	});
+
+	var $essEls = $contacts.find('.essential_elements');
+	var $essElsCaller = $contacts.find('.essential_elements_caller');
+	var essAnimate = false;
+
+	$essEls.hide();
+
+	$essElsCaller.click(function () {
+		if (essAnimate) return false;
+		else essAnimate = true;
+
+		if ($essEls.hasClass('opened')) {
+			$essEls.slideUp(getVal('animationSpeed')*3, function () {
+				$essEls.removeClass('opened');
+				essAnimate = false;
+			});
+		} else {
+			$essEls.slideDown(getVal('animationSpeed')*3, function () {
+				$essEls.addClass('opened');
+				$window.trigger('resize');
+				$page.animate(
+					{ scrollTop: $essElsCaller.offset().top - 10 },
+					getVal('animationSpeed')*3,
+					function () {
+						essAnimate = false;
+					});
+			});
+		}
+
+		return false;
 	});
 
 }); // .each()
