@@ -1,8 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetPageProperty("description", "Объекты DESCRIPTION");
-$APPLICATION->SetPageProperty("title", "Объекты TITLE");
-$APPLICATION->SetTitle("Объекты H1");
+$APPLICATION->SetTitle("Объекты");
 ?><?$APPLICATION->IncludeComponent("bitrix:news.list", "objects", array(
 	"IBLOCK_TYPE" => "content",
 	"IBLOCK_ID" => "1",
