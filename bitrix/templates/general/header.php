@@ -14,7 +14,7 @@
 
 	$APPLICATION->AddBufferContent($delayedCallback);
 
-	$revision = 17;
+	$revision = 18;
 	if ($USER->IsAdmin()) $revision = $revision . 'dev' . 11;
 ?>
 <!DOCTYPE html>
