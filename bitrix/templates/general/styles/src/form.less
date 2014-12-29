@@ -6,24 +6,24 @@
  */
 
 .formMixin() {
-    @formWidth: 250px;
-    @paddingX: 22px;
-    @paddingTop: @paddingX;
-    @paddingBottom: 21px;
-    @offsetX_1: @paddingX * 2;
-    @offsetX_2: @formWidth + @offsetX_1;
-    @offsetX_3: @offsetX_2 / 2;
-    @offsetX: -@offsetX_3;
+	@formWidth: 250px;
+	@paddingX: 22px;
+	@paddingTop: @paddingX;
+	@paddingBottom: 21px;
+	@offsetX_1: @paddingX * 2;
+	@offsetX_2: @formWidth + @offsetX_1;
+	@offsetX_3: @offsetX_2 / 2;
+	@offsetX: -@offsetX_3;
 
-    padding: @paddingTop @paddingX @paddingBottom;
-    width: @formWidth;
-    background: white;
-    z-index: 50;
-    display: none;
-    .absolute(100px - 37px, auto, auto, 50%);
-     margin-left: @offsetX;
-    .border-radius(10px);
-    .box-shadow(0 0 5px fade(black, 40%));
+	padding: @paddingTop @paddingX @paddingBottom;
+	width: @formWidth;
+	background: white;
+	z-index: 50;
+	display: none;
+	.absolute(100px - 37px, auto, auto, 50%);
+	 margin-left: @offsetX;
+	.border-radius(10px);
+	.box-shadow(0 0 5px fade(black, 40%));
 
 	h3 {
 		.fontMetrics(20px);
@@ -75,7 +75,7 @@
 					border: 1px solid @borderColor;
 					padding: 0 @paddingX;
 					.fontMetrics(@fontSize, @fieldHeight);
-					font-family: sans-serif;
+					font-family: arial, sans-serif;
 					color: black;
 
 					&[name=subject] {
@@ -90,7 +90,7 @@
 						border: 1px solid @borderColor;
 						color: black;
 						display: block;
-						font-family: sans-serif;
+						font-family: arial, sans-serif;
 						.fontMetrics(@fontSize, @fieldHeight);
 						height: @fieldHeight;
 						margin: 0;
@@ -163,7 +163,7 @@
 								cursor: pointer;
 								width: @defaultInputWidth;
 								padding: 0 @paddingX;
-								font-family: sans-serif;
+								font-family: arial, sans-serif;
 								color: black;
 								.relative;
 								overflow: inherit;
