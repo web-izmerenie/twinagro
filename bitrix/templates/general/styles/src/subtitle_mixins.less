@@ -1,0 +1,31 @@
+/**
+ * "subtitle" mixins
+ *
+ * @author Viacheslav Lotsmanov
+ */
+
+@import "go_to_list_mixins";
+
+.subtitleBlock() {
+	@height: 48px;
+
+	display: block;
+	.relative;
+	height: @height;
+	.bg('assets/sprite.png', 0 -953px repeat-x);
+	margin-bottom: 21px;
+
+	h2 {
+		display: block;
+		color: #6e7e8c;
+		text-transform: uppercase;
+		font-family: Days, sans-serif;
+		.fontMetrics(30px, 30px);
+	}
+
+	.go_to_list {
+		.go_to_list();
+		display: block;
+		.absolute(auto, 20px, 14px, auto);
+	}
+}
