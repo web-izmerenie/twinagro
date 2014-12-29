@@ -2,7 +2,7 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Статьи");
 ?><?$APPLICATION->IncludeComponent(
-	"bitrix:news.detail", 
+	"custom:content.detail", 
 	"content", 
 	array(
 		"DISPLAY_DATE" => "Y",
@@ -28,7 +28,7 @@ $APPLICATION->SetTitle("Статьи");
 			1 => "",
 		),
 		"IBLOCK_URL" => "",
-		"SET_TITLE" => "N",
+		"SET_TITLE" => "Y",
 		"SET_BROWSER_TITLE" => "Y",
 		"BROWSER_TITLE" => "-",
 		"SET_META_KEYWORDS" => "Y",
