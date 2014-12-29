@@ -1,39 +1,39 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 
 <div class="card card-1">
-    <div class="background">
-        <div class="title"><?$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."index.innovations_for_professionals.title.inc.php", Array(), Array("MODE" => "php"));?></div>
-        <div class="presentation"><a href="/upload/twinagro_booklet.pdf" target="_blank">Скачать презентацию</a></div>
-        <div class="scroll-arrow"><a href="#cut"></a></div>
-        <a class="tour-3d"></a>
-    </div>
-    <div class="info" id="cut">
-        <?$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."index.innovations_for_professionals.inc.php", Array(), Array("MODE" => "html"));?>
-    </div>
+	<div class="background">
+		<div class="title"><?$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."index.innovations_for_professionals.title.inc.php", Array(), Array("MODE" => "php"));?></div>
+		<div class="presentation"><a href="/upload/twinagro_booklet.pdf" target="_blank">Скачать презентацию</a></div>
+		<div class="scroll-arrow"><a href="#cut"></a></div>
+		<a class="tour-3d"></a>
+	</div>
+	<div class="info" id="cut">
+		<?$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."index.innovations_for_professionals.inc.php", Array(), Array("MODE" => "html"));?>
+	</div>
 </div>
 <div class="card card-2">
-    <div class="background">
-        <div class="title"><?$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."index.about_brand.title.inc.php", Array(), Array("MODE" => "php"));?></div>
-    </div>
-    <div class="info three-column">
-        <div class="column">
-            <?$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."index.about_brand_1.inc.php", Array(), Array("MODE" => "html"));?>
-        </div>
-        <div class="column">
-            <?$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."index.about_brand_2.inc.php", Array(), Array("MODE" => "html"));?>
-        </div>
-        <div class="column">
-            <?$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."index.about_brand_3.inc.php", Array(), Array("MODE" => "html"));?>
-        </div>
-    </div>
+	<div class="background">
+		<div class="title"><?$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."index.about_brand.title.inc.php", Array(), Array("MODE" => "php"));?></div>
+	</div>
+	<div class="info three-column">
+		<div class="column">
+			<?$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."index.about_brand_1.inc.php", Array(), Array("MODE" => "html"));?>
+		</div>
+		<div class="column">
+			<?$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."index.about_brand_2.inc.php", Array(), Array("MODE" => "html"));?>
+		</div>
+		<div class="column">
+			<?$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."index.about_brand_3.inc.php", Array(), Array("MODE" => "html"));?>
+		</div>
+	</div>
 </div>
 <div class="card card-3">
-    <div class="background">
-        <div class="title"><?$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."index.development.title.inc.php", Array(), Array("MODE" => "php"));?></div>
-    </div>
-    <div class="info">
-        <?$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."index.development.inc.php", Array(), Array("MODE" => "html"));?>
-    </div>
+	<div class="background">
+		<div class="title"><?$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."index.development.title.inc.php", Array(), Array("MODE" => "php"));?></div>
+	</div>
+	<div class="info">
+		<?$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."index.development.inc.php", Array(), Array("MODE" => "html"));?>
+	</div>
 </div>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
