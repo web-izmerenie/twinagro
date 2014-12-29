@@ -6,6 +6,14 @@
 		define('MAIN_PAGE', 'Y');
 	endif;
 
+	$delayedCallback = function () {
+		if (defined('ERROR_404')) :
+			CHTTP::SetStatus("404 Not Found");
+		endif;
+	};
+
+	$APPLICATION->AddBufferContent($delayedCallback);
+
 	$revision = 17;
 	if ($USER->IsAdmin()) $revision = $revision . 'dev' . 11;
 ?>

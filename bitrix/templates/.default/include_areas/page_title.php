@@ -3,9 +3,9 @@
 $titleCallback = function ($APPLICATION) {
 	if (defined('ERROR_404')) :
 		if (LANGUAGE_ID == 'ru'):
-			return 'Ошибка 404 / ';
+			return 'Ошибка 404';
 		else:
-			return 'Error 404 / ';
+			return 'Error 404';
 		endif;
 	else :
 		$title = $APPLICATION->GetPageProperty('title');
